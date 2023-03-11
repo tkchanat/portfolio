@@ -55,14 +55,18 @@ It comes with the following benefits:
 Of course we can sample uniformly across the domain, but that's usually not the best way to generate samples for our Monte Carlo integral. Picking the random samples carefully helps us to reach the convergence value faster.
 
 ### Inverse Transform Sampling
-This is a method for generating random variables from a given probability distribution by using its inverse cumulative distribution (cdf). 
+This is a method for generating random variables from a given probability distribution by using its inverse cumulative distribution (cdf). The inversion method states that given a density function $p(x)$ 
+
 <div style="display: flex">
   <div id="normal-distribution" style="flex: 1"></div>
   <div id="cumulative-distribution" style="flex: 1"></div>
 </div>
-<button type="button" id="cdf-1">Add 1 sample</button>
-<button type="button" id="cdf-10">Add 10 samples</button>
-<button type="button" id="cdf-reset">Reset</button>
+<button type="button" class="btn d-inline" id="cdf-1">Add 1 sample</button>
+<button type="button" class="btn d-inline" id="cdf-10">Add 10 samples</button>
+<button type="button" class="btn d-inline" id="cdf-reset">Reset</button>
 
-<style> .js-plotly-plot .plotly, .js-plotly-plot .plotly div {margin: auto} </style>
-<script type="module" src="../../javascripts/plot.js"></script>
+### Rejection Sampling
+
+
+<link href="../../css/app.css" rel="stylesheet"></style>
+<script type="module" src="../../js/plot.js"></script>
