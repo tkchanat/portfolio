@@ -150,26 +150,29 @@ if (document.getElementById("normal-distribution") &&
       type: 'line',
       x0: -5, x1: pt_x,
       y0: pt_y, y1: pt_y,
+      line: { width: 0.5 },
     });
     // vertical
     cdfShapes.push({
       type: 'line',
       x0: pt_x, x1: pt_x,
       y0: 0, y1: pt_y,
+      line: { width: 0.5 },
     });
     Plotly.relayout("cumulative-distribution", { shapes: cdfShapes });
-    
+
     var pdfShapes = document.getElementById("normal-distribution").layout.shapes || [];
     // vertical
     pdfShapes.push({
       type: 'line',
       x0: pt_x, x1: pt_x,
       y0: 0, y1: normalDistribution(pt_x),
+      line: { width: 0.5 },
     });
     Plotly.relayout("normal-distribution", { shapes: pdfShapes });
   }
   function addSample10() { for (var i = 0; i < 10; i++) addSample1(); }
-  function reset() { 
+  function reset() {
     Plotly.relayout("cumulative-distribution", { shapes: [] });
     Plotly.relayout("normal-distribution", { shapes: [] });
   }
@@ -177,4 +180,88 @@ if (document.getElementById("normal-distribution") &&
   document.getElementById("cdf-1").onclick = addSample1;
   document.getElementById("cdf-10").onclick = addSample10;
   document.getElementById("cdf-reset").onclick = reset;
+}
+
+if (document.getElementById("rejection-graph")) {
+  var data = [
+    { x: [], y: [], mode: "markers", type: "scatter", marker: { color: "#f24a27", size: 12 } },
+    { x: [], y: [], mode: "markers", type: "scatter", marker: { color: "#51ce00", size: 12 } },
+  ];
+  let arrow = [
+    { type: 'line', x0: 0, x1: 4, y0: 0, y1: 8 },
+    { type: 'line', x0: 0, x1: 4, y0: 0, y1: 3, },
+    { type: 'line', x0: 4, x1: 8, y0: 8, y1: 0, },
+    { type: 'line', x0: 4, x1: 8, y0: 3, y1: 0, }
+  ];
+
+  var layout = {
+    autosize: false,
+    hovermode: false,
+    showlegend: false,
+    width: 240,
+    height: 240,
+    margin: { l: 20, r: 20, b: 20, t: 20, },
+    xaxis: { fixedrange: true, range: [0, 8] },
+    yaxis: { fixedrange: true, range: [0, 8] },
+    shapes: arrow,
+  };
+
+  const limit = 1000;
+  var area = 0, inCount = 0, sampleCount = 0;
+  var playing = false;
+  var timeout;
+  function plot() {
+    function inTriangle(px, py, p0x, p0y, p1x, p1y, p2x, p2y) {
+      let area = 10;
+      let s = 1 / (2 * area) * (p0y * p2x - p0x * p2y + (p2y - p0y) * px + (p0x - p2x) * py);
+      let t = 1 / (2 * area) * (p0x * p1y - p0y * p1x + (p0y - p1y) * px + (p1x - p0x) * py);
+      return s > 0 && t > 0 && (s + t) < 1;
+    }
+    function inShape(x, y) {
+      return inTriangle(x, y, 0, 0, 4, 3, 4, 8) || inTriangle(x, y, 4, 3, 8, 0, 4, 8);
+    }
+    let x = Math.random() * 8, y = Math.random() * 8;
+    let inside = inShape(x, y) ? 1 : 0;
+    let pdf = 1.0 / 64.0; // choose x∈[0,8] and y∈[0,8] (1/8 * 1/8)
+    inCount += inside;
+    area = inCount / pdf / ++sampleCount;
+    if (data[inside].x.length > limit) data[inside].x.shift();
+    if (data[inside].y.length > limit) data[inside].y.shift();
+    data[inside].x.push(x);
+    data[inside].y.push(y);
+    let annotations = [{
+      x: 8, xanchor: 'right',
+      y: 8, yanchor: 'top',
+      text: 'Expected = ' + 20,
+      showarrow: false
+    }, {
+      x: 8, xanchor: 'right',
+      y: 7.5, yanchor: 'top',
+      text: 'Area ≈ ' + area.toFixed(4),
+      showarrow: false
+    }, {
+      x: 8, xanchor: 'right',
+      y: 7, yanchor: 'top',
+      text: '# Samples = ' + sampleCount,
+      showarrow: false
+    }];
+    Plotly.update("rejection-graph", { x: [data[0].x, data[1].x], y: [data[0].y, data[1].y] }, { annotations });
+    timeout = setTimeout(plot, 0.5);
+  }
+  function startStop() {
+    playing = !playing;
+    document.getElementById("rejection-start").innerHTML = playing ? "Pause" : "Start";
+    if (playing)
+      timeout = setTimeout(plot, 0.5);
+    else
+      clearTimeout(timeout);
+  }
+  function reset() { 
+    area = inCount = sampleCount = 0;
+    Plotly.restyle("rejection-graph", { x: [[], []], y: [[], []] });
+  }
+
+  document.getElementById("rejection-start").onclick = startStop;
+  document.getElementById("rejection-reset").onclick = reset;
+  Plotly.newPlot("rejection-graph", data, layout, { displayModeBar: false });
 }

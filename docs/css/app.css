@@ -64,3 +64,8 @@
 .d-inline {
   display: inline;
 }
+
+.d-flex {
+  display: flex;
+  flex-wrap: wrap;
+}

@@ -1,16 +1,40 @@
-# Home
-For full documentation visit [mkdocs.org](https://www.mkdocs.org).
+# About
 
-## Commands
+Rendering software engineer at [Animal Logic](https://animallogic.com/) Vancouver. I write any codes mostly related to both realtime and offline graphics. Fascinated in light transport and Monte Carlo path tracers. 
 
-* `mkdocs new [dir-name]` - Create a new project.
-* `mkdocs serve` - Start the live-reloading docs server.
-* `mkdocs build` - Build the documentation site.
-* `mkdocs -h` - Print help message and exit.
+---
 
-## Project layout
+# Notes
 
-    mkdocs.yml    # The configuration file.
-    docs/
-        index.md  # The documentation homepage.
-        ...       # Other markdown pages, images and other files.
+---
+
+# Projects
+
+---
+
+# Experience
+
+---
+
+# Education
+**Hong Kong University of Science and Technology**, _HK_ (2016 - 2020)
+
+- _Bachelor of Engineering, Computer Science_
+
+**KTH Royal Institue of Technology**, _Sweden_ (2019 Jan - June)
+
+- _Exchange Study, Master's Program_
+
+---
+
+# Skills
+
+## Tools & Application
+|![](img/vs.png){:style="width:50px"}|![](img/vscode.png){:style="width:50px"}|![](img/xcode.png){:style="width:50px"}|![](img/git.png){:style="width:50px"}|![](img/unity.png){:style="width:50px"}|![](img/ue4.png){:style="width:50px"}|![](img/blender.png){:style="width:50px"}|
+|:--:|:--:|:--:|:--:|:--:|:--:|:--:|
+|VisualStudio|VSCode|XCode|Git|Unity3D|UE4|Blender|
+
+## Programming Languages
+|![](img/cpp.png){:style="width:50px"}|![](img/rust.png){:style="width:50px"}|![](img/python.png){:style="width:50px"}|![](img/cs.png){:style="width:50px"}|![](img/php.png){:style="width:50px"}|![](img/js.png){:style="width:50px"}|
+|:--:|:--:|:--:|:--:|:--:|:--:|
+|C++|Rust|Python|C#|PHP|Javascript|

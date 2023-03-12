@@ -48,16 +48,16 @@ $$
 
 It comes with the following benefits:
 
-1. It has a convergence rate of $O(N^{-\frac{1}{2}})$ in any number of dimensions, which quadrature rule methods cannot achieve.
+1. It has a convergence rate of $O(\frac{1}{\sqrt{N}})$ in any number of dimensions, which quadrature rule methods cannot achieve.
 2. Simplicity. All you need is two functions `sample()` and `eval()`, and occationally finding a suitable pdf.
 
 ## Sampling random variables
-Of course we can sample uniformly across the domain, but that's usually not the best way to generate samples for our Monte Carlo integral. Picking the random samples carefully helps us to reach the convergence value faster.
+Generating uniform samples gurantees convergence but its rate is much slower. Ultimately, the samples should be drawn from a specific distribution such that most contribution to the integral is being extracted quickly from the domain. In other words, sampling carefully reduces the time to compute the ground-truth result.
 
 ### Inverse Transform Sampling
-This is a method for generating random variables from a given probability distribution by using its inverse cumulative distribution (cdf). The inversion method states that given a density function $p(x)$ 
+This is a method for generating random variables from a given probability distribution (pdf) by using its inverse cumulative distribution (cdf). Imagine the likelihood of picking a random variable $X$ follows a normal distribution, and we want the samples to be drawn proportional to its likeliness. A cdf table is built by summing up the marginal distributions (It's totally fine that the pdf doesn't add up to 1, since the sample will be drawn from the range of cdf which can be normalized by its maximum value). Then uniform samples $U$ are drawn in the inverse domain of cdf such that random variable $X$ is picked with $X = cdf^{-1}(U)$.
 
-<div style="display: flex">
+<div class="d-flex">
   <div id="normal-distribution" style="flex: 1"></div>
   <div id="cumulative-distribution" style="flex: 1"></div>
 </div>
@@ -65,7 +65,17 @@ This is a method for generating random variables from a given probability distri
 <button type="button" class="btn d-inline" id="cdf-10">Add 10 samples</button>
 <button type="button" class="btn d-inline" id="cdf-reset">Reset</button>
 
+From the above example, we can see most samples are centered at the highest probability area while the tails on both sides will have lower sample count. Good thing with this method is that it can be easily extended to multi-dimensional cases, and stratifying samples in the domain helps improves exploring the entire domain. 
+
+#### Downside
+Building the cdf takes time and memory. And if the cdf cannot be inverted analytically, numerically computing the inverse mapping value (e.g. binary search) on every drawn samples is quite costly. 
+
 ### Rejection Sampling
+When the pdf is difficult to sample, we can instead sample from a simpler density $q$ such that $p(x) \le M q(x)$, where $M$ is a scaling constant. For instance, you want to integrate the area of an arbitrary shape but directly sampling the shape is hard. However, you know it's much easiler to draw samples from a box. So let's throw some dots onto our sample space!
+
+<div id="rejection-graph"></div>
+<button type="button" class="btn d-inline" id="rejection-start">Start</button>
+<button type="button" class="btn d-inline" id="rejection-reset">Reset</button>
 
 
 <link href="../../css/app.css" rel="stylesheet"></style>
