@@ -1,5 +1,4 @@
-import "https://cdn.plot.ly/plotly-2.18.2.min.js"
-
+const safeWidth = window.innerWidth - 30;
 if (document.getElementById("rectangle-rule")) {
   function func(x) { return Math.sqrt(1 - x * x); }
   var a = Array.from({ length: 20 }, (_, i) => i / (20 - 1) * Math.PI / 2);
@@ -7,11 +6,12 @@ if (document.getElementById("rectangle-rule")) {
     x: a.map(a => Math.cos(a)),
     y: a.map(a => Math.sin(a))
   }];
+  let width = Math.min(300, safeWidth);
   var layout = {
     autosize: false,
     hovermode: false,
-    width: 300,
-    height: 325,
+    width,
+    height: width * (325.0 / 300.0),
     margin: { l: 20, r: 20, b: 20, t: 20, },
     xaxis: { fixedrange: true },
     yaxis: { fixedrange: true },
@@ -65,12 +65,14 @@ if (document.getElementById("high-frequency")) {
   let x = Array.from({ length: 100 }, (_, i) => i);
   let y = x.map(_ => Math.random() * 10);
   var data = [{ x, y }];
+  let width = Math.min(600, safeWidth);
   var layout = {
     autosize: false,
     hovermode: false,
-    width: 600,
-    height: 240,
+    width,
+    height: width * (240.0 / 600.0),
     margin: { l: 20, r: 20, b: 20, t: 20, },
+    padding: { l: 0, r: 0, b: 0, t: 0, },
     xaxis: { fixedrange: true },
     yaxis: { fixedrange: true },
   };
@@ -89,6 +91,7 @@ if (document.getElementById("normal-distribution") &&
   let x = Array.from({ length: n }, (_, i) => i / (n - 1) * 10 - 5);
   let y = x.map(x => normalDistribution(x));
   var data = [{ x, y }];
+  let width = Math.min(400, safeWidth);
   var layout = {
     title: {
       text: "Probability Density Function (pdf)",
@@ -96,8 +99,8 @@ if (document.getElementById("normal-distribution") &&
     },
     autosize: false,
     hovermode: false,
-    width: 400,
-    height: 240,
+    width,
+    height: width * (240.0 / 400.0),
     margin: { l: 20, r: 20, b: 20, t: 20, },
     xaxis: { fixedrange: true },
     yaxis: { fixedrange: true },
@@ -118,8 +121,8 @@ if (document.getElementById("normal-distribution") &&
     },
     autosize: false,
     hovermode: false,
-    width: 400,
-    height: 240,
+    width,
+    height: width * (240.0 / 400.0),
     margin: { l: 20, r: 20, b: 20, t: 20, },
     xaxis: { fixedrange: true },
     yaxis: { fixedrange: true },
@@ -193,13 +196,13 @@ if (document.getElementById("rejection-graph")) {
     { type: 'line', x0: 4, x1: 8, y0: 8, y1: 0, },
     { type: 'line', x0: 4, x1: 8, y0: 3, y1: 0, }
   ];
-
+  let width = Math.min(240, safeWidth);
   var layout = {
     autosize: false,
     hovermode: false,
     showlegend: false,
-    width: 240,
-    height: 240,
+    width,
+    height: width,
     margin: { l: 20, r: 20, b: 20, t: 20, },
     xaxis: { fixedrange: true, range: [0, 8] },
     yaxis: { fixedrange: true, range: [0, 8] },
@@ -256,7 +259,7 @@ if (document.getElementById("rejection-graph")) {
     else
       clearTimeout(timeout);
   }
-  function reset() { 
+  function reset() {
     area = inCount = sampleCount = 0;
     Plotly.restyle("rejection-graph", { x: [[], []], y: [[], []] });
   }

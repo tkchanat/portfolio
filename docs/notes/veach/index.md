@@ -5,9 +5,10 @@ To integrate the function $I = \int_{\Omega}{f(x) dx}$, where $\Omega$ is the do
 
 Pretend you don't know the equation for the following function and you want to know its area bounded by it. In high school, we were taught that the integral can be approximated with infinitesimal rectangles, a.k.a. the rectangle rules. So let's put together a bunch of rectangles and crunch some numbers!
 
-<div id="rectangle-rule">
-  <input type="range" min="2" max="64" value="8" class="slider center" id="myRange">
-  <input type="text" id="textInput" value="8">
+<div id="rectangle-rule"></div>
+<div style="display:flex; justify-content:center; width:100%; text-align:center">
+  <input id="myRange" type="range" min="2" max="64" value="8" >
+  <input id="textInput" type="text" value="8">
 </div>
 
 As the number of rectangles grows, the closer it fills the target area. To which I can say with confidence the area is $\pi/4$ since it's obviously a quarter of a circle. 
@@ -77,6 +78,11 @@ When the pdf is difficult to sample, we can instead sample from a simpler densit
 <button type="button" class="btn d-inline" id="rejection-start">Start</button>
 <button type="button" class="btn d-inline" id="rejection-reset">Reset</button>
 
+The sampling space is defined as the tight bounding box of the shape, since drawing samples from a square is much simpler. We know the probability $p$ of picking a sample point inside the shape is always less than the density $q$ (it's completely enclosed within the bound), it's eligible to use this strategy to draw a sample. To draw one:
 
-<link href="../../css/app.css" rel="stylesheet"></style>
-<script type="module" src="../../js/plot.js"></script>
+1. Sample $X_i$ according to $q$ (draw a point inside the square)
+2. Sample $U_i$ uniformly on $[0, 1]$
+3. If $U_i \le p(X_i) / (Mq(X_i))$, return the sample $X_i$
+4. Else, repeat 1
+
+In the above case, $p(X_i)$ is $\frac{1}{area}$ when the point is drawn inside the shape else zero, and $q(X_i)$ is always $\frac{1}{64}$ because we are uniformly sampling a 8x8 square. Given that $U_i$ has a trivial probability of being 0, we can safely assume that all valid samples $X_i$ are located inside the shape. Thus we know they are good samples.
