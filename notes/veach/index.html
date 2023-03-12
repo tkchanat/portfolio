@@ -1,0 +1,613 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../..">
+      
+      
+      <link rel="icon" href="../../img/favicon.ico">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.2">
+    
+    
+      
+        <title>Monte Carlo Integration - Andy Chan</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.7bf56d0a.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.a0c5b2b5.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../css/app.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="grey" data-md-color-accent="">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#monte-carlo-integration" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Andy Chan" class="md-header__button md-logo" aria-label="Andy Chan" data-md-component="logo">
+      
+  <img src="../../img/triangle.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Andy Chan
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Monte Carlo Integration
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Andy Chan" class="md-nav__button md-logo" aria-label="Andy Chan" data-md-component="logo">
+      
+  <img src="../../img/triangle.png" alt="logo">
+
+    </a>
+    Andy Chan
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+          Notes
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          Notes
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+          Veach
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="true">
+        <label class="md-nav__title" for="__nav_2_1">
+          <span class="md-nav__icon md-icon"></span>
+          Veach
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Monte Carlo Integration
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Monte Carlo Integration
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#quadrature-rules" class="md-nav__link">
+    Quadrature rules
+  </a>
+  
+    <nav class="md-nav" aria-label="Quadrature rules">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#downside" class="md-nav__link">
+    Downside
+  </a>
+  
+    <nav class="md-nav" aria-label="Downside">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#high-frequency-signals" class="md-nav__link">
+    High-frequency signals
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#high-dimensional-domains" class="md-nav__link">
+    High-dimensional domains
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#motivation" class="md-nav__link">
+    Motivation
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sampling-random-variables" class="md-nav__link">
+    Sampling random variables
+  </a>
+  
+    <nav class="md-nav" aria-label="Sampling random variables">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#inverse-transform-sampling" class="md-nav__link">
+    Inverse Transform Sampling
+  </a>
+  
+    <nav class="md-nav" aria-label="Inverse Transform Sampling">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#downside_1" class="md-nav__link">
+    Downside
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rejection-sampling" class="md-nav__link">
+    Rejection Sampling
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#quadrature-rules" class="md-nav__link">
+    Quadrature rules
+  </a>
+  
+    <nav class="md-nav" aria-label="Quadrature rules">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#downside" class="md-nav__link">
+    Downside
+  </a>
+  
+    <nav class="md-nav" aria-label="Downside">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#high-frequency-signals" class="md-nav__link">
+    High-frequency signals
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#high-dimensional-domains" class="md-nav__link">
+    High-dimensional domains
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#motivation" class="md-nav__link">
+    Motivation
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sampling-random-variables" class="md-nav__link">
+    Sampling random variables
+  </a>
+  
+    <nav class="md-nav" aria-label="Sampling random variables">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#inverse-transform-sampling" class="md-nav__link">
+    Inverse Transform Sampling
+  </a>
+  
+    <nav class="md-nav" aria-label="Inverse Transform Sampling">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#downside_1" class="md-nav__link">
+    Downside
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rejection-sampling" class="md-nav__link">
+    Rejection Sampling
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="monte-carlo-integration">Monte Carlo Integration</h1>
+<h2 id="quadrature-rules">Quadrature rules</h2>
+<p>To integrate the function <span class="arithmatex">\(I = \int_{\Omega}{f(x) dx}\)</span>, where <span class="arithmatex">\(\Omega\)</span> is the domain of integration. If <span class="arithmatex">\(f(x)\)</span> known to you and can be evaluated analytically, then you are good. But usually that's not the case, <span class="arithmatex">\(f(x)\)</span> behaves like a blackbox (you give it an input and it spits out an output), it needs to be integrated numerically. </p>
+<p>Pretend you don't know the equation for the following function and you want to know its area bounded by it. In high school, we were taught that the integral can be approximated with infinitesimal rectangles, a.k.a. the rectangle rules. So let's put together a bunch of rectangles and crunch some numbers!</p>
+<div id="rectangle-rule"></div>
+<div style="display:flex; justify-content:center; width:100%; text-align:center">
+  <input id="myRange" type="range" min="2" max="64" value="8" >
+  <input id="textInput" type="text" value="8">
+</div>
+
+<p>As the number of rectangles grows, the closer it fills the target area. To which I can say with confidence the area is <span class="arithmatex">\(\pi/4\)</span> since it's obviously a quarter of a circle. </p>
+<p>There are more similar approaches to do integration and they are known as quatrature rules. The generalized form looks like this <span class="arithmatex">\(\hat{I} = \sum_{i=1}^n w_i\ f(x_i)\)</span>. The weight <span class="arithmatex">\(w_i\)</span> is defined differently in other rules, e.g. <em>Midpoint rule</em>, <em>Trapezoid rule</em>, <em>Simpson's rule</em>, etc. </p>
+<h3 id="downside">Downside</h3>
+<p>These kind of numerical approximations suffers from two major problems. </p>
+<h4 id="high-frequency-signals">High-frequency signals</h4>
+<div id="high-frequency"></div>
+<p>Graphs like this can't be easily approximated with thick bars. To get closer to the real value, the bars must be really narrow which means more iterations to compute. </p>
+<h4 id="high-dimensional-domains">High-dimensional domains</h4>
+<div class="arithmatex">\[
+\hat{I}=\sum_{i_1=1}^n \sum_{i_2=1}^n \dots \sum_{i_s=1}^n{w_{i_1} w_{i_2} \dots w_{i_s} f(x_{i_1}, x_{i_2}, \dots, x_{i_s})}
+\]</div>
+<p>where <span class="arithmatex">\(s\)</span> is the dimension, <span class="arithmatex">\(w_i\)</span> is the weights and <span class="arithmatex">\(x_i\)</span> is the sample position in the domain. Which is always the case when solving light transport problems.</p>
+<h2 id="motivation">Motivation</h2>
+<p>As the name suggests, we can integrate functions with stochastic approaches through random sampling. With the Monte Carlo method, we can tap into the power of integrating arbitrary multi-dimensional functions!</p>
+<div class="arithmatex">\[
+F_N = \frac{1}{N} \sum_{i=1}^N{ \frac{f(X_i)}{p(X_i)} }
+\]</div>
+<p>where <span class="arithmatex">\(p(X_i)\)</span> is the probability density function (pdf). And we can verify that with sufficient samples, it will eventually converge to the expected value <span class="arithmatex">\(I\)</span>.</p>
+<div class="arithmatex">\[
+\begin{align}
+E[F_N] &amp;= E[\frac{1}{N}\sum_{i=1}^N{\frac{f(X_i)}{p(X_i)}}] \\
+&amp;= \frac{1}{N}\sum_{i=1}^N{\int_{\Omega}{\frac{f(x)}{p(x)} p(x) d\mu(x)}} \\
+&amp;= \int_{\Omega}{f(x) d\mu(x)} \\
+&amp;= I
+\end{align}
+\]</div>
+<p>It comes with the following benefits:</p>
+<ol>
+<li>It has a convergence rate of <span class="arithmatex">\(O(\frac{1}{\sqrt{N}})\)</span> in any number of dimensions, which quadrature rule methods cannot achieve.</li>
+<li>Simplicity. All you need is two functions <code>sample()</code> and <code>eval()</code>, and occationally finding a suitable pdf.</li>
+</ol>
+<h2 id="sampling-random-variables">Sampling random variables</h2>
+<p>Generating uniform samples gurantees convergence but its rate is much slower. Ultimately, the samples should be drawn from a specific distribution such that most contribution to the integral is being extracted quickly from the domain. In other words, sampling carefully reduces the time to compute the ground-truth result.</p>
+<h3 id="inverse-transform-sampling">Inverse Transform Sampling</h3>
+<p>This is a method for generating random variables from a given probability distribution (pdf) by using its inverse cumulative distribution (cdf). Imagine the likelihood of picking a random variable <span class="arithmatex">\(X\)</span> follows a normal distribution, and we want the samples to be drawn proportional to its likeliness. A cdf table is built by summing up the marginal distributions (It's totally fine that the pdf doesn't add up to 1, since the sample will be drawn from the range of cdf which can be normalized by its maximum value). Then uniform samples <span class="arithmatex">\(U\)</span> are drawn in the inverse domain of cdf such that random variable <span class="arithmatex">\(X\)</span> is picked with <span class="arithmatex">\(X = cdf^{-1}(U)\)</span>.</p>
+<div class="d-flex">
+  <div id="normal-distribution" style="flex: 1"></div>
+  <div id="cumulative-distribution" style="flex: 1"></div>
+</div>
+<p><button type="button" class="btn d-inline" id="cdf-1">Add 1 sample</button>
+<button type="button" class="btn d-inline" id="cdf-10">Add 10 samples</button>
+<button type="button" class="btn d-inline" id="cdf-reset">Reset</button></p>
+<p>From the above example, we can see most samples are centered at the highest probability area while the tails on both sides will have lower sample count. Good thing with this method is that it can be easily extended to multi-dimensional cases, and stratifying samples in the domain helps improves exploring the entire domain. </p>
+<h4 id="downside_1">Downside</h4>
+<p>Building the cdf takes time and memory. And if the cdf cannot be inverted analytically, numerically computing the inverse mapping value (e.g. binary search) on every drawn samples is quite costly. </p>
+<h3 id="rejection-sampling">Rejection Sampling</h3>
+<p>When the pdf is difficult to sample, we can instead sample from a simpler density <span class="arithmatex">\(q\)</span> such that <span class="arithmatex">\(p(x) \le M q(x)\)</span>, where <span class="arithmatex">\(M\)</span> is a scaling constant. For instance, you want to integrate the area of an arbitrary shape but directly sampling the shape is hard. However, you know it's much easiler to draw samples from a box. So let's throw some dots onto our sample space!</p>
+<div id="rejection-graph"></div>
+<p><button type="button" class="btn d-inline" id="rejection-start">Start</button>
+<button type="button" class="btn d-inline" id="rejection-reset">Reset</button></p>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.fc8c2696.min.js"></script>
+      
+        <script src="../../js/mathjax.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+        <script src="https://cdn.plot.ly/plotly-2.18.2.min.js"></script>
+      
+        <script src="../../js/plot.js"></script>
+      
+    
+  </body>
+</html>
