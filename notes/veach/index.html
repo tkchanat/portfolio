@@ -556,6 +556,14 @@ E[F_N] &amp;= E[\frac{1}{N}\sum_{i=1}^N{\frac{f(X_i)}{p(X_i)}}] \\
 <div id="rejection-graph"></div>
 <p><button type="button" class="btn d-inline" id="rejection-start">Start</button>
 <button type="button" class="btn d-inline" id="rejection-reset">Reset</button></p>
+<p>The sampling space is defined as the tight bounding box of the shape, since drawing samples from a square is much simpler. We know the probability <span class="arithmatex">\(p\)</span> of picking a sample point inside the shape is always less than the density <span class="arithmatex">\(q\)</span> (it's completely enclosed within the bound), it's eligible to use this strategy to draw a sample. To draw one:</p>
+<ol>
+<li>Sample <span class="arithmatex">\(X_i\)</span> according to <span class="arithmatex">\(q\)</span> (draw a point inside the square)</li>
+<li>Sample <span class="arithmatex">\(U_i\)</span> uniformly on <span class="arithmatex">\([0, 1]\)</span></li>
+<li>If <span class="arithmatex">\(U_i \le p(X_i) / (Mq(X_i))\)</span>, return the sample <span class="arithmatex">\(X_i\)</span></li>
+<li>Else, repeat 1</li>
+</ol>
+<p>In the above case, <span class="arithmatex">\(p(X_i)\)</span> is <span class="arithmatex">\(\frac{1}{area}\)</span> when the point is drawn inside the shape else zero, and <span class="arithmatex">\(q(X_i)\)</span> is always <span class="arithmatex">\(\frac{1}{64}\)</span> because we are uniformly sampling a 8x8 square. Given that <span class="arithmatex">\(U_i\)</span> has a trivial probability of being 0, we can safely assume that all valid samples <span class="arithmatex">\(X_i\)</span> are located inside the shape. Thus we know they are good samples.</p>
 
 
 
