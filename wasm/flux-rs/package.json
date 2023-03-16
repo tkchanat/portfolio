@@ -1,0 +1,12 @@
+{
+  "name": "flux-rs",
+  "version": "0.1.0",
+  "files": [
+    "flux_rs_bg.wasm",
+    "flux_rs.js",
+    "flux_rs.d.ts"
+  ],
+  "module": "flux_rs.js",
+  "types": "flux_rs.d.ts",
+  "sideEffects": false
+}

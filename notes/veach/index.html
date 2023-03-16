@@ -9,7 +9,7 @@
       
       
       
-        <link rel="prev" href="../..">
+        <link rel="prev" href="../../flux-rs/">
       
       
       <link rel="icon" href="../../img/favicon.ico">
@@ -166,6 +166,55 @@
 
   
   
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+          Flux rs
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          Flux rs
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../flux-rs/" class="md-nav__link">
+        flux-rs
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
     
   
   
@@ -175,17 +224,17 @@
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
       
       
       
-        <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+        <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
           Notes
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
-        <label class="md-nav__title" for="__nav_2">
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+        <label class="md-nav__title" for="__nav_3">
           <span class="md-nav__icon md-icon"></span>
           Notes
         </label>
@@ -204,17 +253,17 @@
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" checked>
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" checked>
       
       
       
-        <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+        <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
           Veach
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="true">
-        <label class="md-nav__title" for="__nav_2_1">
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="true">
+        <label class="md-nav__title" for="__nav_3_1">
           <span class="md-nav__icon md-icon"></span>
           Veach
         </label>
@@ -337,6 +386,13 @@
           <li class="md-nav__item">
   <a href="#rejection-sampling" class="md-nav__link">
     Rejection Sampling
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#importance-sampling" class="md-nav__link">
+    Importance Sampling
   </a>
   
 </li>
@@ -476,6 +532,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#importance-sampling" class="md-nav__link">
+    Importance Sampling
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -564,6 +627,7 @@ E[F_N] &amp;= E[\frac{1}{N}\sum_{i=1}^N{\frac{f(X_i)}{p(X_i)}}] \\
 <li>Else, repeat 1</li>
 </ol>
 <p>In the above case, <span class="arithmatex">\(p(X_i)\)</span> is <span class="arithmatex">\(\frac{1}{area}\)</span> when the point is drawn inside the shape else zero, and <span class="arithmatex">\(q(X_i)\)</span> is always <span class="arithmatex">\(\frac{1}{64}\)</span> because we are uniformly sampling a 8x8 square. Given that <span class="arithmatex">\(U_i\)</span> has a trivial probability of being 0, we can safely assume that all valid samples <span class="arithmatex">\(X_i\)</span> are located inside the shape. Thus we know they are good samples.</p>
+<h3 id="importance-sampling">Importance Sampling</h3>
 
 
 
