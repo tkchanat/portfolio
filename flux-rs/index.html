@@ -346,9 +346,9 @@
 </div>
 
 <script type="module">
-  import init, { greet, print_result, render } from '/wasm/flux-rs/flux_rs.js';
+  import init, { greet, print_result, render } from './flux_rs.js';
   init().then(() => {
-    render("/scenes/CornellBox-Sphere.obj");
+    render("./CornellBox-Sphere.obj");
   });
 </script>
 
