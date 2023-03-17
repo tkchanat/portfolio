@@ -86,3 +86,5 @@ The sampling space is defined as the tight bounding box of the shape, since draw
 4. Else, repeat 1
 
 In the above case, $p(X_i)$ is $\frac{1}{area}$ when the point is drawn inside the shape else zero, and $q(X_i)$ is always $\frac{1}{64}$ because we are uniformly sampling a 8x8 square. Given that $U_i$ has a trivial probability of being 0, we can safely assume that all valid samples $X_i$ are located inside the shape. Thus we know they are good samples.
+
+### Importance Sampling
