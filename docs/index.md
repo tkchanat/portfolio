@@ -9,9 +9,8 @@ Rendering software engineer at [Animal Logic](https://animallogic.com/) Vancouve
 ---
 
 ## Notes
-**Monte Carlo Integration**
-
-[![](img/veach.png){:style="width:300px"}](notes/veach/index.md)
+### Monte Carlo Integration
+[![](img/mci.jpg){:style="width:300px"}](notes/monte-carlo-integration.md)
 
 ---
 

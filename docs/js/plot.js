@@ -268,3 +268,206 @@ if (document.getElementById("rejection-graph")) {
   document.getElementById("rejection-reset").onclick = reset;
   Plotly.newPlot("rejection-graph", data, layout, { displayModeBar: false });
 }
+
+if (document.getElementById("white-noise-1d")) {
+  let rng = new Math.seedrandom(123);
+  let x = Array.from({ length: 30 }, _ => rng());
+  let y = Array.from({ length: 30 }, _ => 0);
+  var data = [{ x, y, mode: "markers", type: "scatter", marker: { color: "#000000", size: 8 } }];
+  let width = Math.min(250, safeWidth);
+  var layout = {
+    autosize: false,
+    hovermode: false,
+    width,
+    height: width,
+    margin: { l: 30, r: 30, b: 30, t: 30, },
+    padding: { l: 0, r: 0, b: 0, t: 0, },
+    title: "1D",
+    xaxis: { fixedrange: true, range: [0, 1] },
+    yaxis: { fixedrange: true, visible: false },
+  };
+  Plotly.newPlot("white-noise-1d", data, layout, { displayModeBar: false });
+}
+
+if (document.getElementById("white-noise-2d")) {
+  let rng = new Math.seedrandom(123);
+  let x = Array.from({ length: 100 }, _ => rng());
+  let y = Array.from({ length: 100 }, _ => rng());
+  var data = [{ x, y, mode: "markers", type: "scatter", marker: { color: "#000000", size: 8 } }];
+  let width = Math.min(250, safeWidth);
+  var layout = {
+    autosize: false,
+    hovermode: false,
+    width,
+    height: width,
+    margin: { l: 30, r: 30, b: 30, t: 30, },
+    padding: { l: 0, r: 0, b: 0, t: 0, },
+    title: "2D",
+    xaxis: { fixedrange: true, range: [0, 1], autotick: false, tick0: 0, dtick: 0.5 },
+    yaxis: { fixedrange: true, range: [0, 1], autotick: false, tick0: 0, dtick: 0.5 },
+  };
+  Plotly.newPlot("white-noise-2d", data, layout, { displayModeBar: false });
+}
+
+if (document.getElementById("white-noise-3d")) {
+  let rng = new Math.seedrandom(114);
+  let x = Array.from({ length: 200 }, _ => rng());
+  let y = Array.from({ length: 200 }, _ => rng());
+  let z = Array.from({ length: 200 }, _ => rng());
+  var data = [{ x, y, z, mode: "markers", type: "scatter3d", marker: { color: "#000000", size: 4 } }];
+  let width = Math.min(250, safeWidth);
+  var layout = {
+    autosize: false,
+    hovermode: false,
+    width,
+    height: width,
+    margin: { l: 30, r: 30, b: 30, t: 30, },
+    padding: { l: 0, r: 0, b: 0, t: 0, },
+    title: "3D",
+    scene: {
+      dragmode: false,
+      xaxis: { showspikes: false, range: [0, 1] },
+      yaxis: { showspikes: false, range: [0, 1] },
+      zaxis: { showspikes: false, range: [0, 1] },
+    }
+  };
+  Plotly.newPlot("white-noise-3d", data, layout, { displayModeBar: false });
+}
+
+if (document.getElementById("stratified-1d")) {
+  let rng = new Math.seedrandom(2);
+  let stratum = 20;
+  let x = Array.from({ length: stratum }, (_, i) => (i + rng()) / stratum);
+  let y = Array.from({ length: stratum }, _ => 0);
+  var data = [{ x, y, mode: "markers", type: "scatter", marker: { color: "#000000", size: 8 } }];
+  let width = Math.min(250, safeWidth);
+  var layout = {
+    autosize: false,
+    hovermode: false,
+    width,
+    height: width,
+    margin: { l: 30, r: 30, b: 30, t: 30, },
+    padding: { l: 0, r: 0, b: 0, t: 0, },
+    title: `1D (${stratum} stratum)`,
+    xaxis: { autotick: false, tick0: 0, dtick: 1.0 / stratum, fixedrange: true, range: [0, 1] },
+    yaxis: { fixedrange: true, visible: false },
+  };
+  Plotly.newPlot("stratified-1d", data, layout, { displayModeBar: false });
+}
+
+if (document.getElementById("stratified-2d")) {
+  let stratum = 10;
+  let rng = new Math.seedrandom(1);
+  let x = Array.from({ length: stratum * stratum }, (_, i) => (i % stratum + rng()) / stratum);
+  let y = Array.from({ length: stratum * stratum }, (_, i) => (Math.floor(i / stratum) + rng()) / stratum);
+  var data = [{ x, y, mode: "markers", type: "scatter", marker: { color: "#000000", size: 8 } }];
+  let width = Math.min(250, safeWidth);
+  var layout = {
+    autosize: false,
+    hovermode: false,
+    width,
+    height: width,
+    margin: { l: 30, r: 30, b: 30, t: 30, },
+    padding: { l: 0, r: 0, b: 0, t: 0, },
+    title: `2D (${stratum} stratum)`,
+    xaxis: { autotick: false, tick0: 0, dtick: 1.0 / stratum, fixedrange: true, range: [0, 1] },
+    yaxis: { autotick: false, tick0: 0, dtick: 1.0 / stratum, fixedrange: true, range: [0, 1] },
+  };
+  Plotly.newPlot("stratified-2d", data, layout, { displayModeBar: false });
+}
+
+if (document.getElementById("stratified-3d")) {
+  let stratum = 6;
+  let rng = new Math.seedrandom(4);
+  let x = Array.from({ length: stratum * stratum * stratum }, (_, i) => (i % stratum + rng()) / stratum);
+  let y = Array.from({ length: stratum * stratum * stratum }, (_, i) => (Math.floor(i / stratum) % stratum + rng()) / stratum);
+  let z = Array.from({ length: stratum * stratum * stratum }, (_, i) => (Math.floor(i / (stratum * stratum)) + rng()) / stratum);
+  var data = [{ x, y, z, mode: "markers", type: "scatter3d", marker: { color: "#000000", size: 4 } }];
+  let width = Math.min(250, safeWidth);
+  var layout = {
+    autosize: false,
+    hovermode: false,
+    width,
+    height: width,
+    margin: { l: 30, r: 30, b: 30, t: 30, },
+    padding: { l: 0, r: 0, b: 0, t: 0, },
+    title: `3D (${stratum} stratum)`,
+    scene: {
+      dragmode: false,
+      xaxis: { showspikes: false, autotick: false, tick0: 0, dtick: 1.0 / stratum, fixedrange: true, range: [0, 1] },
+      yaxis: { showspikes: false, autotick: false, tick0: 0, dtick: 1.0 / stratum, fixedrange: true, range: [0, 1] },
+      zaxis: { showspikes: false, autotick: false, tick0: 0, dtick: 1.0 / stratum, fixedrange: true, range: [0, 1] },
+    }
+  };
+  Plotly.newPlot("stratified-3d", data, layout, { displayModeBar: false });
+}
+
+if (document.getElementById("discrepancy")) {
+  let x = [], y = [];
+  var data = [{ x, y, mode: "markers", type: "scatter", marker: { color: "#000000", size: 4 } }];
+  let width = Math.min(250, safeWidth);
+  let boxes = [[0, 0, 0.5, 1], [0.8, 0.8, 1, 1], [0.8, 0, 1, 0.4]];
+  function area(box) {
+    return (box[2] - box[0]) * (box[3] - box[1]);
+  }
+  function inBox(box, point) {
+    return point[0] > box[0] && point[0] < box[2] && point[1] > box[1] && point[1] < box[3];
+  }
+  let shapes = boxes.map(box => ({
+    type: 'rect',
+    x0: box[0], y0: box[1],
+    x1: box[2], y1: box[3],
+    line: { color: 'rgba(0, 0, 0, 0.8)', width: 1 },
+    fillcolor: 'rgba(0, 0, 0, 0.2)'
+  }));
+  let annotations = boxes.map((box, i, _) => ({
+    showarrow: false,
+    text: (i + 10).toString(36).toUpperCase(),
+    x: (box[0]+box[2]) / 2,
+    y: (box[1]+box[3]) / 2,
+  }));
+  var layout = {
+    autosize: false,
+    hovermode: false,
+    width,
+    height: width,
+    margin: { l: 30, r: 30, b: 30, t: 30, },
+    padding: { l: 0, r: 0, b: 0, t: 0, },
+    shapes,
+    annotations,
+    xaxis: { autotick: false, tick0: 0, dtick: 0.1, fixedrange: true, range: [0, 1] },
+    yaxis: { autotick: false, tick0: 0, dtick: 0.1, fixedrange: true, range: [0, 1] },
+  };
+  function generate() {
+    reset();
+    let n = 100;
+    // let rng = new Math.seedrandom(1);
+    let x = Array.from({ length: n }, _ => Math.random());
+    let y = Array.from({ length: n }, _ => Math.random());
+    let count = Array(boxes.length).fill(0);
+    for (var i = 0; i < n; ++i) {
+      for (var j = 0; j < boxes.length; ++j) {
+        count[j] += inBox(boxes[j], [x[i], y[i]]) ? 1 : 0;
+      }
+    }
+    let areaA = area(boxes[0]), areaB = area(boxes[1]), areaC = area(boxes[2]);
+    let jA = count[0]/parseFloat(n), jB = count[1]/parseFloat(n), jC = count[2]/parseFloat(n);
+    let dA = Math.abs(jA-areaA), dB = Math.abs(jB-areaB), dC = Math.abs(jC-areaC);
+    document.getElementById("discrepancy-n").innerText = `${n}`;
+    document.getElementById("discrepancy-a").innerText = `${jA.toFixed(4)}-${areaA.toFixed(4)}`;
+    document.getElementById("discrepancy-b").innerText = `${jB.toFixed(4)}-${areaB.toFixed(4)}`;
+    document.getElementById("discrepancy-c").innerText = `${jC.toFixed(4)}-${areaC.toFixed(4)}`;
+    document.getElementById("discrepancy-ar").innerText = `${dA.toFixed(4)}`;
+    document.getElementById("discrepancy-br").innerText = `${dB.toFixed(4)}`;
+    document.getElementById("discrepancy-cr").innerText = `${dC.toFixed(4)}`;
+    document.getElementById("discrepancy-star").innerText = `${Math.max.apply(null, [dA, dB, dC]).toFixed(4)}`;
+    Plotly.restyle("discrepancy", { x: [x], y: [y] }, [0]);
+  }
+  function reset() {
+    Plotly.restyle("discrepancy", { x: [[]], y: [[]] });
+  }
+
+  document.getElementById("discrepancy-generate").onclick = generate;
+  document.getElementById("discrepancy-reset").onclick = reset;
+  Plotly.newPlot("discrepancy", data, layout, { displayModeBar: false });
+}
