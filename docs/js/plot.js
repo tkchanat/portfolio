@@ -181,8 +181,11 @@ if (document.getElementById("normal-distribution") &&
   }
 
   document.getElementById("cdf-1").onclick = addSample1;
+  document.getElementById("cdf-1").ontouchend = addSample1;
   document.getElementById("cdf-10").onclick = addSample10;
+  document.getElementById("cdf-10").ontouchend = addSample10;
   document.getElementById("cdf-reset").onclick = reset;
+  document.getElementById("cdf-reset").ontouchend = reset;
 }
 
 if (document.getElementById("rejection-graph")) {
@@ -265,7 +268,9 @@ if (document.getElementById("rejection-graph")) {
   }
 
   document.getElementById("rejection-start").onclick = startStop;
+  document.getElementById("rejection-start").ontouchend = startStop;
   document.getElementById("rejection-reset").onclick = reset;
+  document.getElementById("rejection-reset").ontouchend = reset;
   Plotly.newPlot("rejection-graph", data, layout, { displayModeBar: false });
 }
 
@@ -468,6 +473,64 @@ if (document.getElementById("discrepancy")) {
   }
 
   document.getElementById("discrepancy-generate").onclick = generate;
+  document.getElementById("discrepancy-generate").ontouchend = generate;
   document.getElementById("discrepancy-reset").onclick = reset;
+  document.getElementById("discrepancy-reset").ontouchend = reset;
   Plotly.newPlot("discrepancy", data, layout, { displayModeBar: false });
+}
+
+if (document.getElementById("halton")) {
+  var data = [
+    { x: [], y: [], mode: "markers", type: "scatter", marker: { color: "#000000", size: 4 } },
+  ];
+  let width = Math.min(240, safeWidth);
+  var layout = {
+    autosize: false,
+    hovermode: false,
+    showlegend: false,
+    width,
+    height: width,
+    margin: { l: 20, r: 20, b: 20, t: 20, },
+    xaxis: { fixedrange: true, range: [0, 1], autotick: false, tick0: 0, dtick: 0.2 },
+    yaxis: { fixedrange: true, range: [0, 1], autotick: false, tick0: 0, dtick: 0.2 },
+  };
+  function halton(i, b) {
+    var f = 1, r = 0;
+    while (i > 0) {
+      f = f / b;
+      r = r + f * (i % b);
+      i = Math.floor(i / b);
+    }
+    return r;
+  }
+
+  var playing = false;
+  var timeout = null;
+  var i = 0;
+  function plot() {
+    let x = halton(i, 2);
+    let y = halton(i, 3);
+    data[0].x.push(x);
+    data[0].y.push(y);
+    i += 1;
+    Plotly.relayout("halton", { x: [data[0].x], y: [data[0].y] });
+    timeout = setTimeout(plot, 0.5);
+  }
+  function startStop() {
+    playing = !playing;
+    document.getElementById("halton-start").innerHTML = playing ? "Pause" : "Start";
+    if (playing)
+      timeout = setTimeout(plot, 0.5);
+    else
+      clearTimeout(timeout);
+  }
+  function reset() {
+    Plotly.restyle("halton", { x: [[], []], y: [[], []] });
+  }
+
+  document.getElementById("halton-start").onclick = startStop;
+  document.getElementById("halton-start").ontouchend = startStop;
+  document.getElementById("halton-reset").onclick = reset;
+  document.getElementById("halton-reset").ontouchend = reset;
+  Plotly.newPlot("halton", data, layout, { displayModeBar: false });
 }
