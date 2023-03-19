@@ -180,12 +180,9 @@ if (document.getElementById("normal-distribution") &&
     Plotly.relayout("normal-distribution", { shapes: [] });
   }
 
-  document.getElementById("cdf-1").onclick = addSample1;
-  document.getElementById("cdf-1").ontouchend = addSample1;
-  document.getElementById("cdf-10").onclick = addSample10;
-  document.getElementById("cdf-10").ontouchend = addSample10;
-  document.getElementById("cdf-reset").onclick = reset;
-  document.getElementById("cdf-reset").ontouchend = reset;
+  document.getElementById("cdf-1").addEventListener('click', addSample1);
+  document.getElementById("cdf-10").addEventListener('click', addSample10);
+  document.getElementById("cdf-reset").addEventListener('click', reset);
 }
 
 if (document.getElementById("rejection-graph")) {
@@ -267,10 +264,8 @@ if (document.getElementById("rejection-graph")) {
     Plotly.restyle("rejection-graph", { x: [[], []], y: [[], []] });
   }
 
-  document.getElementById("rejection-start").onclick = startStop;
-  document.getElementById("rejection-start").ontouchend = startStop;
-  document.getElementById("rejection-reset").onclick = reset;
-  document.getElementById("rejection-reset").ontouchend = reset;
+  document.getElementById("rejection-start").addEventListener('click', startStop);
+  document.getElementById("rejection-reset").addEventListener('click', reset);
   Plotly.newPlot("rejection-graph", data, layout, { displayModeBar: false });
 }
 
@@ -472,10 +467,8 @@ if (document.getElementById("discrepancy")) {
     Plotly.restyle("discrepancy", { x: [[]], y: [[]] });
   }
 
-  document.getElementById("discrepancy-generate").onclick = generate;
-  document.getElementById("discrepancy-generate").ontouchend = generate;
-  document.getElementById("discrepancy-reset").onclick = reset;
-  document.getElementById("discrepancy-reset").ontouchend = reset;
+  document.getElementById("discrepancy-generate").addEventListener('click', generate);
+  document.getElementById("discrepancy-reset").addEventListener('click', reset);
   Plotly.newPlot("discrepancy", data, layout, { displayModeBar: false });
 }
 
@@ -525,12 +518,12 @@ if (document.getElementById("halton")) {
       clearTimeout(timeout);
   }
   function reset() {
+    playing = false;
+    clearTimeout(timeout);
     Plotly.restyle("halton", { x: [[], []], y: [[], []] });
   }
 
-  document.getElementById("halton-start").onclick = startStop;
-  document.getElementById("halton-start").ontouchend = startStop;
-  document.getElementById("halton-reset").onclick = reset;
-  document.getElementById("halton-reset").ontouchend = reset;
+  document.getElementById("halton-start").addEventListener('click', startStop);
+  document.getElementById("halton-reset").addEventListener('click', reset);
   Plotly.newPlot("halton", data, layout, { displayModeBar: false });
 }
