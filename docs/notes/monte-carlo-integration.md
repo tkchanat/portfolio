@@ -1,6 +1,8 @@
 # Monte Carlo Integration
 
-## Quadrature rules
+## Motivation
+
+### Quadrature rules
 To integrate the function $I = \int_{\Omega}{f(x) dx}$, where $\Omega$ is the domain of integration. If $f(x)$ known to you and can be evaluated analytically, then you are good. But usually that's not the case, $f(x)$ behaves like a blackbox (you give it an input and it spits out an output), it needs to be integrated numerically. 
 
 Pretend you don't know the equation for the following function and you want to know its area bounded by it. In high school, we were taught that the integral can be approximated with infinitesimal rectangles, a.k.a. the rectangle rules. So let's put together a bunch of rectangles and crunch some numbers!
@@ -15,21 +17,21 @@ As the number of rectangles grows, the closer it fills the target area. To which
 
 There are more similar approaches to do integration and they are known as quatrature rules. The generalized form looks like this $\hat{I} = \sum_{i=1}^n w_i\ f(x_i)$. The weight $w_i$ is defined differently in other rules, e.g. _Midpoint rule_, _Trapezoid rule_, _Simpson's rule_, etc. 
 
-### Downside
+#### Downside
 These kind of numerical approximations suffers from two major problems. 
 
-#### High-frequency signals
+### High-frequency signals
 <div id="high-frequency"></div>
 Graphs like this can't be easily approximated with thick bars. To get closer to the real value, the bars must be really narrow which means more iterations to compute. 
 
-#### High-dimensional domains
+### High-dimensional domains
 $$
 \hat{I}=\sum_{i_1=1}^n \sum_{i_2=1}^n \dots \sum_{i_s=1}^n{w_{i_1} w_{i_2} \dots w_{i_s} f(x_{i_1}, x_{i_2}, \dots, x_{i_s})}
 $$
 
 where $s$ is the dimension, $w_i$ is the weights and $x_i$ is the sample position in the domain. Which is always the case when solving light transport problems.
 
-## Motivation
+## Definition
 As the name suggests, we can integrate functions with stochastic approaches through random sampling. With the Monte Carlo method, we can tap into the power of integrating arbitrary multi-dimensional functions!
 
 $$
@@ -53,7 +55,7 @@ It comes with the following benefits:
 2. Simplicity. All you need is two functions `sample()` and `eval()`, and occationally finding a suitable pdf.
 
 ## Sampling random variables
-Generating uniform samples gurantees convergence but its rate is much slower. Ultimately, the samples should be drawn from a specific distribution such that most contribution to the integral is being extracted quickly from the domain. In other words, sampling carefully reduces the time to compute the ground-truth result.
+Generating uniform samples (e.g. $p(x)$ is a constant) gurantees convergence but its rate is much slower. Ultimately, the samples should be drawn from a specific distribution such that most contribution to the integral is being extracted quickly from the domain. In other words, sampling carefully reduces the time to compute the ground-truth result.
 
 ### Inverse Transform Sampling
 This is a method for generating random variables from a given probability distribution (pdf) by using its inverse cumulative distribution (cdf). Imagine the likelihood of picking a random variable $X$ follows a normal distribution, and we want the samples to be drawn proportional to its likeliness. A cdf table is built by summing up the marginal distributions (It's totally fine that the pdf doesn't add up to 1, since the sample will be drawn from the range of cdf which can be normalized by its maximum value). Then uniform samples $U$ are drawn in the inverse domain of cdf such that random variable $X$ is picked with $X = cdf^{-1}(U)$.
@@ -69,7 +71,9 @@ This is a method for generating random variables from a given probability distri
 From the above example, we can see most samples are centered at the highest probability area while the tails on both sides will have lower sample count. Good thing with this method is that it can be easily extended to multi-dimensional cases, and stratifying samples in the domain helps improves exploring the entire domain. 
 
 #### Downside
-Building the cdf takes time and memory. And if the cdf cannot be inverted analytically, numerically computing the inverse mapping value (e.g. binary search) on every drawn samples is quite costly. 
+The pdf must be known, also building the cdf takes time and memory. And if the cdf cannot be inverted analytically, numerically computing the inverse mapping value (e.g. binary search) on every drawn samples is quite costly.
+
+**Note: **A more efficient sampling structure exists out there, and it's called the [Alias Method](https://en.wikipedia.org/wiki/Alias_method), which samples can be drawn in constant $O(1)$ time. // TODO: Make a page about this
 
 ### Rejection Sampling
 When the pdf is difficult to sample, we can instead sample from a simpler density $q$ such that $p(x) \le M q(x)$, where $M$ is a scaling constant. For instance, you want to integrate the area of an arbitrary shape but directly sampling the shape is hard. However, you know it's much easiler to draw samples from a box. So let's throw some dots onto our sample space!
@@ -87,6 +91,13 @@ The sampling space is defined as the tight bounding box of the shape, since draw
 
 In the above case, $p(X_i)$ is $\frac{1}{area}$ when the point is drawn inside the shape else zero, and $q(X_i)$ is always $\frac{1}{64}$ because we are uniformly sampling a 8x8 square. Given that $U_i$ has a trivial probability of being 0, we can safely assume that all valid samples $X_i$ are located inside the shape. Thus we know they are good samples.
 
-### Importance Sampling
+## Importance Sampling
+<div id="importance-graph"></div>
+$N=$<span id="importance-n"></span></br>
+$\int{f(x)}dx =$<span id="importance-gt"></span></br>
+Approx $=$<span id="importance-approx"></span></br>
+<button type="button" class="btn d-inline" id="importance-start">Start</button>
+<button type="button" class="btn d-inline" id="importance-reset">Reset</button>
+
 
 [^1]: Veach, E. (1997). Robust Monte Carlo Methods for Light Transport Simulation. (Doctoral dissertation, Stanford University).

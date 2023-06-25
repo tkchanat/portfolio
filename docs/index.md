@@ -25,6 +25,16 @@ Migrating from old webpage :material-wrench-clock:
 _Trademarks of the above are owned by their respective companies and publishers._
 
 ---
+## Publication
+![](img/fire.jpeg){:style="width:200px"}
+
+**Can You See the Heat? A Null-scattering Approach for Refractive Volume Rendering** - SIGGRAPH 2023
+
+_Basile Fraboni, Tsz Kin Chan, Thibault Vergne, Jakub Jeziorski_
+
+[Presentation Session](https://s2023.siggraph.org/presentation/?id=gensub_241&sess=sess170)
+
+---
 
 ## Education 
 **Hong Kong University of Science and Technology**, _HK_ (2016 - 2020)
@@ -50,14 +60,14 @@ _Exchange Study, Master's Program_
 ## Skills
 
 ### Tools & Application
-|![](img/vs.png){:style="width:50px"}|![](img/vscode.png){:style="width:50px"}|![](img/xcode.png){:style="width:50px"}|![](img/git.png){:style="width:50px"}|![](img/unity.png){:style="width:50px"}|![](img/ue4.png){:style="width:50px"}|![](img/blender.png){:style="width:50px"}|
-|:--:|:--:|:--:|:--:|:--:|:--:|:--:|
-|VisualStudio|VSCode|XCode|Git|Unity3D|UE4|Blender|
+|![](img/vscode.png){:style="width:50px"}|![](img/vs.png){:style="width:50px"}|![](img/git.png){:style="width:50px"}|![](img/unity.png){:style="width:50px"}|![](img/ue4.png){:style="width:50px"}|![](img/blender.png){:style="width:50px"}|
+|:--:|:--:|:--:|:--:|:--:|:--:|
+|VSCode|VisualStudio|Git|Unity3D|UE4|Blender|
 
 ### Programming Languages
-|![](img/cpp.png){:style="width:50px"}|![](img/rust.png){:style="width:50px"}|![](img/python.png){:style="width:50px"}|![](img/cs.png){:style="width:50px"}|![](img/php.png){:style="width:50px"}|![](img/js.png){:style="width:50px"}|
-|:--:|:--:|:--:|:--:|:--:|:--:|
-|C++|Rust|Python|C#|PHP|Javascript|
+|![](img/cpp.png){:style="width:50px"}|![](img/rust.png){:style="width:50px"}|![](img/python.png){:style="width:50px"}|![](img/cs.png){:style="width:50px"}|![](img/js.png){:style="width:50px"}|
+|:--:|:--:|:--:|:--:|:--:|
+|C++|Rust|Python|C#|Javascript|
 
 ### Graphics API
 |![](img/vulkan.png){:style="width:50px"}|![](img/opengl.png){:style="width:50px"}|![](img/dx11.png){:style="width:50px"}|![](img/webgl.png){:style="width:50px"}|

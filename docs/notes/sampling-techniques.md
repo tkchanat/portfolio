@@ -1,4 +1,4 @@
-# Uniform Sampling
+# Sampling Techniques
 Puseudo-random noise usually don't produce good uniform samples. It often produces clusters and void within the sample space. That means the sample space is not well explored, either wasting samples on similar areas or even complete ignoring some subregions. And this scales to any dimensions.
 
 <div class="d-flex">

@@ -269,6 +269,69 @@ if (document.getElementById("rejection-graph")) {
   Plotly.newPlot("rejection-graph", data, layout, { displayModeBar: false });
 }
 
+if (document.getElementById("importance-graph")) {
+  let n = 100;
+  let gt = (5+7*Math.cos(Math.PI/7))/(6*Math.PI);
+  let f = (x) => Math.abs(Math.sin(4*Math.PI*x) + Math.cos(3*Math.PI*x))/2;
+  let importance1 = (x) => Math.abs(Math.sin(4*Math.PI*x));
+  let gtx = Array.from({ length: n }, (_, i) => i / n);
+  let gty = gtx.map(f);
+  let imx = Array.from({ length: n }, (_, i) => i / n);
+  let imy = imx.map(importance1);
+  var data = [
+    { x: gtx, y: gty, name: "f(x)", type: "scatter" },
+    { x: imx, y: imy, name: "Importance", type: "scatter", marker: { color: "#fcba03" } },
+  ];
+  let width = Math.min(600, safeWidth);
+  var layout = {
+    autosize: false,
+    hovermode: false,
+    width, height: 200,
+    margin: { l: 20, r: 20, b: 20, t: 20, },
+    xaxis: { fixedrange: true, range: [0, 1] },
+    yaxis: { fixedrange: true, range: [0, 1] },
+  };
+
+  const limit = 1000;
+  var area = 0, sampleCount = 0;
+  var playing = false;
+  var timeout;
+  function plot() {
+    let x = Math.random();
+    let pdf = 1.0;
+    let contrib = f(x) / pdf;
+    area = sampleCount ? area + (contrib-area)/sampleCount : contrib;
+    sampleCount++;
+    document.getElementById("importance-n").innerText = `${sampleCount}`;
+    document.getElementById("importance-approx").innerText = `${area}`;
+    // if (data[inside].x.length > limit) data[inside].x.shift();
+    // if (data[inside].y.length > limit) data[inside].y.shift();
+    // data[inside].x.push(x);
+    // data[inside].y.push(y);
+    // Plotly.update("importance-graph", { x: [data[0].x, data[1].x], y: [data[0].y, data[1].y] }, { annotations });
+    timeout = setTimeout(plot, 50.0);
+  }
+  function startStop() {
+    playing = !playing;
+    document.getElementById("importance-start").innerHTML = playing ? "Pause" : "Start";
+    if (playing)
+      timeout = setTimeout(plot, 0.5);
+    else
+      clearTimeout(timeout);
+  }
+  function reset() {
+    area = sampleCount = 0;
+    document.getElementById("importance-n").innerText = "0";
+    document.getElementById("importance-approx").innerText = "";
+  }
+  
+  document.getElementById("importance-n").innerText = "0";
+  document.getElementById("importance-gt").innerText = `${gt}`;
+  document.getElementById("importance-start").addEventListener('click', startStop);
+  document.getElementById("importance-reset").addEventListener('click', reset);
+  Plotly.newPlot("importance-graph", data, layout, { displayModeBar: false });
+}
+
 if (document.getElementById("white-noise-1d")) {
   let rng = new Math.seedrandom(123);
   let x = Array.from({ length: 30 }, _ => rng());
