@@ -12,7 +12,7 @@
         <link rel="prev" href="../..">
       
       
-        <link rel="next" href="../uniform-sampling/">
+        <link rel="next" href="../sampling-techniques/">
       
       <link rel="icon" href="../../img/favicon.ico">
       <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.2">
@@ -298,6 +298,14 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#motivation" class="md-nav__link">
+    Motivation
+  </a>
+  
+    <nav class="md-nav" aria-label="Motivation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
   <a href="#quadrature-rules" class="md-nav__link">
     Quadrature rules
   </a>
@@ -310,8 +318,12 @@
     Downside
   </a>
   
-    <nav class="md-nav" aria-label="Downside">
-      <ul class="md-nav__list">
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
         
           <li class="md-nav__item">
   <a href="#high-frequency-signals" class="md-nav__link">
@@ -331,15 +343,10 @@
     </nav>
   
 </li>
-        
-      </ul>
-    </nav>
-  
-</li>
       
         <li class="md-nav__item">
-  <a href="#motivation" class="md-nav__link">
-    Motivation
+  <a href="#definition" class="md-nav__link">
+    Definition
   </a>
   
 </li>
@@ -379,15 +386,15 @@
   
 </li>
         
-          <li class="md-nav__item">
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#importance-sampling" class="md-nav__link">
     Importance Sampling
   </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -406,8 +413,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../uniform-sampling/" class="md-nav__link">
-        Uniform Sampling
+      <a href="../sampling-techniques/" class="md-nav__link">
+        Sampling Techniques
       </a>
     </li>
   
@@ -447,6 +454,14 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#motivation" class="md-nav__link">
+    Motivation
+  </a>
+  
+    <nav class="md-nav" aria-label="Motivation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
   <a href="#quadrature-rules" class="md-nav__link">
     Quadrature rules
   </a>
@@ -459,8 +474,12 @@
     Downside
   </a>
   
-    <nav class="md-nav" aria-label="Downside">
-      <ul class="md-nav__list">
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
         
           <li class="md-nav__item">
   <a href="#high-frequency-signals" class="md-nav__link">
@@ -480,15 +499,10 @@
     </nav>
   
 </li>
-        
-      </ul>
-    </nav>
-  
-</li>
       
         <li class="md-nav__item">
-  <a href="#motivation" class="md-nav__link">
-    Motivation
+  <a href="#definition" class="md-nav__link">
+    Definition
   </a>
   
 </li>
@@ -528,15 +542,15 @@
   
 </li>
         
-          <li class="md-nav__item">
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#importance-sampling" class="md-nav__link">
     Importance Sampling
   </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -556,7 +570,8 @@
 
 
 <h1 id="monte-carlo-integration">Monte Carlo Integration</h1>
-<h2 id="quadrature-rules">Quadrature rules</h2>
+<h2 id="motivation">Motivation</h2>
+<h3 id="quadrature-rules">Quadrature rules</h3>
 <p>To integrate the function <span class="arithmatex">\(I = \int_{\Omega}{f(x) dx}\)</span>, where <span class="arithmatex">\(\Omega\)</span> is the domain of integration. If <span class="arithmatex">\(f(x)\)</span> known to you and can be evaluated analytically, then you are good. But usually that's not the case, <span class="arithmatex">\(f(x)\)</span> behaves like a blackbox (you give it an input and it spits out an output), it needs to be integrated numerically. </p>
 <p>Pretend you don't know the equation for the following function and you want to know its area bounded by it. In high school, we were taught that the integral can be approximated with infinitesimal rectangles, a.k.a. the rectangle rules. So let's put together a bunch of rectangles and crunch some numbers!</p>
 <div id="rectangle-rule"></div>
@@ -567,17 +582,17 @@
 
 <p>As the number of rectangles grows, the closer it fills the target area. To which I can say with confidence the area is <span class="arithmatex">\(\pi/4\)</span> since it's obviously a quarter of a circle. </p>
 <p>There are more similar approaches to do integration and they are known as quatrature rules. The generalized form looks like this <span class="arithmatex">\(\hat{I} = \sum_{i=1}^n w_i\ f(x_i)\)</span>. The weight <span class="arithmatex">\(w_i\)</span> is defined differently in other rules, e.g. <em>Midpoint rule</em>, <em>Trapezoid rule</em>, <em>Simpson's rule</em>, etc. </p>
-<h3 id="downside">Downside</h3>
+<h4 id="downside">Downside</h4>
 <p>These kind of numerical approximations suffers from two major problems. </p>
-<h4 id="high-frequency-signals">High-frequency signals</h4>
+<h3 id="high-frequency-signals">High-frequency signals</h3>
 <div id="high-frequency"></div>
 <p>Graphs like this can't be easily approximated with thick bars. To get closer to the real value, the bars must be really narrow which means more iterations to compute. </p>
-<h4 id="high-dimensional-domains">High-dimensional domains</h4>
+<h3 id="high-dimensional-domains">High-dimensional domains</h3>
 <div class="arithmatex">\[
 \hat{I}=\sum_{i_1=1}^n \sum_{i_2=1}^n \dots \sum_{i_s=1}^n{w_{i_1} w_{i_2} \dots w_{i_s} f(x_{i_1}, x_{i_2}, \dots, x_{i_s})}
 \]</div>
 <p>where <span class="arithmatex">\(s\)</span> is the dimension, <span class="arithmatex">\(w_i\)</span> is the weights and <span class="arithmatex">\(x_i\)</span> is the sample position in the domain. Which is always the case when solving light transport problems.</p>
-<h2 id="motivation">Motivation</h2>
+<h2 id="definition">Definition</h2>
 <p>As the name suggests, we can integrate functions with stochastic approaches through random sampling. With the Monte Carlo method, we can tap into the power of integrating arbitrary multi-dimensional functions!</p>
 <div class="arithmatex">\[
 F_N = \frac{1}{N} \sum_{i=1}^N{ \frac{f(X_i)}{p(X_i)} }
@@ -597,7 +612,7 @@ E[F_N] &amp;= E[\frac{1}{N}\sum_{i=1}^N{\frac{f(X_i)}{p(X_i)}}] \\
 <li>Simplicity. All you need is two functions <code>sample()</code> and <code>eval()</code>, and occationally finding a suitable pdf.</li>
 </ol>
 <h2 id="sampling-random-variables">Sampling random variables</h2>
-<p>Generating uniform samples gurantees convergence but its rate is much slower. Ultimately, the samples should be drawn from a specific distribution such that most contribution to the integral is being extracted quickly from the domain. In other words, sampling carefully reduces the time to compute the ground-truth result.</p>
+<p>Generating uniform samples (e.g. <span class="arithmatex">\(p(x)\)</span> is a constant) gurantees convergence but its rate is much slower. Ultimately, the samples should be drawn from a specific distribution such that most contribution to the integral is being extracted quickly from the domain. In other words, sampling carefully reduces the time to compute the ground-truth result.</p>
 <h3 id="inverse-transform-sampling">Inverse Transform Sampling</h3>
 <p>This is a method for generating random variables from a given probability distribution (pdf) by using its inverse cumulative distribution (cdf). Imagine the likelihood of picking a random variable <span class="arithmatex">\(X\)</span> follows a normal distribution, and we want the samples to be drawn proportional to its likeliness. A cdf table is built by summing up the marginal distributions (It's totally fine that the pdf doesn't add up to 1, since the sample will be drawn from the range of cdf which can be normalized by its maximum value). Then uniform samples <span class="arithmatex">\(U\)</span> are drawn in the inverse domain of cdf such that random variable <span class="arithmatex">\(X\)</span> is picked with <span class="arithmatex">\(X = cdf^{-1}(U)\)</span>.</p>
 <div class="d-flex">
@@ -609,7 +624,8 @@ E[F_N] &amp;= E[\frac{1}{N}\sum_{i=1}^N{\frac{f(X_i)}{p(X_i)}}] \\
 <button type="button" class="btn d-inline" id="cdf-reset">Reset</button></p>
 <p>From the above example, we can see most samples are centered at the highest probability area while the tails on both sides will have lower sample count. Good thing with this method is that it can be easily extended to multi-dimensional cases, and stratifying samples in the domain helps improves exploring the entire domain. </p>
 <h4 id="downside_1">Downside</h4>
-<p>Building the cdf takes time and memory. And if the cdf cannot be inverted analytically, numerically computing the inverse mapping value (e.g. binary search) on every drawn samples is quite costly. </p>
+<p>The pdf must be known, also building the cdf takes time and memory. And if the cdf cannot be inverted analytically, numerically computing the inverse mapping value (e.g. binary search) on every drawn samples is quite costly.</p>
+<p><strong>Note: </strong>A more efficient sampling structure exists out there, and it's called the <a href="https://en.wikipedia.org/wiki/Alias_method">Alias Method</a>, which samples can be drawn in constant <span class="arithmatex">\(O(1)\)</span> time. // TODO: Make a page about this</p>
 <h3 id="rejection-sampling">Rejection Sampling</h3>
 <p>When the pdf is difficult to sample, we can instead sample from a simpler density <span class="arithmatex">\(q\)</span> such that <span class="arithmatex">\(p(x) \le M q(x)\)</span>, where <span class="arithmatex">\(M\)</span> is a scaling constant. For instance, you want to integrate the area of an arbitrary shape but directly sampling the shape is hard. However, you know it's much easiler to draw samples from a box. So let's throw some dots onto our sample space!</p>
 <div id="rejection-graph"></div>
@@ -623,7 +639,13 @@ E[F_N] &amp;= E[\frac{1}{N}\sum_{i=1}^N{\frac{f(X_i)}{p(X_i)}}] \\
 <li>Else, repeat 1</li>
 </ol>
 <p>In the above case, <span class="arithmatex">\(p(X_i)\)</span> is <span class="arithmatex">\(\frac{1}{area}\)</span> when the point is drawn inside the shape else zero, and <span class="arithmatex">\(q(X_i)\)</span> is always <span class="arithmatex">\(\frac{1}{64}\)</span> because we are uniformly sampling a 8x8 square. Given that <span class="arithmatex">\(U_i\)</span> has a trivial probability of being 0, we can safely assume that all valid samples <span class="arithmatex">\(X_i\)</span> are located inside the shape. Thus we know they are good samples.</p>
-<h3 id="importance-sampling">Importance Sampling</h3>
+<h2 id="importance-sampling">Importance Sampling</h2>
+<div id="importance-graph"></div>
+<p><span class="arithmatex">\(N=\)</span><span id="importance-n"></span></br>
+<span class="arithmatex">\(\int{f(x)}dx =\)</span><span id="importance-gt"></span></br>
+Approx <span class="arithmatex">\(=\)</span><span id="importance-approx"></span></br>
+<button type="button" class="btn d-inline" id="importance-start">Start</button>
+<button type="button" class="btn d-inline" id="importance-reset">Reset</button></p>
 <div class="footnote">
 <hr />
 <ol>
