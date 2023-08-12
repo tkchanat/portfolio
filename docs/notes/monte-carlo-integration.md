@@ -99,5 +99,35 @@ Approx $=$<span id="importance-approx"></span></br>
 <button type="button" class="btn d-inline" id="importance-start">Start</button>
 <button type="button" class="btn d-inline" id="importance-reset">Reset</button>
 
+## Multiple Importance Sampling
+Next event estimation can be seen as a multiple importance sampling approach of integrating the radiance since it combines two sampling strategies, BSDF sampling and light sampling, often called as direct and indirect lighting. 
+
+### BSDF Sampling
+$$
+p(w_i') \propto f_s(\mathbf{x}', w_i' \rightarrow w_o')
+$$
+
+Depending on the surface properties, there are certain directions ($w_i'$) the BSDF favors after an interaction. To get the more contribution from the function, samples have to be drawn proportional to the $f_s$'s shape. Because BSDF samples are drawn inside the solid angle domain, the probability $p(w_i')$ is also measured in solid angle.
+
+### Light Sampling
+In case when BSDF failed to find a significant contribution, other words the outgoing ray direction missed the light source, light sampling then comes into play to provide as a backup strategy.
+
+$$
+L_o(\mathbf{x}'\rightarrow\mathbf{x}'') = \int_{\mathcal{M}}{f_s(\mathbf{x}\rightarrow\mathbf{x}'\rightarrow\mathbf{x}'')L_e(\mathbf{x}\rightarrow\mathbf{x}')G(\mathbf{x}\leftrightarrow\mathbf{x}')dA(\mathbf{x})}
+$$
+
+$G(\mathbf{x}\leftrightarrow\mathbf{x}')$ often refers as the _geometric term_, which was introduced because of change of variables. When changing from projected solid angle $d\sigma^\bot(w_i')$ to area measure $dA(\mathbf{x})$, it is required to have this term to normalize the integral:
+
+$$
+G(\mathbf{x}\leftrightarrow\mathbf{x}') = V(\mathbf{x}\leftrightarrow\mathbf{x}')\frac{cos(\theta_o)cos(\theta_i')}{||\mathbf{x}-\mathbf{x}'||^2}
+$$
+
+To importance sample the light instead of solid angle, the density $p(\mathbf{x})$ is **predetermined** since it is just the probability of picking a point on the manifold surface, i.e. $p(\mathbf{x})=\frac{1}{Area}$. 
+
+### Transformation of Space / Conversion of Domain
+$$
+p(\mathbf{x})=p(w_i')\frac{d\sigma^\bot(w_i')}{dA(\mathbf{x})}=p(w_i')\frac{|cos(\theta_o)cos(\theta_i')|}{||\mathbf{x}-\mathbf{x}'||^2}
+$$
+
 
 [^1]: Veach, E. (1997). Robust Monte Carlo Methods for Light Transport Simulation. (Doctoral dissertation, Stanford University).

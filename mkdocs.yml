@@ -3,10 +3,12 @@ theme:
   favicon: img/favicon.ico
   logo: img/triangle.png
   name: material
+  features:
+    - toc.integrate
   palette:
     # Palette toggle for automatic mode
     - media: "(prefers-color-scheme)"
-      primary: blue grey
+      primary: orange
       accent: amber
       scheme: default
       toggle:
@@ -14,7 +16,7 @@ theme:
         name: Switch to light mode
     # Palette toggle for light mode
     - media: "(prefers-color-scheme: light)"
-      primary: blue grey
+      primary: orange
       accent: amber
       scheme: default 
       toggle:
@@ -23,7 +25,7 @@ theme:
 
     # Palette toggle for dark mode
     - media: "(prefers-color-scheme: dark)"
-      primary: blue grey
+      primary: orange
       accent: amber
       scheme: slate
       toggle:
@@ -46,6 +48,9 @@ extra_css:
 markdown_extensions:
   - attr_list
   - footnotes
+  - pymdownx.caret
+  - pymdownx.mark
+  - pymdownx.tilde
   - pymdownx.arithmatex:
       generic: true
   - pymdownx.emoji:
