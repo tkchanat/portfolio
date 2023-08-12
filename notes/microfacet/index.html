@@ -9,20 +9,24 @@
       
       
       
+        <link rel="prev" href="../..">
       
-      <link rel="icon" href="/img/favicon.ico">
+      
+        <link rel="next" href="../monte-carlo-integration/">
+      
+      <link rel="icon" href="../../img/favicon.ico">
       <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.2">
     
     
       
-        <title>Andy Chan</title>
+        <title>Microfacet Theory - Andy Chan</title>
       
     
     
-      <link rel="stylesheet" href="/assets/stylesheets/main.7bf56d0a.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.7bf56d0a.min.css">
       
         
-        <link rel="stylesheet" href="/assets/stylesheets/palette.a0c5b2b5.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.a0c5b2b5.min.css">
       
       
 
@@ -38,9 +42,9 @@
       
     
     
-      <link rel="stylesheet" href="/css/app.css">
+      <link rel="stylesheet" href="../../css/app.css">
     
-    <script>__md_scope=new URL("/",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -68,6 +72,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#microfacet-theory" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -80,9 +89,9 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="/." title="Andy Chan" class="md-header__button md-logo" aria-label="Andy Chan" data-md-component="logo">
+    <a href="../.." title="Andy Chan" class="md-header__button md-logo" aria-label="Andy Chan" data-md-component="logo">
       
-  <img src="/img/triangle.png" alt="logo">
+  <img src="../../img/triangle.png" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -98,7 +107,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              
+              Microfacet Theory
             
           </span>
         </div>
@@ -195,9 +204,9 @@
 
 <nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="/." title="Andy Chan" class="md-nav__button md-logo" aria-label="Andy Chan" data-md-component="logo">
+    <a href="../.." title="Andy Chan" class="md-nav__button md-logo" aria-label="Andy Chan" data-md-component="logo">
       
-  <img src="/img/triangle.png" alt="logo">
+  <img src="../../img/triangle.png" alt="logo">
 
     </a>
     Andy Chan
@@ -213,7 +222,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/." class="md-nav__link">
+      <a href="../.." class="md-nav__link">
         Home
       </a>
     </li>
@@ -226,14 +235,16 @@
 
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
       
       
       
@@ -242,7 +253,7 @@
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
         <label class="md-nav__title" for="__nav_2">
           <span class="md-nav__icon md-icon"></span>
           Notes
@@ -253,11 +264,93 @@
               
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="/notes/microfacet/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Microfacet Theory
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         Microfacet Theory
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#fresnel-f" class="md-nav__link">
+    Fresnel (F)
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#normal-distribution-d" class="md-nav__link">
+    Normal Distribution (D)
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#geometric-attenuation-g" class="md-nav__link">
+    Geometric Attenuation (G)
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#various-models" class="md-nav__link">
+    Various Models
+  </a>
+  
+    <nav class="md-nav" aria-label="Various Models">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#schlicks-approximation" class="md-nav__link">
+    Schlick's Approximation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#unreal-4" class="md-nav__link">
+    Unreal 4
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -269,7 +362,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/notes/monte-carlo-integration/" class="md-nav__link">
+      <a href="../monte-carlo-integration/" class="md-nav__link">
         Monte Carlo Integration
       </a>
     </li>
@@ -283,7 +376,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/notes/sampling-techniques/" class="md-nav__link">
+      <a href="../sampling-techniques/" class="md-nav__link">
         Sampling Techniques
       </a>
     </li>
@@ -309,8 +402,41 @@
             <div class="md-content" data-md-component="content">
               <article class="md-content__inner md-typeset">
                 
-  <h1>404 - Not found</h1>
+                  
 
+
+<h1 id="microfacet-theory">Microfacet Theory</h1>
+<h2 id="fresnel-f">Fresnel (F)</h2>
+<h2 id="normal-distribution-d">Normal Distribution (D)</h2>
+<h2 id="geometric-attenuation-g">Geometric Attenuation (G)</h2>
+<h2 id="various-models">Various Models</h2>
+<h3 id="schlicks-approximation">Schlick's Approximation</h3>
+<p>Christophe Schlick proposed an inexpensive and efficient model<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup> in attempt to capture the microfacet properties. This is probably the most popular go-to model aside from the Cook-Torrance model, usually used in real-time graphics since it has less mathematical operations. Both <span class="arithmatex">\(F\)</span> and <span class="arithmatex">\(G\)</span> terms are inspired from the Cook-Torrance model, while the <span class="arithmatex">\(D\)</span> term is derived from the Beckmann distribution.</p>
+<div class="arithmatex">\[F(\mathbf{v},\mathbf{h})=f_0+(1-f_0)(1-\left|\mathbf{v}\cdot\mathbf{h}\right|)^5\]</div>
+<div class="arithmatex">\[D(\mathbf{h})=\frac{\alpha^3x}{\left|\mathbf{n}\cdot\mathbf{h}\right|(\alpha x^2-x^2+\alpha^2)^2},\quad x=\left|\mathbf{n}\cdot\mathbf{h}\right|+\alpha-1\]</div>
+<div class="arithmatex">\[G(\mathbf{l},\mathbf{v},\mathbf{h})=G_1(\mathbf{l})\ G_1(\mathbf{v}),\quad G_1(\mathbf{v})=\frac{\left|\mathbf{n}\cdot\mathbf{h}\right|}{\left|\mathbf{n}\cdot\mathbf{h}\right|(1-k)+k},\quad k=\sqrt{\frac{\pi}{2\alpha^2}}\]</div>
+<h3 id="unreal-4">Unreal 4</h3>
+<p>Epic Games<sup id="fnref:2"><a class="footnote-ref" href="#fn:2">2</a></sup> mostly adopts the formulations of <span class="arithmatex">\(F\)</span> and <span class="arithmatex">\(G\)</span> from the Schlick's model, but uses Disney's choice of <span class="arithmatex">\(G\)</span> in GGX. It seems to me that every decisions are sacrificing minor visual error for faster computations.</p>
+<div class="arithmatex">\[F(\mathbf{v},\mathbf{h})=f_0+(1-f_0)\cdot2^{(-5.55473\left|\mathbf{v}\cdot\mathbf{h}\right|-6.98316)\left|\mathbf{v}\cdot\mathbf{h}\right|}\]</div>
+<div class="arithmatex">\[D(\mathbf{h})=\frac{\alpha^2}{\pi(\left|\mathbf{n}\cdot\mathbf{h}\right|^2(\alpha^2-1)+1)^2}\]</div>
+<div class="arithmatex">\[G(\mathbf{l},\mathbf{v},\mathbf{h})=G_1(\mathbf{l})\ G_1(\mathbf{v}),\quad G_1(\mathbf{v})=\frac{\left|\mathbf{n}\cdot\mathbf{h}\right|}{\left|\mathbf{n}\cdot\mathbf{h}\right|(1-k)+k},\quad k=\frac{(\alpha+1)^2}{8}\]</div>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:1">
+<p>Schlick C. (1994, August). <a href="https://citeseerx.ist.psu.edu/document?repid=rep1&amp;type=pdf&amp;doi=183db641ff80ff21234040ccce884cb06227dad4">An inexpensive BRDF model for physically‐based rendering</a>. <em>In Computer graphics forum (Vol. 13, No. 3, pp. 233-246). Edinburgh, UK: Blackwell Science Ltd.</em>&#160;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+<li id="fn:2">
+<p>Karis B, Epic Games. (2013). <a href="https://blog.selfshadow.com/publications/s2013-shading-course/karis/s2013_pbs_epic_notes_v2.pdf">Real shading in unreal engine 4</a>. <em>Proc. Physically Based Shading Theory Practice, 4(3), 1.</em>&#160;<a class="footnote-backref" href="#fnref:2" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div>
+
+
+
+
+
+                
               </article>
             </div>
           
@@ -342,12 +468,12 @@
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-    <script id="__config" type="application/json">{"base": "/", "features": ["toc.integrate"], "search": "/assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["toc.integrate"], "search": "../../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="/assets/javascripts/bundle.fc8c2696.min.js"></script>
+      <script src="../../assets/javascripts/bundle.fc8c2696.min.js"></script>
       
-        <script src="/js/mathjax.js"></script>
+        <script src="../../js/mathjax.js"></script>
       
         <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
       
@@ -357,7 +483,7 @@
       
         <script src="https://cdnjs.cloudflare.com/ajax/libs/seedrandom/2.3.10/seedrandom.min.js"></script>
       
-        <script src="/js/plot.js"></script>
+        <script src="../../js/plot.js"></script>
       
     
   </body>
