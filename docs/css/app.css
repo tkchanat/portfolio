@@ -70,3 +70,9 @@
   display: flex;
   flex-wrap: wrap;
 }
+
+/* Not sure why mkdocs have overflow of arithmatex set to auto
+   but this gets rid of the ugly scroll bar. */
+.md-typeset div.arithmatex {
+  overflow: hidden;
+}

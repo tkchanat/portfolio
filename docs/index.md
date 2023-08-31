@@ -1,3 +1,9 @@
+---
+hide:
+  - footer
+---
+
+
 ![](img/profile.jpg){:style="width:200px; border-radius: 20%"}
 
 <h1>Andy (Tsz Kin) Chan</h1>
@@ -54,9 +60,9 @@ _Exchange Study, Master's Program_
 ## Skills
 
 <h3>Tools & Application</h3>
-|![](img/vscode.png){:style="width:50px"}|![](img/vs.png){:style="width:50px"}|![](img/git.png){:style="width:50px"}|![](img/unity.png){:style="width:50px"}|![](img/ue4.png){:style="width:50px"}|![](img/blender.png){:style="width:50px"}|
-|:--:|:--:|:--:|:--:|:--:|:--:|
-|VSCode|VisualStudio|Git|Unity3D|UE4|Blender|
+|![](img/vscode.png){:style="width:50px"}|![](img/vs.png){:style="width:50px"}|![](img/git.png){:style="width:50px"}|![](img/usd.png){:style="width:50px"}|![](img/unity.png){:style="width:50px"}|![](img/ue4.png){:style="width:50px"}|![](img/blender.png){:style="width:50px"}|
+|:--:|:--:|:--:|:--:|:--:|:--:|:--:|
+|VSCode|VisualStudio|Git|USD|Unity3D|UE4|Blender|
 
 <h3>Programming Languages</h3>
 |![](img/cpp.png){:style="width:50px"}|![](img/rust.png){:style="width:50px"}|![](img/python.png){:style="width:50px"}|![](img/cs.png){:style="width:50px"}|![](img/js.png){:style="width:50px"}|
