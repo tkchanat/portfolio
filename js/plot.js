@@ -2,7 +2,7 @@ const safeWidth = window.innerWidth - 30;
 if (document.getElementById("rectangle-rule")) {
   function func(x) { return Math.sqrt(1 - x * x); }
   var a = Array.from({ length: 20 }, (_, i) => i / (20 - 1) * Math.PI / 2);
-  var data = [{
+  let data = [{
     x: a.map(a => Math.cos(a)),
     y: a.map(a => Math.sin(a))
   }];
@@ -64,7 +64,7 @@ if (document.getElementById("rectangle-rule")) {
 if (document.getElementById("high-frequency")) {
   let x = Array.from({ length: 100 }, (_, i) => i);
   let y = x.map(_ => Math.random() * 10);
-  var data = [{ x, y }];
+  let data = [{ x, y }];
   let width = Math.min(600, safeWidth);
   var layout = {
     autosize: false,
@@ -90,7 +90,7 @@ if (document.getElementById("normal-distribution") &&
   // Left chart
   let x = Array.from({ length: n }, (_, i) => i / (n - 1) * 10 - 5);
   let y = x.map(x => normalDistribution(x));
-  var data = [{ x, y }];
+  let pdf_data = [{ x, y }];
   let width = Math.min(400, safeWidth);
   var layout = {
     title: {
@@ -106,14 +106,14 @@ if (document.getElementById("normal-distribution") &&
     yaxis: { fixedrange: true },
   };
 
-  Plotly.newPlot("normal-distribution", data, layout, { displayModeBar: false });
+  Plotly.newPlot("normal-distribution", pdf_data, layout, { displayModeBar: false });
 
   // Right chart
   let c = y;
   for (var i = 1; i < n; i++) {
     c[i] = c[i] + c[i - 1];
   }
-  var data = [{ x, y: c }];
+  let cdf_data = [{ x, y: c }];
   var layout = {
     title: {
       text: "Cumulative Density Function (cdf)",
@@ -128,7 +128,7 @@ if (document.getElementById("normal-distribution") &&
     yaxis: { fixedrange: true },
   };
 
-  Plotly.newPlot("cumulative-distribution", data, layout, { displayModeBar: false });
+  Plotly.newPlot("cumulative-distribution", cdf_data, layout, { displayModeBar: false });
 
   function binarySearch(arr, x) {
     let start = 0, end = arr.length - 1;
@@ -186,7 +186,7 @@ if (document.getElementById("normal-distribution") &&
 }
 
 if (document.getElementById("rejection-graph")) {
-  var data = [
+  let data = [
     { x: [], y: [], mode: "markers", type: "scatter", marker: { color: "#f24a27", size: 12 } },
     { x: [], y: [], mode: "markers", type: "scatter", marker: { color: "#51ce00", size: 12 } },
   ];
@@ -278,7 +278,7 @@ if (document.getElementById("importance-graph")) {
   let gty = gtx.map(f);
   let imx = Array.from({ length: n }, (_, i) => i / n);
   let imy = imx.map(importance1);
-  var data = [
+  let data = [
     { x: gtx, y: gty, name: "f(x)", type: "scatter" },
     { x: imx, y: imy, name: "Importance", type: "scatter", marker: { color: "#fcba03" } },
   ];
@@ -336,7 +336,7 @@ if (document.getElementById("white-noise-1d")) {
   let rng = new Math.seedrandom(123);
   let x = Array.from({ length: 30 }, _ => rng());
   let y = Array.from({ length: 30 }, _ => 0);
-  var data = [{ x, y, mode: "markers", type: "scatter", marker: { color: "#000000", size: 8 } }];
+  let data = [{ x, y, mode: "markers", type: "scatter", marker: { color: "#000000", size: 8 } }];
   let width = Math.min(250, safeWidth);
   var layout = {
     autosize: false,
@@ -356,7 +356,7 @@ if (document.getElementById("white-noise-2d")) {
   let rng = new Math.seedrandom(123);
   let x = Array.from({ length: 100 }, _ => rng());
   let y = Array.from({ length: 100 }, _ => rng());
-  var data = [{ x, y, mode: "markers", type: "scatter", marker: { color: "#000000", size: 8 } }];
+  let data = [{ x, y, mode: "markers", type: "scatter", marker: { color: "#000000", size: 8 } }];
   let width = Math.min(250, safeWidth);
   var layout = {
     autosize: false,
@@ -377,7 +377,7 @@ if (document.getElementById("white-noise-3d")) {
   let x = Array.from({ length: 200 }, _ => rng());
   let y = Array.from({ length: 200 }, _ => rng());
   let z = Array.from({ length: 200 }, _ => rng());
-  var data = [{ x, y, z, mode: "markers", type: "scatter3d", marker: { color: "#000000", size: 4 } }];
+  let data = [{ x, y, z, mode: "markers", type: "scatter3d", marker: { color: "#000000", size: 4 } }];
   let width = Math.min(250, safeWidth);
   var layout = {
     autosize: false,
@@ -402,7 +402,7 @@ if (document.getElementById("stratified-1d")) {
   let stratum = 20;
   let x = Array.from({ length: stratum }, (_, i) => (i + rng()) / stratum);
   let y = Array.from({ length: stratum }, _ => 0);
-  var data = [{ x, y, mode: "markers", type: "scatter", marker: { color: "#000000", size: 8 } }];
+  let data = [{ x, y, mode: "markers", type: "scatter", marker: { color: "#000000", size: 8 } }];
   let width = Math.min(250, safeWidth);
   var layout = {
     autosize: false,
@@ -423,7 +423,7 @@ if (document.getElementById("stratified-2d")) {
   let rng = new Math.seedrandom(1);
   let x = Array.from({ length: stratum * stratum }, (_, i) => (i % stratum + rng()) / stratum);
   let y = Array.from({ length: stratum * stratum }, (_, i) => (Math.floor(i / stratum) + rng()) / stratum);
-  var data = [{ x, y, mode: "markers", type: "scatter", marker: { color: "#000000", size: 8 } }];
+  let data = [{ x, y, mode: "markers", type: "scatter", marker: { color: "#000000", size: 8 } }];
   let width = Math.min(250, safeWidth);
   var layout = {
     autosize: false,
@@ -445,7 +445,7 @@ if (document.getElementById("stratified-3d")) {
   let x = Array.from({ length: stratum * stratum * stratum }, (_, i) => (i % stratum + rng()) / stratum);
   let y = Array.from({ length: stratum * stratum * stratum }, (_, i) => (Math.floor(i / stratum) % stratum + rng()) / stratum);
   let z = Array.from({ length: stratum * stratum * stratum }, (_, i) => (Math.floor(i / (stratum * stratum)) + rng()) / stratum);
-  var data = [{ x, y, z, mode: "markers", type: "scatter3d", marker: { color: "#000000", size: 4 } }];
+  let data = [{ x, y, z, mode: "markers", type: "scatter3d", marker: { color: "#000000", size: 4 } }];
   let width = Math.min(250, safeWidth);
   var layout = {
     autosize: false,
@@ -467,7 +467,7 @@ if (document.getElementById("stratified-3d")) {
 
 if (document.getElementById("discrepancy")) {
   let x = [], y = [];
-  var data = [{ x, y, mode: "markers", type: "scatter", marker: { color: "#000000", size: 4 } }];
+  let data = [{ x, y, mode: "markers", type: "scatter", marker: { color: "#000000", size: 4 } }];
   let width = Math.min(250, safeWidth);
   let boxes = [[0, 0, 0.5, 1], [0.8, 0.8, 1, 1], [0.8, 0, 1, 0.4]];
   function area(box) {
@@ -536,7 +536,7 @@ if (document.getElementById("discrepancy")) {
 }
 
 if (document.getElementById("halton")) {
-  var data = [
+  let data = [
     { x: [], y: [], mode: "markers", type: "scatter", marker: { color: "#000000", size: 4 } },
   ];
   let width = Math.min(240, safeWidth);
