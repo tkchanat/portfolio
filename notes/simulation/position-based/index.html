@@ -9,24 +9,22 @@
       
       
       
-        <link rel="prev" href="../monte-carlo-integration/">
+        <link rel="prev" href="../impulse-based/">
       
       
-        <link rel="next" href="../simulation/force-based/">
-      
-      <link rel="icon" href="../../img/favicon.ico">
+      <link rel="icon" href="../../../img/favicon.ico">
       <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.2">
     
     
       
-        <title>Sampling Techniques - Andy Chan</title>
+        <title>Position Based Simulation - Andy Chan</title>
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.7bf56d0a.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.7bf56d0a.min.css">
       
         
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.a0c5b2b5.min.css">
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.a0c5b2b5.min.css">
       
       
 
@@ -42,9 +40,9 @@
       
     
     
-      <link rel="stylesheet" href="../../css/app.css">
+      <link rel="stylesheet" href="../../../css/app.css">
     
-    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -73,7 +71,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#sampling-techniques" class="md-skip">
+        <a href="#position-based-simulation" class="md-skip">
           Skip to content
         </a>
       
@@ -89,9 +87,9 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="../.." title="Andy Chan" class="md-header__button md-logo" aria-label="Andy Chan" data-md-component="logo">
+    <a href="../../.." title="Andy Chan" class="md-header__button md-logo" aria-label="Andy Chan" data-md-component="logo">
       
-  <img src="../../img/triangle.png" alt="logo">
+  <img src="../../../img/triangle.png" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -107,7 +105,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Sampling Techniques
+              Position Based Simulation
             
           </span>
         </div>
@@ -204,9 +202,9 @@
 
 <nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../.." title="Andy Chan" class="md-nav__button md-logo" aria-label="Andy Chan" data-md-component="logo">
+    <a href="../../.." title="Andy Chan" class="md-nav__button md-logo" aria-label="Andy Chan" data-md-component="logo">
       
-  <img src="../../img/triangle.png" alt="logo">
+  <img src="../../../img/triangle.png" alt="logo">
 
     </a>
     Andy Chan
@@ -222,7 +220,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../.." class="md-nav__link">
+      <a href="../../.." class="md-nav__link">
         Home
       </a>
     </li>
@@ -266,7 +264,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../microfacet/" class="md-nav__link">
+      <a href="../../microfacet/" class="md-nav__link">
         Microfacet Theory
       </a>
     </li>
@@ -280,8 +278,79 @@
   
   
     <li class="md-nav__item">
-      <a href="../monte-carlo-integration/" class="md-nav__link">
+      <a href="../../monte-carlo-integration/" class="md-nav__link">
         Monte Carlo Integration
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sampling-techniques/" class="md-nav__link">
+        Sampling Techniques
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+          Simulation
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="true">
+        <label class="md-nav__title" for="__nav_2_4">
+          <span class="md-nav__icon md-icon"></span>
+          Simulation
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../force-based/" class="md-nav__link">
+        Force Based Simulation
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../impulse-based/" class="md-nav__link">
+        Impulse Based Simulation
       </a>
     </li>
   
@@ -304,12 +373,12 @@
       
       
         <label class="md-nav__link md-nav__link--active" for="__toc">
-          Sampling Techniques
+          Position Based Simulation
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <a href="./" class="md-nav__link md-nav__link--active">
-        Sampling Techniques
+        Position Based Simulation
       </a>
       
         
@@ -328,49 +397,22 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#stratified-sampling" class="md-nav__link">
-    Stratified Sampling
+  <a href="#problem" class="md-nav__link">
+    Problem
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#low-discrepancy-sequences" class="md-nav__link">
-    Low-Discrepancy Sequences
-  </a>
-  
-    <nav class="md-nav" aria-label="Low-Discrepancy Sequences">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#defining-discrepancy" class="md-nav__link">
-    Defining Discrepancy
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#halton-sequence" class="md-nav__link">
-    Halton Sequence
+  <a href="#algorithm" class="md-nav__link">
+    Algorithm
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#sobol-sequence" class="md-nav__link">
-    Sobol Sequence
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#progressive-multi-jittered-sample-sequence" class="md-nav__link">
-    Progressive Multi-Jittered Sample Sequence
+  <a href="#result" class="md-nav__link">
+    Result
   </a>
   
 </li>
@@ -379,75 +421,6 @@
   
 </nav>
       
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-      
-      
-      
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" >
-      
-      
-      
-        <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
-          Simulation
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
-        <label class="md-nav__title" for="__nav_2_4">
-          <span class="md-nav__icon md-icon"></span>
-          Simulation
-        </label>
-        <ul class="md-nav__list" data-md-scrollfix>
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../simulation/force-based/" class="md-nav__link">
-        Force Based Simulation
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../simulation/impulse-based/" class="md-nav__link">
-        Impulse Based Simulation
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../simulation/position-based/" class="md-nav__link">
-        Position Based Simulation
-      </a>
     </li>
   
 
@@ -481,84 +454,39 @@
                   
 
 
-<h1 id="sampling-techniques">Sampling Techniques</h1>
-<p>Puseudo-random noise usually don't produce good uniform samples. It often produces clusters and void within the sample space. That means the sample space is not well explored, either wasting samples on similar areas or even complete ignoring some subregions. And this scales to any dimensions.</p>
-<div class="d-flex">
-  <div id="white-noise-1d" style="flex: 1"></div>
-  <div id="white-noise-2d" style="flex: 1"></div>
-  <div id="white-noise-3d" style="flex: 1"></div>
-</div>
-
-<h2 id="stratified-sampling">Stratified Sampling</h2>
-<p>Instead of recklessly scatter points around, how about subdiving the domain <span class="arithmatex">\(\Omega\)</span> into non-overlapping regions <span class="arithmatex">\(\Omega_1, \dots, \Omega_n\)</span>. Noted that the union of them must cover the whole domain.</p>
+<h1 id="position-based-simulation">Position Based Simulation</h1>
+<p>As oppose to any other rigidbody simulations, <a href="../force-based/">force-based</a> and <a href="../impulse-based/">impulse-based</a> that deals with velocity and acceleration calculations, position-based simulation attempts to minimize the constrains on the position domain down to particle level. The main benefits of PBD is that it's not suppose to suffer from overshooting problem.
+<a href="">http://mmacklin.com/EG2015PBD.pdf</a></p>
+<h2 id="problem">Problem</h2>
+<p>Given a set of <span class="arithmatex">\(M\)</span> constrains (basically means there are <span class="arithmatex">\(M\)</span> equality or inequality equations to satisfy), we need to solve for <span class="arithmatex">\(N\times\mathbb{R}^3\)</span> unknowns to resolve our final positions. Most of the time, the number of constraints won't match the number of unknowns we are solving (i.e. <span class="arithmatex">\(M \neq N\)</span>). This means if the problem was a linear system <span class="arithmatex">\(\mathbf{A}\mathbf{x}=\mathbf{b}\)</span>, the solution can't be obtained easily by inverting the matrix and solve for <span class="arithmatex">\(\mathbf{x}\)</span>. Not to mention the system we are solving won't necessarily be linear, for example a simple distance constraint <span class="arithmatex">\(c(\mathbf{x}_1, \mathbf{x}_2)=\left|\mathbf{x}_1-\mathbf{x}_2\right|^2-d^2\)</span> alone is a non-linear equation.</p>
+<p>Thus, it all boils down to a complex problem of finding a set of positions <span class="arithmatex">\(\mathbf{x}\)</span> that minimize if not solved the constrained system:</p>
 <div class="arithmatex">\[
-\bigcup_{i=1}^n{\ \Omega_i} = \Omega
+C(\mathbf{x}) = \left\{\\
+\begin{array}\\
+c_1(\mathbf{x}_0, \mathbf{x}_1, \cdots, \mathbf{x}_N) \succ 0\\
+\cdots\\
+c_M(\mathbf{x}_0, \mathbf{x}_1, \cdots, \mathbf{x}_N) \succ 0\\
+\end{array}\\
+\right.
 \]</div>
-<div class="d-flex">
-  <div id="stratified-1d" style="flex: 1"></div>
-  <div id="stratified-2d" style="flex: 1"></div>
-  <div id="stratified-3d" style="flex: 1"></div>
-</div>
-
-<p>This works pretty well in low-dimensional integration problems. However unfortunately, this suffers the same problem as the quadrature rules where it won't perform well in high frequency signals.</p>
-<h2 id="low-discrepancy-sequences">Low-Discrepancy Sequences</h2>
-<p>If randomness are difficult to control, how about herding the points to position in a deterministic pattern such that they are <em>almost</em> equal distance to each other? In other words, how do we get an equidistribution of samples?</p>
-<h3 id="defining-discrepancy">Defining Discrepancy</h3>
-<p>Imagine a <span class="arithmatex">\(s\)</span>-dimentional unit cube <span class="arithmatex">\(\mathbb{I}^s = [0, 1)^s\)</span>, with a point set <span class="arithmatex">\(P = {x_1, x_2, \dots, x_N} \in \mathbb{I}^s\)</span>. We define the point set discrepancy <span class="arithmatex">\(\mathcal{D}(J, P)\)</span> as follows:</p>
-<div class="arithmatex">\[
-\mathcal{D}(J, P) = \left|\frac{A(J)}{N} - V(J)\right|
-\]</div>
-<p>You can think of <span class="arithmatex">\(\mathcal{D}(J, P)\)</span> as the proportion of points inside a sub-interval <span class="arithmatex">\(J\)</span>, where <span class="arithmatex">\(A(J)\)</span> is the number of points <span class="arithmatex">\(x_i \in J\)</span> and <span class="arithmatex">\(V(J)\)</span> is the volume of <span class="arithmatex">\(J\)</span>. </p>
-<p>The worst-case discrepancy is called the <em>star-discrepancy</em> and is defined as:</p>
-<div class="arithmatex">\[
-\mathcal{D^*}(N)=\sup_{J\in\mathbb{I^s}}{|\mathcal{D}(J;P)|}
-\]</div>
-<p>A good sequence should minimize such <em>star-discrepancy</em> <span class="arithmatex">\(\mathcal{D^*}(N)\)</span> to be qualified as <em>low-discrepancy</em>. Perhaps it's easier to visualize the terms in a diagram.</p>
-<div id="discrepancy"></div>
-
-<p><span class="arithmatex">\(N=\)</span><span id="discrepancy-n"></span></br>
-<span class="arithmatex">\(\mathcal{D}(A, P) =|\)</span><span id="discrepancy-a"><span class="arithmatex">\(\frac{A(A)}{N}-V(A)\)</span></span><span class="arithmatex">\(|=\)</span> <span id="discrepancy-ar"></span></br>
-<span class="arithmatex">\(\mathcal{D}(B, P) =|\)</span><span id="discrepancy-b"><span class="arithmatex">\(\frac{A(B)}{N}-V(B)\)</span></span><span class="arithmatex">\(|=\)</span> <span id="discrepancy-br"></span></br>
-<span class="arithmatex">\(\mathcal{D}(C, P) =|\)</span><span id="discrepancy-c"><span class="arithmatex">\(\frac{A(C)}{N}-V(C)\)</span></span><span class="arithmatex">\(|=\)</span> <span id="discrepancy-cr"></span></br>
-<span class="arithmatex">\(\mathcal{D^*}(P) =\)</span><span id="discrepancy-star"></span></p>
-<p><button type="button" class="btn d-inline" id="discrepancy-generate">Generate Point Set</button>
-<button type="button" class="btn d-inline" id="discrepancy-reset">Reset</button></p>
-<h2 id="halton-sequence">Halton Sequence</h2>
-<p>One of the well-known low discrepancy sequences is generated using the radical inverse of numbers. They are called <em>radical inverse sequence</em>, and is defined as:</p>
-<div class="arithmatex">\[
-\phi_b(i) = \sum_{k\ge 0}{d_{i,k}\ b^{-1-k}}
-\]</div>
-<p>where <span class="arithmatex">\(b\)</span> is the base and <span class="arithmatex">\(d_k\)</span> is the <span class="arithmatex">\(k\)</span>-th digit in the <span class="arithmatex">\(b\)</span>-ary expansion of <span class="arithmatex">\(n\)</span>. To generate a sequence for <span class="arithmatex">\(b=2\)</span>, first represent the natural numbers in binary, then revert the digits and take its inverse. i.e.</p>
+<p>Where <span class="arithmatex">\(\mathbf{x}\)</span> is the concatenation of <span class="arithmatex">\(N\times\mathbb{R}^3\)</span> position unknowns we are trying to solve, and the symbol <span class="arithmatex">\(\succ\)</span> denotes either <span class="arithmatex">\(=\)</span> or <span class="arithmatex">\(\geq\)</span>. As said, there won't be closed form solution because the system is neither symmetric nor linear. Our best bet is to apply an iterative solver to minimize the system after a fixed amount of iterations and hope for the best that the approximated result will satisfy all our constraints. </p>
+<h2 id="algorithm">Algorithm</h2>
+<p>The main position based dynamics (PBD) algorithm can be split into three different stages: prediction, constraint projection, and post-solve updates.</p>
 <div class="arithmatex">\[
 \begin{align}
-&amp;\quad \phi_2(1),\phi_2(2),\phi_2(3),\phi_2(4),\phi_2(5),\phi_2(6),\dots \\
-&amp;=0.1_2, 0.01_2, 0.11_2, 0.001_2, 0.101_2, 0.011_2,\dots \\
-&amp;=\frac12,\frac14,\frac34,\frac18,\frac58,\frac38,\dots \\
+&amp;\mathbf{while}\ \text{simulating}\\
+&amp;\quad \mathbf{for} \text{ all particles } i\\
+&amp;\quad\quad \mathbf{v}_i \leftarrow \mathbf{v}_i + \mathbf{f}_{ext}\Delta t\\
+&amp;\quad\quad \mathbf{p}_i \leftarrow \mathbf{x}_i + \mathbf{v}_i\Delta t\\
+&amp;\quad \mathbf{for} \text{ all constraints } C\\
+&amp;\quad\quad solve(C, \Delta t)\\
+&amp;\quad \mathbf{for} \text{ all particles } i\\
+&amp;\quad\quad \mathbf{v}_i \leftarrow (\mathbf{x}_i - \mathbf{p}_i) \frac{1}{\Delta t}\\
+&amp;\quad\quad \mathbf{x}_i \leftarrow \mathbf{p}_i
 \end{align}
 \]</div>
-<p>This is also known as the <em>van der Corput sequence</em>, a specialized one-dimensional radical inverse sequence. The generalized form is called the <em>Halton sequence</em>, that is scalable to higher dimensions. To generate points in <span class="arithmatex">\(N\)</span>-dimension, simply pick a different base from the prim number series <span class="arithmatex">\({2, 3, 5, 7, 11, \dots}\)</span>. Scratchapixel has a more <a href="https://www.scratchapixel.com/lessons/mathematics-physics-for-computer-graphics/monte-carlo-methods-in-practice/introduction-quasi-monte-carlo.html">in-depth explanation</a>, feel free to give it a read! </p>
-<div id="halton"></div>
-<p><button type="button" class="btn d-inline" id="halton-start">Start</button>
-<button type="button" class="btn d-inline" id="halton-reset">Reset</button></p>
-<h2 id="sobol-sequence">Sobol Sequence</h2>
-<h2 id="progressive-multi-jittered-sample-sequence">Progressive Multi-Jittered Sample Sequence</h2>
-<div class="footnote">
-<hr />
-<ol>
-<li id="fn:1">
-<p>Veach, E. (1997). Robust Monte Carlo Methods for Light Transport Simulation. (Doctoral dissertation, Stanford University).&#160;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">&#8617;</a></p>
-</li>
-<li id="fn:2">
-<p>Dalal, I., Stefan, D., &amp; Harwayne-Gidansky, J. (2008). Low discrepancy sequences for Monte Carlo simulations on reconfigurable platforms. In 2008 International Conference on Application-Specific Systems, Architectures and Processors (pp. 108–113).&#160;<a class="footnote-backref" href="#fnref:2" title="Jump back to footnote 2 in the text">&#8617;</a></p>
-</li>
-<li id="fn:3">
-<p>van der Corput, J.G. (1935), "Verteilungsfunktionen (Erste Mitteilung)" (PDF), Proceedings of the Koninklijke Akademie van Wetenschappen te Amsterdam (in German), 38: 813–821, Zbl 0012.34705&#160;<a class="footnote-backref" href="#fnref:3" title="Jump back to footnote 3 in the text">&#8617;</a></p>
-</li>
-<li id="fn:4">
-<p>Christensen, P., Kensler, A., &amp; Kilpatrick, C. (2018). Progressive Multi-Jittered Sample Sequences. Computer Graphics Forum.&#160;<a class="footnote-backref" href="#fnref:4" title="Jump back to footnote 4 in the text">&#8617;</a></p>
-</li>
-</ol>
-</div>
+<h2 id="result">Result</h2>
+<p><img alt="" src="../img/pbd.webp" /></p>
 
 
 
@@ -580,7 +508,7 @@
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../monte-carlo-integration/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Monte Carlo Integration" rel="prev">
+          <a href="../impulse-based/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Impulse Based Simulation" rel="prev">
             <div class="md-footer__button md-icon">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
             </div>
@@ -589,26 +517,11 @@
                 <span class="md-footer__direction">
                   Previous
                 </span>
-                Monte Carlo Integration
+                Impulse Based Simulation
               </div>
             </div>
           </a>
         
-        
-          
-          <a href="../simulation/force-based/" class="md-footer__link md-footer__link--next" aria-label="Next: Force Based Simulation" rel="next">
-            <div class="md-footer__title">
-              <div class="md-ellipsis">
-                <span class="md-footer__direction">
-                  Next
-                </span>
-                Force Based Simulation
-              </div>
-            </div>
-            <div class="md-footer__button md-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
-            </div>
-          </a>
         
       </nav>
     
@@ -696,12 +609,12 @@
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-    <script id="__config" type="application/json">{"base": "../..", "features": ["toc.integrate", "navigation.footer"], "search": "../../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["toc.integrate", "navigation.footer"], "search": "../../../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.fc8c2696.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.fc8c2696.min.js"></script>
       
-        <script src="../../js/mathjax.js"></script>
+        <script src="../../../js/mathjax.js"></script>
       
         <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
       
@@ -711,7 +624,7 @@
       
         <script src="https://cdnjs.cloudflare.com/ajax/libs/seedrandom/2.3.10/seedrandom.min.js"></script>
       
-        <script src="../../js/plot.js"></script>
+        <script src="../../../js/plot.js"></script>
       
     
   </body>
