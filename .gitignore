@@ -69,4 +69,4 @@ ENV/
 # MkDocs documentation
 site*/
 
-flux-rs/
+.DS_Store
