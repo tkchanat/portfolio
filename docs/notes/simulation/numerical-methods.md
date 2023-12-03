@@ -1,13 +1,16 @@
-# Numerial Methods for ODEs
+# Numerical Methods
+In this chapter, I will cover different methods to integrate differential equations (ODE) numerically. Since the integrand is evaluated numerically, I will replace every $=$ to be $\approx$ to make it clear it's just an estimation only.
+
+// TODO: investigate what is consistency and order in numerical methods
 
 ## Euler Method
 This is a first-order numerical method to solve ordinary differential equations (ODEs) with a given initial value. It allows us to approximate a nearby point on the curve by moving a short distance $\Delta t$ along a line tangent, that is the first-order derivative $f'(t)$, to the curve $f(t)$. To write that down:
 
 $$
-\begin{align}
+\begin{cases}
 f'(t) &\approx \frac{f(t+\Delta t) - f(t)}{\Delta t}\\
 f(t+\Delta t) &\approx f(t) + f'(t) \Delta t
-\end{align}
+\end{cases}
 $$
 
 Rewriting it in an iterative way, we can find the next position a particle $\mathbf{x}_{n+1}$ with its current position $\mathbf{x}_n$:
@@ -16,7 +19,45 @@ $$
 \mathbf{x}_{n+1} \approx \mathbf{x}_n + \dot{\mathbf{x}}(t) \Delta t
 $$
 
-// TODO: investigate what is consistency and order in numerical methods
+## Implicit Euler Method
+The implicit here means instead of computing directly the approximation $\mathbf{x}_{n+1}$ from $\mathbf{x}_n$, we need to solve an implicit equation:
+
+$$
+\begin{cases}
+f'(t) &\approx \frac{f(t) - f(t-\Delta t)}{\Delta t}\\
+f(t+\Delta t) &\approx f(t) + f'(t+\Delta t)\Delta t
+\end{cases}
+$$
+
+Also known as backward Euler method, because it uses right-hand [quadrature method](../monte-carlo-integration.md#quadrature-rules) instead of the left-hand rectangle. Implicit method is difficult to evaluate, and usually required iterative methods to solve (e.g. fixed point iteration), but they have better numerical properties and thus more stable.
+
+## Symplectic Euler Method
+This one has way too much names, it's also called semi-implicit Euler, semi-explicit Euler, Euler-Cromer, and Newton-Størmer-Verlet. 
+
+$$
+\begin{cases}
+f'(t+\Delta t) &\approx f'(t) + f''(t)\Delta t\\
+f(t+\Delta t) &\approx f(t) + f'(t+\Delta t)\Delta t
+\end{cases}
+$$
+
+Rewrite it in terms of motion:
+
+$$
+\begin{cases}
+\mathbf{v}_{n+1} &\approx\mathbf{v}_n + \mathbf{a}_{n}\Delta t\\
+\mathbf{x}_{n+1} &\approx\mathbf{x}_n + \mathbf{v}_{n+1}\Delta t\\
+\end{cases}
+$$
+
+$$
+\begin{align}
+\therefore \mathbf{x}_{n+1}&\approx\mathbf{x}_n + (\mathbf{v}_n + \mathbf{a}_{n}\Delta t)\Delta t\\
+&\approx\mathbf{x}_n + \mathbf{v}_n\Delta t + \mathbf{a}_{n}\Delta t^2
+\end{align}
+$$
+
+Look familiar? This is usually seen in game physics to predict a moving body in the next time frame. It is a mix of explicit and implicit method to calculate the final body position. Velocity is integrated explicitly, and position is integrated implicitly by using the velocity from the next time frame. 
 
 ## Verlet Method
 This is a second-order numerical method to integrate Newton's equations of motion. 
@@ -61,9 +102,9 @@ It has an interesting property, we can see the approximated second-derivative is
 
 $$
 \begin{align}
-\ddot{\mathbf{x}} &= \frac{\mathbf{x}_{n+1} - 2\mathbf{x}_n + \mathbf{x}_{n-1}}{\Delta t^2}\\
-\ddot{\mathbf{x}} {\Delta t^2} &= \mathbf{x}_{n+1} - 2\mathbf{x}_n + \mathbf{x}_{n-1}\\
-\mathbf{x}_{n+1}&=2\mathbf{x}_n - \mathbf{x}_{n-1} + \ddot{\mathbf{x}} \Delta t^2 \tag{2}
+\ddot{\mathbf{x}} &\approx \frac{\mathbf{x}_{n+1} - 2\mathbf{x}_n + \mathbf{x}_{n-1}}{\Delta t^2}\\
+\ddot{\mathbf{x}} {\Delta t^2} &\approx \mathbf{x}_{n+1} - 2\mathbf{x}_n + \mathbf{x}_{n-1}\\
+\mathbf{x}_{n+1}&\approx2\mathbf{x}_n - \mathbf{x}_{n-1} + \ddot{\mathbf{x}} \Delta t^2 \tag{2}
 \end{align}
 $$
 
@@ -71,7 +112,7 @@ $$
 Because velocities are not explicitly given by definition, it can only be estimated by the mean value theorem.
 
 $$
-f'(t) = \frac{f(t+\Delta t) - f(t-\Delta t)}{2\Delta t}
+f'(t) \approx \frac{f(t+\Delta t) - f(t-\Delta t)}{2\Delta t}
 $$
 
 To erase the dependency or previous position, just shift the time frame by $\Delta t$ at the cost of accuracy (forward-difference approximation). And you will soon notice it falls back to the form of [Euler method](#euler-method).
@@ -83,5 +124,5 @@ f'(t+\Delta t) &\approx \frac{f(t+2\Delta t) - f(t)}{2\Delta t}\\
 \end{align}
 $$
 
-[^1]: F.Crivelli. _The Störmer-Verlet method, 2008_. [https://www2.math.ethz.ch/education/bachelor/seminars/fs2008/nas/crivelli.pdf]()
-[^2]: Gorilla Sun. _Euler and Verlet Integration for Particle Physics_. [https://www.gorillasun.de/blog/euler-and-verlet-integration-for-particle-physics/]()
+[^1]: F.Crivelli. _The Störmer-Verlet method, 2008_. [https://www2.math.ethz.ch/education/bachelor/seminars/fs2008/nas/crivelli.pdf](https://www2.math.ethz.ch/education/bachelor/seminars/fs2008/nas/crivelli.pdf)
+[^2]: Gorilla Sun. _Euler and Verlet Integration for Particle Physics_. [https://www.gorillasun.de/blog/euler-and-verlet-integration-for-particle-physics/](https://www.gorillasun.de/blog/euler-and-verlet-integration-for-particle-physics/)

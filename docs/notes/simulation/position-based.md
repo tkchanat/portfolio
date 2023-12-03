@@ -1,6 +1,5 @@
 # Position Based Simulation
 As oppose to any other rigidbody simulations, [force-based](force-based.md) and [impulse-based](impulse-based.md) that deals with velocity and acceleration calculations, position-based simulation attempts to minimize the constrains on the position domain down to particle level. The main benefits of PBD is that it's not suppose to suffer from overshooting problem.
-[http://mmacklin.com/EG2015PBD.pdf]()
 
 ## Problem
 Given a set of $M$ constrains (basically means there are $M$ equality or inequality equations to satisfy), we need to solve for $N\times\mathbb{R}^3$ unknowns to resolve our final positions. Most of the time, the number of constraints won't match the number of unknowns we are solving (i.e. $M \neq N$). This means if the problem was a linear system $\mathbf{A}\mathbf{x}=\mathbf{b}$, the solution can't be obtained easily by inverting the matrix and solve for $\mathbf{x}$. Not to mention the system we are solving won't necessarily be linear, for example a simple distance constraint $c(\mathbf{x}_1, \mathbf{x}_2)=\left|\mathbf{x}_1-\mathbf{x}_2\right|^2-d^2$ alone is a non-linear equation.
@@ -36,5 +35,10 @@ $$
 \end{align}
 $$
 
+### Integration
+
+
 ## Result
 ![](img/pbd.webp)
+
+[^1]: Jan Bender, Mattias Müller, Miles Macklin. _Position-Based Simulation Methods in Computer Graphics, Eurographics 2015_. [http://mmacklin.com/EG2015PBD.pdf](http://mmacklin.com/EG2015PBD.pdf)
