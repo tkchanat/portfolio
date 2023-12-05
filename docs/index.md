@@ -10,7 +10,7 @@ hide:
 
 :fontawesome-brands-github: [tkchanat](https://github.com/tkchanat) | :fontawesome-brands-twitter: [@tkchanat](https://twitter.com/tkchanat1) | :fontawesome-brands-linkedin: [Andy Chan](https://www.linkedin.com/in/andy-chan-9b8294155/) | :fontawesome-solid-location-dot: Vancouver, BC
 
-Rendering software engineer at [Animal Logic](https://animallogic.com/) Vancouver. I write codes in both realtime and offline graphics. Fascinated by light transport and Monte Carlo path tracers. 
+Rendering software engineer at [Animal Logic](https://animallogic.com/) Vancouver, being part of developing the glimpse renderer. I write codes in both realtime and offline graphics. Fascinated by light transport and Monte Carlo path tracers. 
 
 ---
 

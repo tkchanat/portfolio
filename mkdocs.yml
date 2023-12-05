@@ -1,11 +1,14 @@
 site_name: Andy Chan
 theme:
-  favicon: img/favicon.ico
+  favicon: img/triangle.png
   logo: img/triangle.png
   name: material
+  font:
+    text: PT Sans
   features:
     - toc.integrate
     - navigation.footer
+    - navigation.expand
   palette:
     # Palette toggle for automatic mode
     - media: "(prefers-color-scheme)"
