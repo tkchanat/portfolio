@@ -12,7 +12,6 @@ theme:
   palette:
     # Palette toggle for automatic mode
     - media: "(prefers-color-scheme)"
-      primary: orange
       accent: amber
       scheme: default
       toggle:
@@ -20,7 +19,6 @@ theme:
         name: Switch to light mode
     # Palette toggle for light mode
     - media: "(prefers-color-scheme: light)"
-      primary: orange
       accent: amber
       scheme: default 
       toggle:

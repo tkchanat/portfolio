@@ -32,7 +32,7 @@ $$
 \Delta\mathbf{x}=\lambda \mathbf{M}^{-1}\nabla C(\mathbf{x})
 $$
 
-where $\mathbf{M}=diag(m_1, m_2, \cdots, m_N)$ (not quite sure what is it, I think it's some sort of multipliers, maybe the mass for each particles). So the correction vector of particle $i$ will be:
+where $\mathbf{M}=diag(m_1, m_2, \cdots, m_N)$ represents the mass of each particles. So the correction vector of particle $i$ will be:
 
 $$
 \begin{cases}
@@ -63,6 +63,8 @@ $$
 &\quad\quad \mathbf{x}_i \leftarrow \mathbf{p}_i
 \end{align}
 $$
+
+Noted that this non-linear constrained system is "solved" by iterating each constraints and optimizing them sequentially, which to me, doesn't really "solve" the system but rather find a close-enough solution. This is also why it's plausible that a particle will end up violating one of the constaints (possibly clipping through geometries) after the solver reached its maximum iterations. 
 
 ### Integration
 
