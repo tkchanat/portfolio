@@ -3,6 +3,7 @@ theme:
   favicon: img/triangle.png
   logo: img/triangle.png
   name: material
+  custom_dir: theme
   font:
     text: PT Sans
   features:
@@ -48,6 +49,15 @@ extra:
       link: https://www.linkedin.com/in/andy-chan-9b8294155/
     - icon: fontawesome/solid/paper-plane
       link: mailto:andychancse@gmail.com
+
+reveal:
+  path: reveal.js/dist
+  transition: slide
+  theme:
+    name: white.css
+    path: theme
+  plugin:
+    path: reveal.js/plugin
 
 extra_javascript:
   - js/mathjax.js
