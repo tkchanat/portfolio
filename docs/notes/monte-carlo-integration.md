@@ -21,7 +21,7 @@ There are more similar approaches to do integration and they are known as quatra
 These kind of numerical approximations suffers from two major problems. 
 
 ### High-frequency signals
-<div id="high-frequency"></div>
+![](../img/high_freq.webp)
 Graphs like this can't be easily approximated with thick bars. To get closer to the real value, the bars must be really narrow which means more iterations to compute. 
 
 ### High-dimensional domains

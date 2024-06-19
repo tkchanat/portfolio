@@ -1,2 +1,0 @@
-# Bi-Scale Model
-

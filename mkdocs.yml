@@ -1,9 +1,8 @@
-site_name: Andy Chan
+site_name: graphics memdump
 theme:
-  favicon: img/triangle.png
-  logo: img/triangle.png
+  favicon: img/dump.webp
+  logo: img/dump.webp
   name: material
-  custom_dir: theme
   font:
     text: PT Sans
   features:
@@ -20,6 +19,7 @@ theme:
         name: Switch to light mode
     # Palette toggle for light mode
     - media: "(prefers-color-scheme: light)"
+      primary: grey
       accent: amber
       scheme: default 
       toggle:
@@ -28,7 +28,7 @@ theme:
 
     # Palette toggle for dark mode
     - media: "(prefers-color-scheme: dark)"
-      primary: orange
+      primary: black
       accent: amber
       scheme: slate
       toggle:
@@ -70,9 +70,8 @@ markdown_extensions:
   - pymdownx.arithmatex:
       generic: true
   - pymdownx.emoji:
-      emoji_index: !!python/name:materialx.emoji.twemoji
-      emoji_generator: !!python/name:materialx.emoji.to_svg
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
 
 plugins:
   - search
-  - macros
