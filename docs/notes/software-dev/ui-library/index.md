@@ -1,0 +1,5 @@
+# Prelude
+
+I know I know, this is probably a waste of time to reinvent the wheel. There are plenty GUI libraries out in the wild that could save me tons of time without reinventing it. But my past experience tells me that these libraries are usually quite heavy, and dependencies mean I will have to wait for fixes/patches if anything was broken. Having all that frustration makes me think, even it's annoying to build a UI library from scratch, maybe it's worth making it on my own. Perhaps I can learn something, or ended up having the same struggle the community have, who knows? It will be a valueable experience nonetheless.
+
+In my own toy engine, I want to make [retained mode](./retained.md) and [immediate mode](./immediate.md) GUI work together because I see merits in both techniques. For punctual widgets (part of the core engine), I will certainly make it in retained mode. But for utilities and debug tools, I want it to be prototyped in immediate mode first. Then if it ever got mature enough to be a standalone widget, it will certainly be rewritten in retained mode. At least this is how I think about the long-term development. 

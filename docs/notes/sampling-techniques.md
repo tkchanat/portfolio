@@ -1,7 +1,7 @@
 # Sampling Techniques
 Puseudo-random noise usually don't produce good uniform samples. It often produces clusters and void within the sample space. That means the sample space is not well explored, either wasting samples on similar areas or even complete ignoring some subregions. And this scales to any dimensions.
 
-![](/img/random_white.webp)
+![](../img/random_white.webp)
 
 ## Stratified Sampling
 Instead of recklessly scatter points around, how about subdiving the domain $\Omega$ into non-overlapping regions $\Omega_1, \dots, \Omega_n$. Noted that the union of them must cover the whole domain.
@@ -10,7 +10,7 @@ $$
 \bigcup_{i=1}^n{\ \Omega_i} = \Omega
 $$
 
-![](/img/random_stratified.webp)
+![](../img/random_stratified.webp)
 
 This works pretty well in low-dimensional integration problems. However unfortunately, this suffers the same problem as the quadrature rules where it won't perform well in high frequency signals.
 

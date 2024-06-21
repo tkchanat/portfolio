@@ -35,7 +35,7 @@ theme:
         icon: material/brightness-4
         name: Switch to system preference
 
-copyright: Copyright &copy; 2023 Andy Chan
+copyright: Copyright &copy; 2024 Andy Chan
 
 extra:
   social:
