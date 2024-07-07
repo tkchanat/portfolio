@@ -3,12 +3,14 @@ window.MathJax = {
     inlineMath: [["\\(", "\\)"]],
     displayMath: [["\\[", "\\]"]],
     processEscapes: true,
-    processEnvironments: true
+    processEnvironments: true,
+    package: { "[+]": ["cancel"] }
   },
   options: {
     ignoreHtmlClass: ".*|",
     processHtmlClass: "arithmatex"
-  }
+  },
+  loader: { load: ["[tex]/cancel"] }
 };
 
 document$.subscribe(() => { 

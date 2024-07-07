@@ -98,12 +98,129 @@ Looks a lot like spherical harmonics, right? With these basis functions, they ca
 
     One interesting observation about rotating these basis functions, is that the choice of the oscillating/trigonometric function. Recall that $\sin(\theta)=\cos(\frac{\pi}{2}-\theta)$, meaning cosine is just an off-phase sine. Therefore, substituding the sine to cosine is all we need to rotate it by $90^{\circ}$.
 
-## Definition
-Citing from Wikipedia again, spherical harmonics originate from solving Laplace's equation in the spherical domains. Functions that are solutions to Laplace's equation are called harmonics[^3]. 
+## Derivation of Spherical Harmonics
+> Spherical harmonics originate from solving Laplace's equation in the spherical domains. Functions that are solutions to Laplace's equation are called harmonics[^3]. 
+
+To recap Laplace's equation is to solve for a function $f$ where its divergence of gradient is 0, e.g. $\nabla^2f=0$. In Cartesian coordinates, the three-dimensional Laplacian is defined as:
+
+$$
+\nabla^2 f = \frac{\partial^2f}{\partial x^2} + \frac{\partial^2f}{\partial y^2} + \frac{\partial^2f}{\partial z^2}
+$$
+
+In spherical coordinates $x=r\sin\theta\cos\phi,\ y=r\sin\theta\sin\phi,\ z=r\cos\theta$, it became: ([full derivation](https://planetmath.org/derivationofthelaplacianfromrectangulartosphericalcoordinates))
+
+$$
+\begin{align*}
+\nabla^2f &= \frac{1}{r^2\sin\theta}
+  \left(
+    \frac{\partial}{\partial r} r^2 \sin\theta \frac{\partial}{\partial r} + \frac{\partial}{\partial \theta} \sin\theta \frac{\partial}{\partial\theta} + \frac{\partial}{\partial\phi} \csc\theta \frac{\partial}{\partial\phi}
+  \right) \\
+  &= \frac{1}{r^2}
+  \frac{\partial}{\partial r} \left(r^2 \frac{\partial f}{\partial r}\right) + 
+  \frac{1}{r^2\sin\theta} \frac{\partial}{\partial \theta} \left(\sin\theta \frac{\partial f}{\partial\theta}\right) + 
+  \frac{1}{r^2\sin^2\theta} \frac{\partial^2 f}{\partial\phi^2}
+\end{align*}
+$$
+
+To separate the radial part ($r$) from the angular part ($\theta, \phi$), we need to let $f(r, \theta, \phi)=R(r)Y(\theta, \phi)$ and perform what's called a [separation of variables](https://en.wikipedia.org/wiki/Separation_of_variables).
+
+$$
+\begin{align*}
+    &\ \nabla^2 (R(r)Y(\theta, \phi))\\ 
+  = &\ \frac{1}{r^2} \frac{\partial}{\partial r} \left(r^2 \frac{\partial R(r)Y(\theta, \phi)}{\partial r}\right) + 
+  \frac{1}{r^2\sin\theta} \frac{\partial}{\partial \theta} \left(\sin\theta \frac{\partial R(r)Y(\theta, \phi)}{\partial\theta}\right) + 
+  \frac{1}{r^2\sin^2\theta} \frac{\partial^2 R(r)Y(\theta, \phi)}{\partial\phi^2}\\
+  = &\cancel{\frac{1}{r^2}}\ Y(\theta, \phi)\left(\frac{\partial}{\partial r} \left(r^2 \frac{\partial R(r)}{\partial r}\right)\right) + 
+  \cancel{\frac{1}{r^2}}R(r)\left(
+  \frac{1}{\sin\theta} \frac{\partial}{\partial \theta} \left(\sin\theta \frac{\partial Y(\theta, \phi)}{\partial\theta}\right) + 
+  \frac{1}{\sin^2\theta} \frac{\partial^2 Y(\theta, \phi)}{\partial\phi^2}\right)\\
+\end{align*}
+$$
+
+Since $\nabla^2f=0$, we can introduce a separation constant $\ell(\ell+1)$ such that:
+
+$$
+\begin{cases}
+  Y(\theta, \phi)\left(\frac{\partial}{\partial r} \left(r^2 \frac{\partial R(r)}{\partial r}\right)\right)
+  = \ell(\ell+1)\\
+  R(r)\left(
+  \frac{1}{\sin\theta} \frac{\partial}{\partial \theta} \left(\sin\theta \frac{\partial Y(\theta, \phi)}{\partial\theta}\right) + 
+  \frac{1}{\sin^2\theta} \frac{\partial^2 Y(\theta, \phi)}{\partial\phi^2}\right)
+  =
+  -\ell(\ell+1)
+\end{cases}
+$$
+
+To rewrite it nicely,
+
+$$
+\begin{align*}
+  \frac{Y(\theta, \phi)\left(\frac{\partial}{\partial r} \left(r^2 \frac{\partial R(r)}{\partial r}\right)\right)}{\ell(\ell+1)}
+  &=
+  \frac{R(r)\left(
+  \frac{1}{\sin\theta} \frac{\partial}{\partial \theta} \left(\sin\theta \frac{\partial Y(\theta, \phi)}{\partial\theta}\right) + 
+  \frac{1}{\sin^2\theta} \frac{\partial^2 Y(\theta, \phi)}{\partial\phi^2}\right)}{-\ell(\ell+1)}\\
+  \frac{\frac{\partial}{\partial r} \left(r^2 \frac{\partial R(r)}{\partial r}\right)}{\ell(\ell+1)R(r)}
+  &=
+  \frac{\frac{1}{\sin\theta} \frac{\partial}{\partial \theta} \left(\sin\theta \frac{\partial Y(\theta, \phi)}{\partial\theta}\right) + 
+  \frac{1}{\sin^2\theta} \frac{\partial^2 Y(\theta, \phi)}{\partial\phi^2}}{-\ell(\ell+1)Y(\theta, \phi)}
+\end{align*}
+$$
+
+Then we obtained two separated ordinary differential equations, radial $(1)$ and angular $(2)$.
+
+$$
+\frac{\partial}{\partial r} \left(r^2 \frac{\partial R(r)}{\partial r}\right) = \ell(\ell+1)R(r) \tag{1}
+$$
+
+$$
+\frac{1}{\sin\theta} \frac{\partial}{\partial \theta} \left(\sin\theta \frac{\partial Y(\theta, \phi)}{\partial\theta}\right) + \frac{1}{\sin^2\theta} \frac{\partial^2 Y(\theta, \phi)}{\partial\phi^2} = -\ell(\ell+1)Y(\theta, \phi) \tag{2}
+$$
+
+Spherical harmonics arises from the angular part $Y(\theta, \phi)$ of a spherical Laplace's equation. Those "harmonics" are forms an infinite set of solutions that satisfy the angular part of the Laplace's equation. Therefore, the radial part $R(r)$ can be omitted for now.
+
+???+ note "Linearity of Laplace's equation and relation to SH"
+
+    The Laplace operator $\nabla^2$ is a linear operator since it satisfies the superposition principle, where the sum of any two solutions is also a solution. That is, $\nabla^2(a\theta + b\phi) = a\nabla^2(\theta) + b\nabla^2(\phi)$. The only prerequisite is that $\nabla^2(\theta)=0$ and $\nabla^2(\phi)=0$, and thus proofing its linearity (i.e. $a\cdot0+b\cdot0=0$).
+    
+    $$
+    \underbrace{\frac{1}{\sin\theta} \frac{\partial}{\partial \theta} \left(\sin\theta \frac{\partial Y(\theta, \phi)}{\partial\theta}\right) + \frac{1}{\sin^2\theta} \frac{\partial^2 Y(\theta, \phi)}{\partial\phi^2}}_{\nabla^2 f} = \underbrace{-\ell(\ell+1)}_{\text{eigenvalue}(\lambda)}\underbrace{Y(\theta, \phi)}_{\text{eigenfunction}(f)}
+    $$
+    
+    Taking equation $(2)$ and simplify it to $\nabla^2(Y(\theta, \phi)) = -\ell(\ell+1)Y(\theta, \phi)$. It's not hard to see that this takes the form of $Df=\lambda f$, where $D$ is a linear operator[^4]. And just so happened the Laplace operator $\nabla^2$ is also a linear operator! So, our separation constant $-\ell(\ell+1)$ are actually **eigenvalues** and the spherical harmonics $Y(\theta, \phi)$ are indeed **eigenfunctions**.
+
+By writing $Y(\theta, \phi)=\Theta(\theta)\Phi(\phi)$, we are going to perform the separation of variable again. That gives us:
+
+$$
+\begin{align*}
+\frac{1}{\sin\theta} \frac{\partial}{\partial \theta} \left(\sin\theta \frac{\partial (\Theta(\theta)\Phi(\phi))}{\partial\theta}\right) + \frac{1}{\sin^2\theta} \frac{\partial^2 (\Theta(\theta)\Phi(\phi))}{\partial\phi^2} &= -\ell(\ell+1)(\Theta(\theta)\Phi(\phi))\\
+\frac{\Phi(\phi)}{\sin\theta} \frac{\partial}{\partial \theta} \left(\sin\theta \frac{\partial \Theta(\theta)}{\partial\theta}\right) + \frac{\Theta(\theta)}{\sin^2\theta} \frac{\partial^2 \Phi(\phi)}{\partial\phi^2} + \ell(\ell+1)(\Theta(\theta)\Phi(\phi)) &= 0\\
+\end{align*}
+$$
+
+Multiplying both sides by $\frac{\sin^2\theta}{\Theta(\theta)\Phi(\phi)}$:
+
+$$
+\begin{align*}
+\frac{\sin^2\theta}{\Theta(\theta)\Phi(\phi)}\left(\frac{\Phi(\phi)}{\sin\theta} \frac{\partial}{\partial \theta} \left(\sin\theta \frac{\partial \Theta(\theta)}{\partial\theta}\right) + \frac{\Theta(\theta)}{\sin^2\theta} \frac{\partial^2 \Phi(\phi)}{\partial\phi^2} + \ell(\ell+1)(\Theta(\theta)\Phi(\phi))\right) &= \frac{\sin^2\theta}{\Theta(\theta)\Phi(\phi)}\cdot0\\
+\underbrace{\frac{\sin\theta}{\Theta(\theta)} \frac{\partial}{\partial \theta} \left(\sin\theta \frac{\partial \Theta(\theta)}{\partial\theta}\right) + \ell(\ell+1)\sin^2\theta}_{\theta\text{-dependent}} + \underbrace{\frac{1}{\Phi(\phi)} \frac{\partial^2 \Phi(\phi)}{\partial\phi^2}}_{\phi\text{-dependent}} &= 0\\
+\end{align*}
+$$
+
+This time let $m$ be the separation constant:
+
+$$
+\begin{cases}
+  \frac{\sin\theta}{\Theta(\theta)} \frac{\partial}{\partial \theta} \left(\sin\theta \frac{\partial \Theta(\theta)}{\partial\theta}\right) + \ell(\ell+1)\sin^2\theta = m\\
+  \frac{1}{\Phi(\phi)}{\frac{\partial^2 \Phi(\phi)}{\partial\phi^2}} = -m
+\end{cases}
+$$
 
 // TODO
-
 
 [^1]: Fourier series (2024). In Wikipedia. [https://en.wikipedia.org/wiki/Fourier_series]()
 [^2]: Circular Harmonics: Digging in circles (2021). Jon Valdés. [https://valdes.cc/articles/ch.html]()
 [^3]: Spherical harmonics (2024). In Wikipedia. [https://en.wikipedia.org/wiki/Spherical_harmonics]()
+[^4]: Eigenfunction (2024). In Wikipedia. [https://en.wikipedia.org/wiki/Eigenfunction]()
+[^5]: All You Need to Know about Spherical Harmonics. Mathcube. [https://www.cantorsparadise.com/all-you-need-to-know-about-spherical-harmonics-29ff76e74ad5]()
+[^6]: Spherical Harmonic. Weisstein, Eric W. From MathWorld--A Wolfram Web Resource. [https://mathworld.wolfram.com/SphericalHarmonic.html]()
