@@ -6,6 +6,7 @@ window.MathJax = {
     processEnvironments: true,
     package: { "[+]": ["cancel"] }
   },
+  chtml: { scale: 0.9 },
   options: {
     ignoreHtmlClass: ".*|",
     processHtmlClass: "arithmatex"

@@ -134,16 +134,37 @@ $$
   \cancel{\frac{1}{r^2}}R(r)\left(
   \frac{1}{\sin\theta} \frac{\partial}{\partial \theta} \left(\sin\theta \frac{\partial Y(\theta, \phi)}{\partial\theta}\right) + 
   \frac{1}{\sin^2\theta} \frac{\partial^2 Y(\theta, \phi)}{\partial\phi^2}\right)\\
+  = &\ Y(\theta, \phi)\left(\frac{\partial}{\partial r} \left(r^2 \frac{\partial R(r)}{\partial r}\right)\right) + R(r)\left(
+  \frac{1}{\sin\theta} \frac{\partial}{\partial \theta} \left(\sin\theta \frac{\partial Y(\theta, \phi)}{\partial\theta}\right) + 
+  \frac{1}{\sin^2\theta} \frac{\partial^2 Y(\theta, \phi)}{\partial\phi^2}\right)
 \end{align*}
 $$
 
-Since $\nabla^2f=0$, we can introduce a separation constant $\ell(\ell+1)$ such that:
+Multiply both side by $\frac{1}{R(r)Y(\theta, \phi)}$:
+
+$$
+\begin{align*}
+  Y(\theta, \phi)\left(\frac{\partial}{\partial r} \left(r^2 \frac{\partial R(r)}{\partial r}\right)\right) + R(r)\left(
+  \frac{1}{\sin\theta} \frac{\partial}{\partial \theta} \left(\sin\theta \frac{\partial Y(\theta, \phi)}{\partial\theta}\right) + 
+  \frac{1}{\sin^2\theta} \frac{\partial^2 Y(\theta, \phi)}{\partial\phi^2}\right) &= 0
+  \\
+  \frac{\cancel{Y(\theta, \phi)}}{R(r)\cancel{Y(\theta, \phi)}}\frac{\partial}{\partial r} \left(r^2 \frac{\partial R(r)}{\partial r}\right) + \frac{\cancel{R(r)}}{\cancel{R(r)}Y(\theta, \phi)}\left(
+  \frac{1}{\sin\theta} \frac{\partial}{\partial \theta} \left(\sin\theta \frac{\partial Y(\theta, \phi)}{\partial\theta}\right) + 
+  \frac{1}{\sin^2\theta} \frac{\partial^2 Y(\theta, \phi)}{\partial\phi^2}\right) &= \frac{1}{R(r)Y(\theta, \phi)} \cdot 0
+  \\
+  \underbrace{\frac{1}{R(r)}\frac{\partial}{\partial r} \left(r^2 \frac{\partial R(r)}{\partial r}\right)}_{r\text{-dependent}} + \underbrace{\frac{1}{Y(\theta, \phi)}\left(
+  \frac{1}{\sin\theta} \frac{\partial}{\partial \theta} \left(\sin\theta \frac{\partial Y(\theta, \phi)}{\partial\theta}\right) + 
+  \frac{1}{\sin^2\theta} \frac{\partial^2 Y(\theta, \phi)}{\partial\phi^2}\right)}_{\theta\phi\text{-dependent}} &= 0
+\end{align*}
+$$
+
+Now we can introduce a separation constant $\ell(\ell+1)$ such that both $r\text{-dependent}$ and $\theta\phi\text{-dependent}$ parts still adds up to 0, satisfying the original Laplace's equation.
 
 $$
 \begin{cases}
-  Y(\theta, \phi)\left(\frac{\partial}{\partial r} \left(r^2 \frac{\partial R(r)}{\partial r}\right)\right)
+  \frac{1}{R(r)}\frac{\partial}{\partial r} \left(r^2 \frac{\partial R(r)}{\partial r}\right)
   = \ell(\ell+1)\\
-  R(r)\left(
+  \frac{1}{Y(\theta, \phi)}\left(
   \frac{1}{\sin\theta} \frac{\partial}{\partial \theta} \left(\sin\theta \frac{\partial Y(\theta, \phi)}{\partial\theta}\right) + 
   \frac{1}{\sin^2\theta} \frac{\partial^2 Y(\theta, \phi)}{\partial\phi^2}\right)
   =
@@ -151,30 +172,13 @@ $$
 \end{cases}
 $$
 
-To rewrite it nicely,
+Then we have successfully obtained two separated ordinary differential equations, the radial part $\eqref{1}$ and the angular part $\eqref{2}$.
 
 $$
 \begin{align*}
-  \frac{Y(\theta, \phi)\left(\frac{\partial}{\partial r} \left(r^2 \frac{\partial R(r)}{\partial r}\right)\right)}{\ell(\ell+1)}
-  &=
-  \frac{R(r)\left(
-  \frac{1}{\sin\theta} \frac{\partial}{\partial \theta} \left(\sin\theta \frac{\partial Y(\theta, \phi)}{\partial\theta}\right) + 
-  \frac{1}{\sin^2\theta} \frac{\partial^2 Y(\theta, \phi)}{\partial\phi^2}\right)}{-\ell(\ell+1)}\\
-  \frac{\frac{\partial}{\partial r} \left(r^2 \frac{\partial R(r)}{\partial r}\right)}{\ell(\ell+1)R(r)}
-  &=
-  \frac{\frac{1}{\sin\theta} \frac{\partial}{\partial \theta} \left(\sin\theta \frac{\partial Y(\theta, \phi)}{\partial\theta}\right) + 
-  \frac{1}{\sin^2\theta} \frac{\partial^2 Y(\theta, \phi)}{\partial\phi^2}}{-\ell(\ell+1)Y(\theta, \phi)}
+  &\frac{\partial}{\partial r} \left(r^2 \frac{\partial R(r)}{\partial r}\right) = \ell(\ell+1)R(r) &\tag{1}\label{1}\\
+  &\frac{1}{\sin\theta} \frac{\partial}{\partial \theta} \left(\sin\theta \frac{\partial Y(\theta, \phi)}{\partial\theta}\right) + \frac{1}{\sin^2\theta} \frac{\partial^2 Y(\theta, \phi)}{\partial\phi^2} = -\ell(\ell+1)Y(\theta, \phi) &\tag{2}\label{2}
 \end{align*}
-$$
-
-Then we obtained two separated ordinary differential equations, radial $(1)$ and angular $(2)$.
-
-$$
-\frac{\partial}{\partial r} \left(r^2 \frac{\partial R(r)}{\partial r}\right) = \ell(\ell+1)R(r) \tag{1}
-$$
-
-$$
-\frac{1}{\sin\theta} \frac{\partial}{\partial \theta} \left(\sin\theta \frac{\partial Y(\theta, \phi)}{\partial\theta}\right) + \frac{1}{\sin^2\theta} \frac{\partial^2 Y(\theta, \phi)}{\partial\phi^2} = -\ell(\ell+1)Y(\theta, \phi) \tag{2}
 $$
 
 Spherical harmonics arises from the angular part $Y(\theta, \phi)$ of a spherical Laplace's equation. Those "harmonics" are forms an infinite set of solutions that satisfy the angular part of the Laplace's equation. Therefore, the radial part $R(r)$ can be omitted for now.
@@ -198,25 +202,89 @@ $$
 \end{align*}
 $$
 
-Multiplying both sides by $\frac{\sin^2\theta}{\Theta(\theta)\Phi(\phi)}$:
+Multiplying both sides by $\frac{\sin^2\theta}{\Theta(\theta)\Phi(\phi)}$ [^6]:
 
 $$
 \begin{align*}
 \frac{\sin^2\theta}{\Theta(\theta)\Phi(\phi)}\left(\frac{\Phi(\phi)}{\sin\theta} \frac{\partial}{\partial \theta} \left(\sin\theta \frac{\partial \Theta(\theta)}{\partial\theta}\right) + \frac{\Theta(\theta)}{\sin^2\theta} \frac{\partial^2 \Phi(\phi)}{\partial\phi^2} + \ell(\ell+1)(\Theta(\theta)\Phi(\phi))\right) &= \frac{\sin^2\theta}{\Theta(\theta)\Phi(\phi)}\cdot0\\
-\underbrace{\frac{\sin\theta}{\Theta(\theta)} \frac{\partial}{\partial \theta} \left(\sin\theta \frac{\partial \Theta(\theta)}{\partial\theta}\right) + \ell(\ell+1)\sin^2\theta}_{\theta\text{-dependent}} + \underbrace{\frac{1}{\Phi(\phi)} \frac{\partial^2 \Phi(\phi)}{\partial\phi^2}}_{\phi\text{-dependent}} &= 0\\
+\underbrace{\frac{\sin\theta}{\Theta(\theta)} \frac{\partial}{\partial \theta} \left(\sin\theta \frac{\partial \Theta(\theta)}{\partial\theta}\right) + \ell(\ell+1)\sin^2\theta}_{\theta\text{-dependent}} + \underbrace{\frac{1}{\Phi(\phi)} \frac{\partial^2 \Phi(\phi)}{\partial\phi^2}}_{\phi\text{-dependent}} &= 0 \tag{3}\label{3}\\
 \end{align*}
 $$
 
-This time let $m$ be the separation constant:
+This time let $m^2$ be the separation constant:
 
 $$
-\begin{cases}
-  \frac{\sin\theta}{\Theta(\theta)} \frac{\partial}{\partial \theta} \left(\sin\theta \frac{\partial \Theta(\theta)}{\partial\theta}\right) + \ell(\ell+1)\sin^2\theta = m\\
-  \frac{1}{\Phi(\phi)}{\frac{\partial^2 \Phi(\phi)}{\partial\phi^2}} = -m
-\end{cases}
+\begin{align*}
+  &\frac{\sin\theta}{\Theta(\theta)} \frac{\partial}{\partial \theta} \left(\sin\theta \frac{\partial \Theta(\theta)}{\partial\theta}\right) + \ell(\ell+1)\sin^2\theta = m^2 &\tag{4}\label{4} \\
+  &\frac{1}{\Phi(\phi)}{\frac{\partial^2 \Phi(\phi)}{\partial\phi^2}} = -m^2 &\tag{5}\label{5}
+\end{align*}
 $$
 
-// TODO
+Fortunately, $\eqref{5}$ already has solutions of $\Phi(\phi)=e^{\pm im\phi}$, which is the two-dimensional angular Laplacian. Substituding it back into $\eqref{3}$ and solve for the $\theta\text{-dependent}$ portion, we get the solutions of $\Theta(\theta)=P_\ell^m(\cos\theta)$ in the form of a Legendre polynomial $P_\ell^m(x)$. (1)
+{ .annotate }
+
+1.  I have zero clue on this part about Legendre polynomials. Come back here when I am prepared.
+
+$$
+P_\ell^m(x) = \frac{(-1)^m}{2^\ell \ell!}(1-x^2)^\frac{m}{2} \frac{\partial^{\ell+m}}{\partial x^{\ell+m}} (x^2-1)^\ell
+$$
+
+Noted that this formula must have $\ell \geq 0$ and $m$ being integers such that $|m| \leq \ell$. 
+
+With that, we get the solution to $\eqref{2}$, which is the spherical harmonics $Y(\theta, \phi)=P_\ell^m(\cos\theta)e^{\pm im\phi}$. And just like vectors, to enforce orthonormality, a normalization factor is required to make independent spherical harmonics orthonormal.
+
+$$
+Y_\ell^m(\theta, \phi) = \underbrace{\sqrt{\frac{2\ell+1}{4\pi}\frac{(\ell-m)!}{(\ell+m)!}}}_{\text{normalization factor}} P_\ell^m(\cos\theta)e^{\pm im\phi}
+$$
+
+$Y(\theta, \phi)$ denotes the whole sets of infinitely many solutions to the angular Laplacian. With this notation $Y_\ell^m(\theta, \phi)$ means it's a specific spherical harmonic with **order** $\ell$ and **degree** $m$. 
+
+<div id="spherical-harmonics-plot" style="width: 100%; height: 240px;"></div>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    let colorScheme = document.querySelector('meta[name="color-scheme"]');
+    var elt = document.getElementById('spherical-harmonics-plot');
+    var calculator = Desmos.GraphingCalculator(elt, {
+      keypad: false,
+      invertedColors: colorScheme.content == "dark",
+      expressions: false,
+      settingsMenu: false,
+      polarMode: true,
+      lockViewport: true,
+    });
+    console.log(calculator);
+    let aspect = elt.clientWidth / elt.clientHeight;
+    calculator.setMathBounds({ left: -1.5*aspect, right: 1.5*aspect, bottom: -1.5, top: 1.5 });
+    calculator.setExpression({ id: "index", latex: "i=l(l+1)+m+1", hidden: true });
+    calculator.setExpression({ id: "P", latex: "P=[ \
+      \\sqrt{\\frac{1}{4\\pi}}, \
+      \\sqrt{\\frac{3}{8\\pi}}\\sin(\\theta), \
+      \\sqrt{\\frac{3}{4\\pi}}\\cos(\\theta), \
+      \\sqrt{\\frac{3}{8\\pi}}\\sin(\\theta), \
+      \\sqrt{\\frac{15}{32\\pi}}(\\sin(\\theta))^2, \
+      \\sqrt{\\frac{15}{8\\pi}}\\sin(\\theta)\\cos(\\theta), \
+      \\sqrt{\\frac{5}{16\\pi}}(3(\\cos(\\theta))^2-1), \
+      \\sqrt{\\frac{15}{8\\pi}}\\sin(\\theta)\\cos(\\theta), \
+      \\sqrt{\\frac{15}{32\\pi}}(\\sin(\\theta))^2, \
+      \\sqrt{\\frac{35}{64\\pi}}(\\sin(\\theta))^3, \
+      \\sqrt{\\frac{105}{16\\pi}}(\\sin(\\theta))^2\\cos(\\theta), \
+      \\sqrt{\\frac{21}{64\\pi}}\\sin(\\theta)(5(\\cos(\\theta))^2-1), \
+      \\sqrt{\\frac{7}{16\\pi}}(5(\\cos(\\theta))^3-3\\cos(\\theta)), \
+      \\sqrt{\\frac{21}{64\\pi}}\\sin(\\theta)(5(\\cos(\\theta))^2-1), \
+      \\sqrt{\\frac{105}{16\\pi}}(\\sin(\\theta))^2\\cos(\\theta), \
+      \\sqrt{\\frac{35}{64\\pi}}(\\sin(\\theta))^3 \
+      ]", hidden: true });
+    calculator.setExpression({ id: "harmonic-positive", latex: "r=P[i] \\left\\{P[i]>=0\\right\\}", color: Desmos.Colors.ORANGE });
+    calculator.setExpression({ id: "harmonic-negative", latex: "r=-P[i] \\left\\{P[i]<0\\right\\}", color: Desmos.Colors.BLUE });
+    calculator.setExpression({ id: "inner-m", latex: "m_0=1", sliderBounds: { min: -3, max: 3, step: 1 }, color: Desmos.Colors.RED, });
+    calculator.setExpression({ id: "m", latex: "m=\\max(\\min(m_0, l), -l)", sliderBounds: { min: -3, max: 3, step: 1 }, color: Desmos.Colors.RED, });
+    calculator.setExpression({ id: "l", latex: "l=2", sliderBounds: { min: 0, max: 3, step: 1 }, color: Desmos.Colors.RED, });
+    calculator.setExpression({ id: "slider-l", type: 'table', columns: [ { latex: 'x', values: ['-2', '-0.5'] }, { latex: 'y', values: ['-1.2', '-1.2'], color: Desmos.Colors.RED, columnMode: Desmos.ColumnModes.LINES, lineOpacity: 0.2 } ] });
+    calculator.setExpression({ id: "slider-m", type: 'table', columns: [ { latex: 'x', values: ['0.5', '2'] }, { latex: 'y', values: ['-1.2', '-1.2'], color: Desmos.Colors.RED, columnMode: Desmos.ColumnModes.LINES, lineOpacity: 0.2 } ] });
+    calculator.setExpression({ id: "knob-l", latex: "(1.5*l/3-2, -1.2)", dragMode: "X", label: "`l=${l}`", showLabel: true, color: Desmos.Colors.RED, labelOrientation: Desmos.LabelOrientations.ABOVE });
+    calculator.setExpression({ id: "knob-m", latex: "(1.5*m_0/7+1.25, -1.2)", dragMode: "X", label: "`m=${m}`", showLabel: true, color: Desmos.Colors.RED, labelOrientation: Desmos.LabelOrientations.ABOVE });
+  }, false);
+</script>
 
 [^1]: Fourier series (2024). In Wikipedia. [https://en.wikipedia.org/wiki/Fourier_series]()
 [^2]: Circular Harmonics: Digging in circles (2021). Jon Valdés. [https://valdes.cc/articles/ch.html]()
@@ -224,3 +292,4 @@ $$
 [^4]: Eigenfunction (2024). In Wikipedia. [https://en.wikipedia.org/wiki/Eigenfunction]()
 [^5]: All You Need to Know about Spherical Harmonics. Mathcube. [https://www.cantorsparadise.com/all-you-need-to-know-about-spherical-harmonics-29ff76e74ad5]()
 [^6]: Spherical Harmonic. Weisstein, Eric W. From MathWorld--A Wolfram Web Resource. [https://mathworld.wolfram.com/SphericalHarmonic.html]()
+[^7]: Associated Lengendre Polynormial. Weisstein, Eric W. From MathWorld--A Wolfram Web Resource. [https://mathworld.wolfram.com/AssociatedLegendrePolynomial.html]()
