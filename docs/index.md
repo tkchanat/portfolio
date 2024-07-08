@@ -5,9 +5,9 @@ hide:
 
 <h1>Andy (Tsz Kin) Chan</h1>
 
-![](img/profile.jpg){:style="width:200px; border-radius: 20%"}
-
 :fontawesome-brands-github: [tkchanat](https://github.com/tkchanat) | :fontawesome-brands-twitter: [@tkchanat](https://twitter.com/tkchanat1) | :fontawesome-brands-linkedin: [Andy Chan](https://www.linkedin.com/in/andy-chan-9b8294155/) | :fontawesome-solid-location-dot: Vancouver, BC
+
+![](img/portrait.jpg){:style="width:200px; height:200px; object-fit: cover; border-radius: 15%; box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.5);"}
 
 I am a rendering software engineer at [Animal Logic](https://animallogic.com/) Vancouver, developing in-house production renderer [_Glimpse_](https://animallogic.com/technology/products/glimpse/). I love both offline and realtime graphics. My main interests are light transport and Monte Carlo path tracer, but any compute graphics related topics fascinate me too.
 
