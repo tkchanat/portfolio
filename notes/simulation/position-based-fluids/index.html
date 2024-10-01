@@ -9,10 +9,10 @@
       
       
       
-        <link rel="prev" href="../impulse-based/">
+        <link rel="prev" href="../numerical-methods/">
       
       
-        <link rel="next" href="../position-based-fluids/">
+        <link rel="next" href="../position-based/">
       
       
       <link rel="icon" href="../../../img/dump.webp">
@@ -20,7 +20,7 @@
     
     
       
-        <title>Numerical Methods - graphics memdump</title>
+        <title>Position Based Fluids - graphics memdump</title>
       
     
     
@@ -74,7 +74,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#numerical-methods" class="md-skip">
+        <a href="#position-based-fluids" class="md-skip">
           Skip to content
         </a>
       
@@ -109,7 +109,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Numerical Methods
+              Position Based Fluids
             
           </span>
         </div>
@@ -575,6 +575,27 @@
                 
   
   
+  
+  
+    <li class="md-nav__item">
+      <a href="../numerical-methods/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Numerical Methods
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
     
   
   
@@ -591,7 +612,7 @@
           
   
   <span class="md-ellipsis">
-    Numerical Methods
+    Position Based Fluids
   </span>
   
 
@@ -602,7 +623,7 @@
         
   
   <span class="md-ellipsis">
-    Numerical Methods
+    Position Based Fluids
   </span>
   
 
@@ -624,46 +645,37 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#euler-method" class="md-nav__link">
+  <a href="#density-constraint" class="md-nav__link">
     <span class="md-ellipsis">
-      Euler Method
+      Density Constraint
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#implicit-euler-method" class="md-nav__link">
+  <a href="#smoothing-kernels" class="md-nav__link">
     <span class="md-ellipsis">
-      Implicit Euler Method
+      Smoothing Kernels
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#symplectic-euler-method" class="md-nav__link">
-    <span class="md-ellipsis">
-      Symplectic Euler Method
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#verlet-method" class="md-nav__link">
-    <span class="md-ellipsis">
-      Verlet Method
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Verlet Method">
+    <nav class="md-nav" aria-label="Smoothing Kernels">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#computing-velocity" class="md-nav__link">
+  <a href="#poly6" class="md-nav__link">
     <span class="md-ellipsis">
-      Computing Velocity
+      Poly6
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#spiky" class="md-nav__link">
+    <span class="md-ellipsis">
+      Spiky
     </span>
   </a>
   
@@ -674,31 +686,28 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#tensile-instability" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tensile Instability
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bloopers" class="md-nav__link">
+    <span class="md-ellipsis">
+      Bloopers
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
       
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../position-based-fluids/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Position Based Fluids
-  </span>
-  
-
-      </a>
     </li>
   
 
@@ -912,116 +921,91 @@
                   
 
 
-<h1 id="numerical-methods">Numerical Methods</h1>
-<p>In this chapter, I will cover different methods to integrate differential equations (ODE) numerically. Since the integrand is evaluated numerically, I will replace every <span class="arithmatex">\(=\)</span> to be <span class="arithmatex">\(\approx\)</span> to make it clear it's just an estimation only.</p>
-<p>// TODO: investigate what is consistency and order in numerical methods</p>
-<h2 id="euler-method">Euler Method</h2>
-<p>This is a first-order numerical method to solve ordinary differential equations (ODEs) with a given initial value. It allows us to approximate a nearby point on the curve by moving a short distance <span class="arithmatex">\(\Delta t\)</span> along a line tangent, that is the first-order derivative <span class="arithmatex">\(f'(t)\)</span>, to the curve <span class="arithmatex">\(f(t)\)</span>. To write that down:</p>
+<h1 id="position-based-fluids">Position Based Fluids</h1>
+<p>As discussed in <a href="../position-based/">Position Based Simulation</a>, position-based dynamics provided the foundations of simulating lagrangian fluids. </p>
+<h2 id="density-constraint">Density Constraint</h2>
+<p>The density constraint<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup> is a function of the particle’s position and the positions of its neighbors <span class="arithmatex">\((\mathbf{x}_1, \cdots, \mathbf{x}_\mathbf{n_j})\)</span>. The <span class="arithmatex">\(\mathbf{n_j}\)</span> denotes the number of neighboring particles, <span class="arithmatex">\(\rho_o\)</span> is the resting density, and <span class="arithmatex">\(W(\vec{r}, h)\)</span> is the smoothing kernel with kernel size of <span class="arithmatex">\(h\)</span>.</p>
 <div class="arithmatex">\[
+C_i(\mathbf{x}_1, \cdots, \mathbf{x}_\mathbf{n_j}) = \frac{\rho_i}{\rho_o}-1
+\]</div>
+<div class="arithmatex">\[
+\rho_i = \sum_j{m_j W(\mathbf{x}_i - \mathbf{x}_j, h)}
+\]</div>
+<p>For a <span class="arithmatex">\(N\)</span>-particle simulation, every particles need to apply a density constraint to ensure its local density <span class="arithmatex">\(\rho\)</span> remain the same at all time. Notice how bilateral condition <span class="arithmatex">\(C(\mathbf{x})=0\)</span> is used here, enforcing the incompressibility property of fluids.</p>
+<div class="arithmatex">\[
+C_{density}(\mathbf{x}) =
 \begin{cases}
-f'(t) &amp;\approx \frac{f(t+\Delta t) - f(t)}{\Delta t}\\
-f(t+\Delta t) &amp;\approx f(t) + f'(t) \Delta t
+C_1(\mathbf{x}_1, \cdots, \mathbf{x}_\mathbf{n_j}) = 0\\
+\cdots\\
+C_N(\mathbf{x}_1, \cdots, \mathbf{x}_\mathbf{n_j}) = 0\\
 \end{cases}
 \]</div>
-<p>Rewriting it in an iterative way, we can find the next position a particle <span class="arithmatex">\(\mathbf{x}_{n+1}\)</span> with its current position <span class="arithmatex">\(\mathbf{x}_n\)</span>:</p>
+<h2 id="smoothing-kernels">Smoothing Kernels</h2>
+<p>Smoothing kernels are essential for integrating local density of a particle in an SPH simulation. They need to fulfill a few requirements:</p>
+<ul>
+<li>Radially symmetric (i.e. only depends on distance)</li>
+<li>Finite support (i.e. particles should only affect up to a certain distance)</li>
+<li>Differentiable and integrates to 1</li>
+</ul>
+<h3 id="poly6">Poly6</h3>
+<p>In 3D:</p>
 <div class="arithmatex">\[
-\mathbf{x}_{n+1} \approx \mathbf{x}_n + \dot{\mathbf{x}}(t) \Delta t
+W_{poly6}(\vec{r}, h) = \frac{315}{64 \pi h^9}
+  \begin{cases}
+  (h^2-\|r\|^2)^3 &amp; \text{if } 0\leq \|r\|\leq h\\
+  0               &amp; \text{else}
+  \end{cases}
 \]</div>
-<h2 id="implicit-euler-method">Implicit Euler Method</h2>
-<p>The implicit here means instead of computing directly the approximation <span class="arithmatex">\(\mathbf{x}_{n+1}\)</span> from <span class="arithmatex">\(\mathbf{x}_n\)</span>, we need to solve an implicit equation:</p>
+<h3 id="spiky">Spiky</h3>
+<p>In 3D:</p>
 <div class="arithmatex">\[
-\begin{cases}
-f'(t) &amp;\approx \frac{f(t) - f(t-\Delta t)}{\Delta t}\\
-f(t+\Delta t) &amp;\approx f(t) + f'(t+\Delta t)\Delta t
-\end{cases}
+W_{spiky}(\vec{r}, h) = \frac{15}{\pi h^6}
+  \begin{cases}
+  (h-\|r\|)^3 &amp; \text{if } 0\leq \|r\|\leq h\\
+  0           &amp; \text{else}
+  \end{cases}
 \]</div>
-<p>Also known as backward Euler method, because it uses right-hand <a href="../../monte-carlo-integration/#quadrature-rules">quadrature method</a> instead of the left-hand rectangle. Implicit method is difficult to evaluate, and usually required iterative methods to solve (e.g. fixed point iteration), but they have better numerical properties and thus more stable.</p>
-<h2 id="symplectic-euler-method">Symplectic Euler Method</h2>
-<p>This one has way too much names, it's also called semi-implicit Euler, semi-explicit Euler, Euler-Cromer, and Newton-Størmer-Verlet. </p>
+<h2 id="tensile-instability">Tensile Instability</h2>
+<p>Quoting from the paper<sup id="fnref2:1"><a class="footnote-ref" href="#fn:1">1</a></sup>:</p>
+<blockquote>
+<p>A common problem in SPH simulations is particle clustering or
+clumping caused by negative pressures when a particle has only a
+few neighbors and is unable to satisfy the rest density.</p>
+</blockquote>
+<p>Lone particles that do not have sufficient neighbor particles to satisfy its density constraint will cause numerical instability in the constraint projection stage. Resulting in extreme correction vector value and can break the simulation. One method is to clamp the density constraint result to zero to prevent negative pressure.</p>
 <div class="arithmatex">\[
-\begin{cases}
-f'(t+\Delta t) &amp;\approx f'(t) + f''(t)\Delta t\\
-f(t+\Delta t) &amp;\approx f(t) + f'(t+\Delta t)\Delta t
-\end{cases}
+C_i(\mathbf{x}_1, \cdots, \mathbf{x}_\mathbf{n_j}) = \max(0, \frac{\rho_i}{\rho_o}-1)
 \]</div>
-<p>Rewrite it in terms of motion:</p>
+<p>Even though negative pressure is not a thing in real life, it models the cohesion nature of fluid particles. So by clamping the constraint, we are also limiting ourselves from having the cohesive behavior.</p>
+<p>Luckily, in the paper "SPH without a tensile instability"<sup id="fnref:2"><a class="footnote-ref" href="#fn:2">2</a></sup>, an artificial pressure correction factor is proposed. Where <span class="arithmatex">\(\Delta\vec{q}\)</span> is vector to a point at some fixed distance inside the smoothing kernel radius <span class="arithmatex">\(h\)</span> and <span class="arithmatex">\(\epsilon\)</span> is a small positive constant. The recommended values are <span class="arithmatex">\(\|\Delta\vec{q}\|=\{0.1h, \cdots, 0.3h\}\)</span>, <span class="arithmatex">\(\epsilon = 0.1\)</span> and <span class="arithmatex">\(n = 4\)</span> work well in most cases.</p>
 <div class="arithmatex">\[
-\begin{cases}
-\mathbf{v}_{n+1} &amp;\approx\mathbf{v}_n + \mathbf{a}_{n}\Delta t\\
-\mathbf{x}_{n+1} &amp;\approx\mathbf{x}_n + \mathbf{v}_{n+1}\Delta t\\
-\end{cases}
+\lambda_{corr}=-\epsilon\cdot\left(\frac{W(\vec{r}, h)}{W(\Delta\vec{q}, h)}\right)^n
 \]</div>
-<div class="arithmatex">\[
-\begin{align}
-\therefore \mathbf{x}_{n+1}&amp;\approx\mathbf{x}_n + (\mathbf{v}_n + \mathbf{a}_{n}\Delta t)\Delta t\\
-&amp;\approx\mathbf{x}_n + \mathbf{v}_n\Delta t + \mathbf{a}_{n}\Delta t^2
-\end{align}
-\]</div>
-<p>Look familiar? This is usually seen in game physics to predict a moving body in the next time frame. It is a mix of explicit and implicit method to calculate the final body position. Velocity is integrated explicitly, and position is integrated implicitly by using the velocity from the next time frame. </p>
-<h2 id="verlet-method">Verlet Method</h2>
-<p>This is a second-order numerical method to integrate Newton's equations of motion. </p>
-<p>We begin by letting the second-derivative <span class="arithmatex">\(\ddot{\mathbf{x}}=f''(t)\)</span> be the <strong>change</strong> of the <span style="color:#388c46"><strong>finite difference</strong></span> of the <span style="color:#6042a6"><strong>backward-difference</strong></span> and <span style="color:#fa7e19"><strong>forward-difference</strong></span>. In other words, using central difference approximation to find the second derivative. When <span class="arithmatex">\(\Delta t\rightarrow 0\)</span>, it will converge to the true second-derivative value. In numerical computations, it will always be an approximation as it's impossible to have an infinitely small step size. </p>
-<script src="https://www.desmos.com/api/v1.8/calculator.js?apiKey=dcb31709b452b1cf9dc26972add0fda6"></script>
-<div id="calculator" style="width: 400px; height: 400px;"></div>
-<p><button type="button" class="btn d-inline" id="verlet-animate">Animate</button></p>
-<script>
-  var elt = document.getElementById('calculator');
-  var calculator = Desmos.GraphingCalculator(elt, {
-    keypad: false,
-    expressions: false,
-    settingsMenu: false,
-    lockViewport: true,
-  });
-  fetch("/assets/desmos/verlet.json")
-    .then(response => response.json())
-    .then(json => calculator.setState(json.state))
-    .catch(err => console.error(err));
-  var button = document.getElementById("verlet-animate");
-  button.onclick = event => {
-    calculator.getExpressions().forEach(expr => {
-      if (expr.id != '2') return;
-      expr.playing = !expr.playing;
-      button.innerHTML = expr.playing ? "Stop" : "Animate";
-      calculator.setExpression(expr);
-    });
-  };
-</script>
-
-<div class="arithmatex">\[
-\begin{align}
-f''(t) &amp;\approx \frac{\frac{f(t+\Delta t)-f(t)}{\Delta t}-\frac{f(t)-f(t-\Delta t)}{\Delta t}}{\Delta t}\\
-&amp;\approx \frac{\frac{(f(t+\Delta t)-f(t))-(f(t)-f(t-\Delta t))}{\Delta t}}{\Delta t}\\
-&amp;\approx \frac{f(t+\Delta t)-2f(t)+f(t-\Delta t)}{\Delta t^2} \tag{1}
-\end{align}
-\]</div>
-<p>It has an interesting property, we can see the approximated second-derivative is independent from its first-derivative. In simpler words, the next position vector <span class="arithmatex">\(\mathbf{x}_{n+1}\)</span> can be obtained directly by the previous two <span class="arithmatex">\(\mathbf{x}_n\)</span> and <span class="arithmatex">\(\mathbf{x}_{n-1}\)</span>, without the need of calculating velocity. Continue from <span class="arithmatex">\((1)\)</span>, we get:</p>
-<div class="arithmatex">\[
-\begin{align}
-\ddot{\mathbf{x}} &amp;\approx \frac{\mathbf{x}_{n+1} - 2\mathbf{x}_n + \mathbf{x}_{n-1}}{\Delta t^2}\\
-\ddot{\mathbf{x}} {\Delta t^2} &amp;\approx \mathbf{x}_{n+1} - 2\mathbf{x}_n + \mathbf{x}_{n-1}\\
-\mathbf{x}_{n+1}&amp;\approx2\mathbf{x}_n - \mathbf{x}_{n-1} + \ddot{\mathbf{x}} \Delta t^2 \tag{2}
-\end{align}
-\]</div>
-<h3 id="computing-velocity">Computing Velocity</h3>
-<p>Because velocities are not explicitly given by definition, it can only be estimated by the mean value theorem.</p>
-<div class="arithmatex">\[
-f'(t) \approx \frac{f(t+\Delta t) - f(t-\Delta t)}{2\Delta t}
-\]</div>
-<p>To erase the dependency or previous position, just shift the time frame by <span class="arithmatex">\(\Delta t\)</span> at the cost of accuracy (forward-difference approximation). And you will soon notice it falls back to the form of <a href="#euler-method">Euler method</a>.</p>
-<div class="arithmatex">\[
-\begin{align}
-f'(t+\Delta t) &amp;\approx \frac{f(t+2\Delta t) - f(t)}{2\Delta t}\\
-&amp;\approx \frac{f(t+\Delta t) - f(t)}{\Delta t}\\
-\end{align}
-\]</div>
+<h2 id="bloopers">Bloopers</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">1</th>
+<th style="text-align: center;">2</th>
+<th style="text-align: center;">3</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><img alt="" src="/img/blooper1.webp" /></td>
+<td style="text-align: center;"><img alt="" src="/img/blooper2.webp" /></td>
+<td style="text-align: center;"><img alt="" src="/img/blooper3.webp" /></td>
+</tr>
+</tbody>
+</table>
 <div class="footnote">
 <hr />
 <ol>
 <li id="fn:1">
-<p>F.Crivelli. <em>The Störmer-Verlet method, 2008</em>. <a href="https://www2.math.ethz.ch/education/bachelor/seminars/fs2008/nas/crivelli.pdf">https://www2.math.ethz.ch/education/bachelor/seminars/fs2008/nas/crivelli.pdf</a>&#160;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+<p>Macklin, M., &amp; Müller, M. (2013). Position based fluids. ACM Transactions on Graphics (TOG), 32(4), 1-12.&#160;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">&#8617;</a><a class="footnote-backref" href="#fnref2:1" title="Jump back to footnote 1 in the text">&#8617;</a></p>
 </li>
 <li id="fn:2">
-<p>Gorilla Sun. <em>Euler and Verlet Integration for Particle Physics</em>. <a href="https://www.gorillasun.de/blog/euler-and-verlet-integration-for-particle-physics/">https://www.gorillasun.de/blog/euler-and-verlet-integration-for-particle-physics/</a>&#160;<a class="footnote-backref" href="#fnref:2" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+<p>Monaghan, J. J. (2000). SPH without a tensile instability. Journal of computational physics, 159(2), 290-311.&#160;<a class="footnote-backref" href="#fnref:2" title="Jump back to footnote 2 in the text">&#8617;</a></p>
 </li>
 </ol>
 </div>
@@ -1054,7 +1038,7 @@ f'(t+\Delta t) &amp;\approx \frac{f(t+2\Delta t) - f(t)}{2\Delta t}\\
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../impulse-based/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Impulse Based Simulation">
+          <a href="../numerical-methods/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Numerical Methods">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
@@ -1064,20 +1048,20 @@ f'(t+\Delta t) &amp;\approx \frac{f(t+2\Delta t) - f(t)}{2\Delta t}\\
                 Previous
               </span>
               <div class="md-ellipsis">
-                Impulse Based Simulation
+                Numerical Methods
               </div>
             </div>
           </a>
         
         
           
-          <a href="../position-based-fluids/" class="md-footer__link md-footer__link--next" aria-label="Next: Position Based Fluids">
+          <a href="../position-based/" class="md-footer__link md-footer__link--next" aria-label="Next: Position Based Simulation">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                Position Based Fluids
+                Position Based Simulation
               </div>
             </div>
             <div class="md-footer__button md-icon">

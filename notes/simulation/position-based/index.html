@@ -9,7 +9,7 @@
       
       
       
-        <link rel="prev" href="../numerical-methods/">
+        <link rel="prev" href="../position-based-fluids/">
       
       
         <link rel="next" href="../../software-dev/ui-library/">
@@ -447,6 +447,27 @@
   
   
     <li class="md-nav__item">
+      <a href="../../mathematics/running-statistics/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Running Statistics
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../mathematics/spherical-harmonics/" class="md-nav__link">
         
   
@@ -575,6 +596,27 @@
                 
   
   
+  
+  
+    <li class="md-nav__item">
+      <a href="../position-based-fluids/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Position Based Fluids
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
     
   
   
@@ -647,21 +689,6 @@
       Algorithm
     </span>
   </a>
-  
-    <nav class="md-nav" aria-label="Algorithm">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#integration" class="md-nav__link">
-    <span class="md-ellipsis">
-      Integration
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -872,41 +899,39 @@
 
 <h1 id="position-based-simulation">Position Based Simulation</h1>
 <p>As oppose to any other rigidbody simulations, <a href="../force-based/">force-based</a> and <a href="../impulse-based/">impulse-based</a> that deals with velocity and acceleration calculations, position-based simulation attempts to minimize the constrains on the position domain down to particle level. </p>
+<p>This is probably my favorite simulation technique!! It's extendable, reuseable, and can simulate all the things. Soft body, fluid, semi-rigidbody, you name it!</p>
 <h2 id="problem">Problem</h2>
-<p>Given a set of <span class="arithmatex">\(M\)</span> constrains (basically means there are <span class="arithmatex">\(M\)</span> equality or inequality equations to satisfy), we need to solve for <span class="arithmatex">\(N\times\mathbb{R}^3\)</span> unknowns to resolve our final positions. Most of the time, the number of constraints won't match the number of unknowns we are solving (i.e. <span class="arithmatex">\(M \neq N\)</span>). This means if the problem was a linear system <span class="arithmatex">\(\mathbf{A}\mathbf{x}=\mathbf{b}\)</span>, the solution can't be obtained easily by inverting the matrix and solve for <span class="arithmatex">\(\mathbf{x}\)</span>. Not to mention the system we are solving won't necessarily be linear, for example a simple distance constraint <span class="arithmatex">\(c(\mathbf{x}_1, \mathbf{x}_2)=\left|\mathbf{x}_1-\mathbf{x}_2\right|^2-d^2\)</span> alone is a non-linear equation.</p>
-<p>Thus, it all boils down to a complex problem of finding a set of positions <span class="arithmatex">\(\mathbf{x}\)</span> that minimize if not solved the constrained system:</p>
+<p>Given a set of <span class="arithmatex">\(M\)</span> constrains (basically means there are <span class="arithmatex">\(M\)</span> equality or inequality equations to satisfy), we need to solve for <span class="arithmatex">\(N\times\mathbb{R}^3\)</span> unknowns to resolve our final positions. Most of the time, the number of constraints won't match the number of unknowns we are solving (i.e. <span class="arithmatex">\(M \neq N\)</span>). This means if the problem was a linear system <span class="arithmatex">\(\mathbf{A}\mathbf{x}=\mathbf{b}\)</span>, the solution can't be obtained easily by inverting the matrix and solve for <span class="arithmatex">\(\mathbf{x}\)</span>. Not to mention the system we are solving won't necessarily be linear. For example, a simple distance constraint <span class="arithmatex">\(C_i(\mathbf{x}_1, \mathbf{x}_2)=\left|\mathbf{x}_1-\mathbf{x}_2\right|^2-d^2\)</span> alone is a non-linear equation.</p>
+<p>Thus, it all boils down to a problem of finding a set of positions <span class="arithmatex">\(\mathbf{x}\)</span> that minimize if not solved the constrained system:</p>
 <div class="arithmatex">\[
 C(\mathbf{x}) =
 \begin{cases}
-c_1(\mathbf{x}_1, \mathbf{x}_2, \cdots, \mathbf{x}_N) \succ 0\\
+C_1(\mathbf{x}_1, \mathbf{x}_2, \cdots, \mathbf{x}_N) \succ 0\\
 \cdots\\
-c_M(\mathbf{x}_1, \mathbf{x}_2, \cdots, \mathbf{x}_N) \succ 0\\
+C_M(\mathbf{x}_1, \mathbf{x}_2, \cdots, \mathbf{x}_N) \succ 0\\
 \end{cases}
 \]</div>
-<p>Where <span class="arithmatex">\(\mathbf{x}\)</span> is the concatenation of <span class="arithmatex">\(N\times\mathbb{R}^3\)</span> positions we are trying to solve, and the symbol <span class="arithmatex">\(\succ\)</span> denotes either <span class="arithmatex">\(=\)</span> or <span class="arithmatex">\(\geq\)</span>. </p>
-<p>As said, there won't be closed form solution because the system is neither symmetric nor linear. Our best bet is to apply an iterative solver to minimize the system after a fixed amount of iterations and hope for the best that the approximated result will satisfy all our constraints. </p>
+<p>Where <span class="arithmatex">\(\mathbf{x}\)</span> is the concatenation of <span class="arithmatex">\(N\times\mathbb{R}^3\)</span> positions we are trying to solve, and the symbol <span class="arithmatex">\(\succ\)</span> denotes either <span class="arithmatex">\(=\)</span> or <span class="arithmatex">\(\geq\)</span>. <span class="arithmatex">\(C(\mathbf{x})=0\)</span> means the constraint has a bilateral condition enforced, usually representing strong forces which should always hold true. On the other hand, <span class="arithmatex">\(C(\mathbf{x}) \geq 0\)</span> or <span class="arithmatex">\(C(\mathbf{x}) \leq 0\)</span> means the constraint is loosely enforced. They are usually seen in collision constraints where particles are free to move on one side, but preventing them to enter the other side. </p>
 <h2 id="non-linear-gauss-seidel-solver">Non-Linear Gauss-Seidel Solver</h2>
-<p>If all constraints in the system can't be solved at once, then we need to solve each constraint equation separately, i.e. <span class="arithmatex">\(c(\mathbf{x})\succ0\)</span>. Since we want to find a correction <span class="arithmatex">\(\Delta\mathbf{x}\)</span> such that <span class="arithmatex">\(c(\mathbf{x}+\Delta\mathbf{x})\succ0\)</span>. Thus we arrived to this constraint equation:</p>
+<p>As said in the previous section, there won't be a closed-form solution because the system is neither symmetric nor linear. Our best bet is to apply an iterative solver to minimize the system after a fixed amount of iterations and hope for the best that the approximated result will satisfy all our constraints. This is where the non-linear Gauss-Seidel algorithm comes in.</p>
+<p>Since all constraints in the system can't be solved at once, then each constraint equations need to be solved separately. At the end of each iteration, each particles should have a correction vector <span class="arithmatex">\(\Delta\mathbf{x}\)</span> such that most constraints should reach their condition <span class="arithmatex">\(C_i(\mathbf{x}+\Delta\mathbf{x})\succ0\)</span>. Thus we arrived to this constraint equation:</p>
 <div class="arithmatex">\[
 C(\mathbf{x}+\Delta\mathbf{x})\approx C(\mathbf{x})+\nabla C(\mathbf{x})\cdot\Delta \mathbf{x} \succ 0 \tag{1}
 \]</div>
-<p>Here <span class="arithmatex">\(\nabla C(\mathbf{x})\)</span> is the gradient of given constraints, and the equation above literally means stepping from the current constraint value <span class="arithmatex">\(C(\mathbf{x})\)</span> with a step size <span class="arithmatex">\(\Delta\mathbf{x}\)</span> should be ended up equal or greater or equal than 0. The paper mentioned that by restricting the step direction to be <span class="arithmatex">\(\nabla C(\mathbf{x})\)</span>, satisfies the requirement for linear and angular momentum conservation. It also means only Lagrange multiplier scalar <span class="arithmatex">\(\lambda\)</span> has to be found to solve the correction equation <span class="arithmatex">\((1)\)</span>.</p>
+<p>Here <span class="arithmatex">\(\nabla C(\mathbf{x})\)</span> is the gradient of given constraints, and the equation above literally means stepping from the current constraint value <span class="arithmatex">\(C(\mathbf{x})\)</span> with a step size <span class="arithmatex">\(\Delta\mathbf{x}\)</span> should be ended up equal or greater or equal than 0. <mark class="critic">The paper mentioned that by restricting the step direction to be <span class="arithmatex">\(\nabla C(\mathbf{x})\)</span>, satisfies the requirement for linear and angular momentum conservation. It also means only Lagrange multiplier scalar <span class="arithmatex">\(\lambda\)</span> has to be found to solve the correction equation <span class="arithmatex">\((1)\)</span>.</mark><span class="critic comment">I can't comprehend this part</span></p>
+<p>The position correction vector <span class="arithmatex">\(\Delta\mathbf{x}\)</span> will then be evaluated as:</p>
 <div class="arithmatex">\[
 \Delta\mathbf{x}=\lambda \mathbf{M}^{-1}\nabla C(\mathbf{x})
 \]</div>
 <p>where <span class="arithmatex">\(\mathbf{M}=diag(m_1, m_2, \cdots, m_N)\)</span> represents the mass of each particles. So the correction vector of particle <span class="arithmatex">\(i\)</span> will be:</p>
 <div class="arithmatex">\[
 \begin{cases}
-\Delta\mathbf{x}_i &amp;= -\lambda_i w_i \nabla_{\mathbf{x}_i} C(\mathbf{x})\\
-\lambda_i &amp;= \frac{C(\mathbf{x})}{\sum_j{w_j\left|\nabla_{\mathbf{x}_j}C(\mathbf{x})\right|^2}}
+\Delta\mathbf{x}_i &amp;= -\lambda_i w_i \nabla_{\mathbf{x}_i} C_i(\mathbf{x})\\
+\lambda_i &amp;= \frac{C_i(\mathbf{x})}{\sum_j{w_j\left|\nabla_{\mathbf{x}_j}C_i(\mathbf{x})\right|^2}}
 \end{cases}
 \]</div>
-<p>I wish I understand this step, maybe later... Combining all Lagrange multipliers, we get:</p>
-<div class="arithmatex">\[
-\lambda=\frac{C(\mathbf{x})}{\nabla C(\mathbf{x})^T \mathbf{M}^{-1}\nabla C(\mathbf{x})}
-\]</div>
 <h2 id="algorithm">Algorithm</h2>
-<p>The main position based dynamics (PBD) algorithm can be split into three different stages: prediction, constraint projection, and post-solve updates.</p>
+<p>The main position based dynamics (PBD) algorithm can be split into three different stages: prediction, solving constraints, and post-solve updates.</p>
 <div class="arithmatex">\[
 \begin{align}
 &amp;\mathbf{while}\ \text{simulating}\\
@@ -921,7 +946,6 @@ C(\mathbf{x}+\Delta\mathbf{x})\approx C(\mathbf{x})+\nabla C(\mathbf{x})\cdot\De
 \end{align}
 \]</div>
 <p>Noted that this non-linear constrained system is "solved" by iterating each constraints and optimizing them sequentially, which to me, doesn't really "solve" the system but rather find a close-enough solution. This is also why it's plausible that a particle will end up violating one of the constaints (possibly clipping through geometries) after the solver reached its maximum iterations. </p>
-<h3 id="integration">Integration</h3>
 <h2 id="result">Result</h2>
 <p><img alt="" src="../img/pbd.webp" /></p>
 <div class="footnote">
@@ -961,7 +985,7 @@ C(\mathbf{x}+\Delta\mathbf{x})\approx C(\mathbf{x})+\nabla C(\mathbf{x})\cdot\De
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../numerical-methods/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Numerical Methods">
+          <a href="../position-based-fluids/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Position Based Fluids">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
@@ -971,7 +995,7 @@ C(\mathbf{x}+\Delta\mathbf{x})\approx C(\mathbf{x})+\nabla C(\mathbf{x})\cdot\De
                 Previous
               </span>
               <div class="md-ellipsis">
-                Numerical Methods
+                Position Based Fluids
               </div>
             </div>
           </a>
