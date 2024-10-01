@@ -65,7 +65,9 @@ markdown_extensions:
   - admonition
   - footnotes
   - pymdownx.caret
+  - pymdownx.critic
   - pymdownx.details
+  - pymdownx.highlight
   - pymdownx.mark
   - pymdownx.tilde
   - pymdownx.arithmatex:
