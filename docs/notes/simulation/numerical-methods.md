@@ -32,7 +32,7 @@ $$
 Also known as backward Euler method, because it uses right-hand [quadrature method](../monte-carlo-integration.md#quadrature-rules) instead of the left-hand rectangle. Implicit method is difficult to evaluate, and usually required iterative methods to solve (e.g. fixed point iteration), but they have better numerical properties and thus more stable.
 
 ## Symplectic Euler Method
-This one has way too much names, it's also called semi-implicit Euler, semi-explicit Euler, Euler-Cromer, and Newton-Størmer-Verlet. 
+This one has way too much names, it's also called semi-implicit Euler, semi-explicit Euler, Euler-Cromer, and Newton-Størmer-Verlet[^1]. 
 
 $$
 \begin{cases}
@@ -59,7 +59,7 @@ $$
 
 Look familiar? This is usually seen in game physics to predict a moving body in the next time frame. It is a mix of explicit and implicit method to calculate the final body position. Velocity is integrated explicitly, and position is integrated implicitly by using the velocity from the next time frame. 
 
-## Verlet Method
+## Verlet Method[^2]
 This is a second-order numerical method to integrate Newton's equations of motion. 
 
 We begin by letting the second-derivative $\ddot{\mathbf{x}}=f''(t)$ be the **change** of the <span style="color:#388c46">**finite difference**</span> of the <span style="color:#6042a6">**backward-difference**</span> and <span style="color:#fa7e19">**forward-difference**</span>. In other words, using central difference approximation to find the second derivative. When $\Delta t\rightarrow 0$, it will converge to the true second-derivative value. In numerical computations, it will always be an approximation as it's impossible to have an infinitely small step size. 

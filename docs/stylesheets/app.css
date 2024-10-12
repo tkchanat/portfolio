@@ -77,3 +77,21 @@
   overflow-x: auto;
   overflow-y: hidden;
 }
+
+:root {
+  --md-admonition-icon--thonk: url('../img/thonk.svg')
+}
+.md-typeset .admonition.thonk,
+.md-typeset details.thonk {
+  border-color: #ffcc4d;
+}
+.md-typeset .thonk > .admonition-title,
+.md-typeset .thonk > summary {
+  background-color: #ffe39b;
+}
+.md-typeset .thonk > .admonition-title::before,
+.md-typeset .thonk > summary::before {
+  background-color: #d5834c;
+  -webkit-mask-image: var(--md-admonition-icon--thonk);
+          mask-image: var(--md-admonition-icon--thonk);
+}

@@ -1,5 +1,5 @@
 # Position Based Simulation
-As oppose to any other rigidbody simulations, [force-based](force-based.md) and [impulse-based](impulse-based.md) that deals with velocity and acceleration calculations, position-based simulation attempts to minimize the constrains on the position domain down to particle level. 
+As oppose to any other rigidbody simulations, [force-based](force-based.md) and [impulse-based](impulse-based.md) that deals with velocity and acceleration calculations, position-based simulation[^1] attempts to minimize the constrains on the position domain down to particle level. 
 
 This is probably my favorite simulation technique!! It's extendable, reuseable, and can simulate all the things. Soft body, fluid, semi-rigidbody, you name it!
 

@@ -18,7 +18,7 @@ This works pretty well in low-dimensional integration problems. However unfortun
 If randomness are difficult to control, how about herding the points to position in a deterministic pattern such that they are _almost_ equal distance to each other? In other words, how do we get an equidistribution of samples?
 
 ### Defining Discrepancy
-Imagine a $s$-dimentional unit cube $\mathbb{I}^s = [0, 1)^s$, with a point set $P = {x_1, x_2, \dots, x_N} \in \mathbb{I}^s$. We define the point set discrepancy $\mathcal{D}(J, P)$ as follows:
+Imagine a $s$-dimentional unit cube $\mathbb{I}^s = [0, 1)^s$, with a point set $P = {x_1, x_2, \dots, x_N} \in \mathbb{I}^s$. We define the point set discrepancy[^1] $\mathcal{D}(J, P)$ as follows:
 
 $$
 \mathcal{D}(J, P) = \left|\frac{A(J)}{N} - V(J)\right|
@@ -62,7 +62,7 @@ $$
 \end{align}
 $$
 
-This is also known as the _van der Corput sequence_, a specialized one-dimensional radical inverse sequence. The generalized form is called the _Halton sequence_, that is scalable to higher dimensions. To generate points in $N$-dimension, simply pick a different base from the prim number series ${2, 3, 5, 7, 11, \dots}$. Scratchapixel has a more [in-depth explanation](https://www.scratchapixel.com/lessons/mathematics-physics-for-computer-graphics/monte-carlo-methods-in-practice/introduction-quasi-monte-carlo.html), feel free to give it a read! 
+This is also known as the _van der Corput sequence_[^2], a specialized one-dimensional radical inverse sequence. The generalized form is called the _Halton sequence_, that is scalable to higher dimensions. To generate points in $N$-dimension, simply pick a different base from the prim number series ${2, 3, 5, 7, 11, \dots}$. Scratchapixel has a more [in-depth explanation](https://www.scratchapixel.com/lessons/mathematics-physics-for-computer-graphics/monte-carlo-methods-in-practice/introduction-quasi-monte-carlo.html), feel free to give it a read! 
 
 <div id="halton"></div>
 <button type="button" class="btn d-inline" id="halton-start">Start</button>
@@ -70,10 +70,9 @@ This is also known as the _van der Corput sequence_, a specialized one-dimension
 
 ## Sobol Sequence
 
-## Progressive Multi-Jittered Sample Sequence
+## Progressive Multi-Jittered Sample Sequence[^3]
 
 
-[^1]: Veach, E. (1997). Robust Monte Carlo Methods for Light Transport Simulation. (Doctoral dissertation, Stanford University).
-[^2]: Dalal, I., Stefan, D., & Harwayne-Gidansky, J. (2008). Low discrepancy sequences for Monte Carlo simulations on reconfigurable platforms. In 2008 International Conference on Application-Specific Systems, Architectures and Processors (pp. 108–113).
-[^3]: van der Corput, J.G. (1935), "Verteilungsfunktionen (Erste Mitteilung)" (PDF), Proceedings of the Koninklijke Akademie van Wetenschappen te Amsterdam (in German), 38: 813–821, Zbl 0012.34705
-[^4]: Christensen, P., Kensler, A., & Kilpatrick, C. (2018). Progressive Multi-Jittered Sample Sequences. Computer Graphics Forum.
+[^1]: Dalal, I., Stefan, D., & Harwayne-Gidansky, J. (2008). Low discrepancy sequences for Monte Carlo simulations on reconfigurable platforms. In 2008 International Conference on Application-Specific Systems, Architectures and Processors (pp. 108–113).
+[^2]: van der Corput, J.G. (1935), "Verteilungsfunktionen (Erste Mitteilung)" (PDF), Proceedings of the Koninklijke Akademie van Wetenschappen te Amsterdam (in German), 38: 813–821, Zbl 0012.34705
+[^3]: Christensen, P., Kensler, A., & Kilpatrick, C. (2018). Progressive Multi-Jittered Sample Sequences. Computer Graphics Forum.

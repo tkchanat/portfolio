@@ -191,7 +191,7 @@ Spherical harmonics arises from the angular part $Y(\theta, \phi)$ of a spherica
     \underbrace{\frac{1}{\sin\theta} \frac{\partial}{\partial \theta} \left(\sin\theta \frac{\partial Y(\theta, \phi)}{\partial\theta}\right) + \frac{1}{\sin^2\theta} \frac{\partial^2 Y(\theta, \phi)}{\partial\phi^2}}_{\nabla^2 f} = \underbrace{-\ell(\ell+1)}_{\text{eigenvalue}(\lambda)}\underbrace{Y(\theta, \phi)}_{\text{eigenfunction}(f)}
     $$
     
-    Taking equation $(2)$ and simplify it to $\nabla^2(Y(\theta, \phi)) = -\ell(\ell+1)Y(\theta, \phi)$. It's not hard to see that this takes the form of $Df=\lambda f$, where $D$ is a linear operator[^4]. And just so happened the Laplace operator $\nabla^2$ is also a linear operator! So, our separation constant $-\ell(\ell+1)$ are actually **eigenvalues** and the spherical harmonics $Y(\theta, \phi)$ are indeed **eigenfunctions**.
+    Taking equation $(2)$ and simplify it to $\nabla^2(Y(\theta, \phi)) = -\ell(\ell+1)Y(\theta, \phi)$. It's not hard to see that this takes the form of $Df=\lambda f$, where $D$ is a linear operator[^4][^5]. And just so happened the Laplace operator $\nabla^2$ is also a linear operator! So, our separation constant $-\ell(\ell+1)$ are actually **eigenvalues** and the spherical harmonics $Y(\theta, \phi)$ are indeed **eigenfunctions**.
 
 By writing $Y(\theta, \phi)=\Theta(\theta)\Phi(\phi)$, we are going to perform the separation of variable again. That gives us:
 
@@ -220,7 +220,7 @@ $$
 \end{align*}
 $$
 
-Fortunately, $\eqref{5}$ already has solutions of $\Phi(\phi)=e^{\pm im\phi}$, which is the two-dimensional angular Laplacian. Substituding it back into $\eqref{3}$ and solve for the $\theta\text{-dependent}$ portion, we get the solutions of $\Theta(\theta)=P_\ell^m(\cos\theta)$ in the form of a Legendre polynomial $P_\ell^m(x)$. (1)
+Fortunately, $\eqref{5}$ already has solutions of $\Phi(\phi)=e^{\pm im\phi}$, which is the two-dimensional angular Laplacian. Substituding it back into $\eqref{3}$ and solve for the $\theta\text{-dependent}$ portion, we get the solutions of $\Theta(\theta)=P_\ell^m(\cos\theta)$ in the form of a Legendre polynomial[^6][^7] $P_\ell^m(x)$. (1)
 { .annotate }
 
 1.  I have zero clue on this part about Legendre polynomials. Come back here when I am prepared.
@@ -292,4 +292,4 @@ $Y(\theta, \phi)$ denotes the whole sets of infinitely many solutions to the ang
 [^4]: Eigenfunction (2024). In Wikipedia. [https://en.wikipedia.org/wiki/Eigenfunction]()
 [^5]: All You Need to Know about Spherical Harmonics. Mathcube. [https://www.cantorsparadise.com/all-you-need-to-know-about-spherical-harmonics-29ff76e74ad5]()
 [^6]: Spherical Harmonic. Weisstein, Eric W. From MathWorld--A Wolfram Web Resource. [https://mathworld.wolfram.com/SphericalHarmonic.html]()
-[^7]: Associated Lengendre Polynormial. Weisstein, Eric W. From MathWorld--A Wolfram Web Resource. [https://mathworld.wolfram.com/AssociatedLegendrePolynomial.html]()
+[^7]: Associated Legendre Polynormial. Weisstein, Eric W. From MathWorld--A Wolfram Web Resource. [https://mathworld.wolfram.com/AssociatedLegendrePolynomial.html]()

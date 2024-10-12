@@ -93,7 +93,7 @@ $$G(\mathbf{l},\mathbf{v},\mathbf{h})=G_1(\mathbf{l})\ G_1(\mathbf{v}),\quad G_1
 
 
 
-[^1]: Heitz E. (2014). [https://jcgt.org/published/0003/02/03/paper.pdf](Understanding the masking-shadowing function in microfacet-based BRDFs). _Journal of Computer Graphics Techniques, 3(2), 32-91._
+[^1]: Heitz E. (2014). [Understanding the masking-shadowing function in microfacet-based BRDFs](https://jcgt.org/published/0003/02/03/paper.pdf). _Journal of Computer Graphics Techniques, 3(2), 32-91._
 [^2]: Walter B., Marschner S. R., Li H., & Torrance K. E. (2007, June). [Microfacet models for refraction through rough surfaces](https://www.cs.cornell.edu/~srm/publications/EGSR07-btdf.pdf). _In Proceedings of the 18th Eurographics conference on Rendering Techniques (pp. 195-206)._
 [^3]: Schlick C. (1994, August). [An inexpensive BRDF model for physically‐based rendering](https://citeseerx.ist.psu.edu/document?repid=rep1&type=pdf&doi=183db641ff80ff21234040ccce884cb06227dad4). _In Computer graphics forum (Vol. 13, No. 3, pp. 233-246). Edinburgh, UK: Blackwell Science Ltd._
 [^4]: Karis B, Epic Games. (2013). [Real shading in unreal engine 4](https://blog.selfshadow.com/publications/s2013-shading-course/karis/s2013_pbs_epic_notes_v2.pdf). _Proc. Physically Based Shading Theory Practice, 4(3), 1._

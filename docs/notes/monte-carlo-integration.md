@@ -99,9 +99,6 @@ Approx $=$<span id="importance-approx"></span></br>
 <button type="button" class="btn d-inline" id="importance-start">Start</button>
 <button type="button" class="btn d-inline" id="importance-reset">Reset</button>
 
-## Multiple Importance Sampling
-Next event estimation can be seen as a multiple importance sampling approach of integrating the radiance since it combines two sampling strategies, BSDF sampling and light sampling, often called as direct and indirect lighting. 
-
 ### BSDF Sampling
 $$
 p(w_i') \propto f_s(\mathbf{x}', w_i' \rightarrow w_o')
@@ -128,6 +125,9 @@ To importance sample the light instead of solid angle, the density $p(\mathbf{x}
 $$
 p(\mathbf{x})=p(w_i')\frac{d\sigma^\bot(w_i')}{dA(\mathbf{x})}=p(w_i')\frac{|cos(\theta_o)cos(\theta_i')|}{||\mathbf{x}-\mathbf{x}'||^2}
 $$
+
+## Multiple Importance Sampling
+Next event estimation can be seen as a multiple importance sampling[^1] approach of integrating the radiance since it combines two sampling strategies, BSDF sampling and light sampling, often called as direct and indirect lighting. 
 
 
 [^1]: Veach, E. (1997). Robust Monte Carlo Methods for Light Transport Simulation. (Doctoral dissertation, Stanford University).

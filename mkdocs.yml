@@ -58,7 +58,7 @@ extra_javascript:
   - js/plot.js
 
 extra_css:
-  - css/app.css
+  - stylesheets/app.css
 
 markdown_extensions:
   - attr_list
