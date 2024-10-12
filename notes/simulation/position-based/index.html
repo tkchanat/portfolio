@@ -46,7 +46,7 @@
       
     
     
-      <link rel="stylesheet" href="../../../css/app.css">
+      <link rel="stylesheet" href="../../../stylesheets/app.css">
     
     <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
@@ -898,7 +898,7 @@
 
 
 <h1 id="position-based-simulation">Position Based Simulation</h1>
-<p>As oppose to any other rigidbody simulations, <a href="../force-based/">force-based</a> and <a href="../impulse-based/">impulse-based</a> that deals with velocity and acceleration calculations, position-based simulation attempts to minimize the constrains on the position domain down to particle level. </p>
+<p>As oppose to any other rigidbody simulations, <a href="../force-based/">force-based</a> and <a href="../impulse-based/">impulse-based</a> that deals with velocity and acceleration calculations, position-based simulation<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup> attempts to minimize the constrains on the position domain down to particle level. </p>
 <p>This is probably my favorite simulation technique!! It's extendable, reuseable, and can simulate all the things. Soft body, fluid, semi-rigidbody, you name it!</p>
 <h2 id="problem">Problem</h2>
 <p>Given a set of <span class="arithmatex">\(M\)</span> constrains (basically means there are <span class="arithmatex">\(M\)</span> equality or inequality equations to satisfy), we need to solve for <span class="arithmatex">\(N\times\mathbb{R}^3\)</span> unknowns to resolve our final positions. Most of the time, the number of constraints won't match the number of unknowns we are solving (i.e. <span class="arithmatex">\(M \neq N\)</span>). This means if the problem was a linear system <span class="arithmatex">\(\mathbf{A}\mathbf{x}=\mathbf{b}\)</span>, the solution can't be obtained easily by inverting the matrix and solve for <span class="arithmatex">\(\mathbf{x}\)</span>. Not to mention the system we are solving won't necessarily be linear. For example, a simple distance constraint <span class="arithmatex">\(C_i(\mathbf{x}_1, \mathbf{x}_2)=\left|\mathbf{x}_1-\mathbf{x}_2\right|^2-d^2\)</span> alone is a non-linear equation.</p>

@@ -46,7 +46,7 @@
       
     
     
-      <link rel="stylesheet" href="../../css/app.css">
+      <link rel="stylesheet" href="../../stylesheets/app.css">
     
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
@@ -464,16 +464,7 @@
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#multiple-importance-sampling" class="md-nav__link">
-    <span class="md-ellipsis">
-      Multiple Importance Sampling
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Multiple Importance Sampling">
+    <nav class="md-nav" aria-label="Importance Sampling">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -505,6 +496,15 @@
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#multiple-importance-sampling" class="md-nav__link">
+    <span class="md-ellipsis">
+      Multiple Importance Sampling
+    </span>
+  </a>
   
 </li>
       
@@ -1103,8 +1103,6 @@ E[F_N] &amp;= E[\frac{1}{N}\sum_{i=1}^N{\frac{f(X_i)}{p(X_i)}}] \\
 Approx <span class="arithmatex">\(=\)</span><span id="importance-approx"></span></br>
 <button type="button" class="btn d-inline" id="importance-start">Start</button>
 <button type="button" class="btn d-inline" id="importance-reset">Reset</button></p>
-<h2 id="multiple-importance-sampling">Multiple Importance Sampling</h2>
-<p>Next event estimation can be seen as a multiple importance sampling approach of integrating the radiance since it combines two sampling strategies, BSDF sampling and light sampling, often called as direct and indirect lighting. </p>
 <h3 id="bsdf-sampling">BSDF Sampling</h3>
 <div class="arithmatex">\[
 p(w_i') \propto f_s(\mathbf{x}', w_i' \rightarrow w_o')
@@ -1124,6 +1122,8 @@ G(\mathbf{x}\leftrightarrow\mathbf{x}') = V(\mathbf{x}\leftrightarrow\mathbf{x}'
 <div class="arithmatex">\[
 p(\mathbf{x})=p(w_i')\frac{d\sigma^\bot(w_i')}{dA(\mathbf{x})}=p(w_i')\frac{|cos(\theta_o)cos(\theta_i')|}{||\mathbf{x}-\mathbf{x}'||^2}
 \]</div>
+<h2 id="multiple-importance-sampling">Multiple Importance Sampling</h2>
+<p>Next event estimation can be seen as a multiple importance sampling<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup> approach of integrating the radiance since it combines two sampling strategies, BSDF sampling and light sampling, often called as direct and indirect lighting. </p>
 <div class="footnote">
 <hr />
 <ol>

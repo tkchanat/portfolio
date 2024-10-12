@@ -46,7 +46,7 @@
       
     
     
-      <link rel="stylesheet" href="../../../css/app.css">
+      <link rel="stylesheet" href="../../../stylesheets/app.css">
     
     <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
@@ -937,7 +937,7 @@ f(t+\Delta t) &amp;\approx f(t) + f'(t+\Delta t)\Delta t
 \]</div>
 <p>Also known as backward Euler method, because it uses right-hand <a href="../../monte-carlo-integration/#quadrature-rules">quadrature method</a> instead of the left-hand rectangle. Implicit method is difficult to evaluate, and usually required iterative methods to solve (e.g. fixed point iteration), but they have better numerical properties and thus more stable.</p>
 <h2 id="symplectic-euler-method">Symplectic Euler Method</h2>
-<p>This one has way too much names, it's also called semi-implicit Euler, semi-explicit Euler, Euler-Cromer, and Newton-Størmer-Verlet. </p>
+<p>This one has way too much names, it's also called semi-implicit Euler, semi-explicit Euler, Euler-Cromer, and Newton-Størmer-Verlet<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup>. </p>
 <div class="arithmatex">\[
 \begin{cases}
 f'(t+\Delta t) &amp;\approx f'(t) + f''(t)\Delta t\\
@@ -958,7 +958,7 @@ f(t+\Delta t) &amp;\approx f(t) + f'(t+\Delta t)\Delta t
 \end{align}
 \]</div>
 <p>Look familiar? This is usually seen in game physics to predict a moving body in the next time frame. It is a mix of explicit and implicit method to calculate the final body position. Velocity is integrated explicitly, and position is integrated implicitly by using the velocity from the next time frame. </p>
-<h2 id="verlet-method">Verlet Method</h2>
+<h2 id="verlet-method">Verlet Method<sup id="fnref:2"><a class="footnote-ref" href="#fn:2">2</a></sup></h2>
 <p>This is a second-order numerical method to integrate Newton's equations of motion. </p>
 <p>We begin by letting the second-derivative <span class="arithmatex">\(\ddot{\mathbf{x}}=f''(t)\)</span> be the <strong>change</strong> of the <span style="color:#388c46"><strong>finite difference</strong></span> of the <span style="color:#6042a6"><strong>backward-difference</strong></span> and <span style="color:#fa7e19"><strong>forward-difference</strong></span>. In other words, using central difference approximation to find the second derivative. When <span class="arithmatex">\(\Delta t\rightarrow 0\)</span>, it will converge to the true second-derivative value. In numerical computations, it will always be an approximation as it's impossible to have an infinitely small step size. </p>
 <script src="https://www.desmos.com/api/v1.8/calculator.js?apiKey=dcb31709b452b1cf9dc26972add0fda6"></script>

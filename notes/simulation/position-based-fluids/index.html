@@ -46,7 +46,7 @@
       
     
     
-      <link rel="stylesheet" href="../../../css/app.css">
+      <link rel="stylesheet" href="../../../stylesheets/app.css">
     
     <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
@@ -651,31 +651,13 @@
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#smoothing-kernels" class="md-nav__link">
-    <span class="md-ellipsis">
-      Smoothing Kernels
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Smoothing Kernels">
+    <nav class="md-nav" aria-label="Density Constraint">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#poly6" class="md-nav__link">
+  <a href="#smoothing-kernels" class="md-nav__link">
     <span class="md-ellipsis">
-      Poly6
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#spiky" class="md-nav__link">
-    <span class="md-ellipsis">
-      Spiky
+      Smoothing Kernels
     </span>
   </a>
   
@@ -683,15 +665,6 @@
         
       </ul>
     </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#tensile-instability" class="md-nav__link">
-    <span class="md-ellipsis">
-      Tensile Instability
-    </span>
-  </a>
   
 </li>
       
@@ -922,16 +895,16 @@
 
 
 <h1 id="position-based-fluids">Position Based Fluids</h1>
-<p>As discussed in <a href="../position-based/">Position Based Simulation</a>, position-based dynamics provided the foundations of simulating lagrangian fluids. </p>
+<p>As discussed in <a href="../position-based/">Position Based Simulation</a>, position-based dynamics provided the foundations of simulating lagrangian fluids. Remember PBD is all about how to put constraints on particles and how to resolve them. Similarly, we can model how fluid particles interact by posing some constraints on them.</p>
 <h2 id="density-constraint">Density Constraint</h2>
-<p>The density constraint<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup> is a function of the particle’s position and the positions of its neighbors <span class="arithmatex">\((\mathbf{x}_1, \cdots, \mathbf{x}_\mathbf{n_j})\)</span>. The <span class="arithmatex">\(\mathbf{n_j}\)</span> denotes the number of neighboring particles, <span class="arithmatex">\(\rho_o\)</span> is the resting density, and <span class="arithmatex">\(W(\vec{r}, h)\)</span> is the smoothing kernel with kernel size of <span class="arithmatex">\(h\)</span>.</p>
+<p>The density constraint<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup> aims to model the <a href="https://en.wikipedia.org/wiki/Compressibility">compressibility on fluids</a> by constraining the density (measuring the amount of mass per unit volume) of a single fluid particle.</p>
 <div class="arithmatex">\[
 C_i(\mathbf{x}_1, \cdots, \mathbf{x}_\mathbf{n_j}) = \frac{\rho_i}{\rho_o}-1
 \]</div>
 <div class="arithmatex">\[
 \rho_i = \sum_j{m_j W(\mathbf{x}_i - \mathbf{x}_j, h)}
 \]</div>
-<p>For a <span class="arithmatex">\(N\)</span>-particle simulation, every particles need to apply a density constraint to ensure its local density <span class="arithmatex">\(\rho\)</span> remain the same at all time. Notice how bilateral condition <span class="arithmatex">\(C(\mathbf{x})=0\)</span> is used here, enforcing the incompressibility property of fluids.</p>
+<p>Since we only care about local density around a given particle, the density constraint takes all its neighboring particle positions <span class="arithmatex">\(\mathbf{x}_1, \cdots, \mathbf{x}_\mathbf{n_j}\)</span>, and sum up their masses to <span class="arithmatex">\(\rho_i\)</span>. Noted that each particles are weighted by a smoothing function <span class="arithmatex">\(W\)</span> that falls off radially from the center of the kernel, which we will discuss more in the <a href="#smoothing-kernels">smoothing kernel</a> section. The ratio to its rest density <span class="arithmatex">\(\rho_o\)</span> is then evaluated, indicating whether the fluid is being compressed locally (e.g. <span class="arithmatex">\(\rho_i &gt; \rho_o\)</span>). In a perfect equilibrium, <span class="arithmatex">\(\rho_i\)</span> should equal to <span class="arithmatex">\(\rho_o\)</span> and the constraint <span class="arithmatex">\(C_i=0\)</span> will be satisfied, meaning this fluid particle is happy :)</p>
 <div class="arithmatex">\[
 C_{density}(\mathbf{x}) =
 \begin{cases}
@@ -940,47 +913,76 @@ C_1(\mathbf{x}_1, \cdots, \mathbf{x}_\mathbf{n_j}) = 0\\
 C_N(\mathbf{x}_1, \cdots, \mathbf{x}_\mathbf{n_j}) = 0\\
 \end{cases}
 \]</div>
-<h2 id="smoothing-kernels">Smoothing Kernels</h2>
-<p>Smoothing kernels are essential for integrating local density of a particle in an SPH simulation. They need to fulfill a few requirements:</p>
+<p>Scaling up the above to a <span class="arithmatex">\(N\)</span>-particle simulation, every particles will be assigned a density constraint, to ensure its local density remain the same at all time. This is why the bilateral condition <span class="arithmatex">\(C(\mathbf{x})=0\)</span> is used here. Once we run the solver for a decent number of iterations, every fluid particles should be happily resting at their stable positions.</p>
+<div class="admonition thonk">
+<p class="admonition-title">What if the density is lower than the rest condition (e.g. <span class="arithmatex">\(\rho_i &lt; \rho_o\)</span>)?</p>
+<p>There will be cases where a lone particle wandered into the void, where a few or even no neighboring particles are present in its surroundings. This posed a tensile instability in our simulation, which can cause clustering or clumping due to negative pressures.</p>
+<p>This can result in extreme correction vectors and can break the simulation. One solution is to clamp the density constraint result to zero to prevent negative pressure.</p>
+<div class="arithmatex">\[
+C_i(\mathbf{x}_1, \cdots, \mathbf{x}_\mathbf{n_j}) = \max(0, \frac{\rho_i}{\rho_o}-1)
+\]</div>
+<p>However, this also means the cohesion nature of fluid particles is gone, particles almost always repel with each other. So by clamping the constraint, we are also limiting ourselves from having this cohesive behavior.</p>
+<p>Luckily, in the paper "SPH without a tensile instability"<sup id="fnref:2"><a class="footnote-ref" href="#fn:2">2</a></sup>, an artificial pressure correction factor is proposed. Where <span class="arithmatex">\(\Delta\vec{q}\)</span> is vector to a point at some fixed distance inside the smoothing kernel radius <span class="arithmatex">\(h\)</span> and <span class="arithmatex">\(k\)</span> is a small positive constant. <span class="arithmatex">\(\|\Delta\vec{q}\|=\{0.1h, \cdots, 0.3h\}\)</span>, <span class="arithmatex">\(k = 0.001\)</span> and <span class="arithmatex">\(n = 4\)</span> work well in my case.</p>
+<div class="arithmatex">\[
+\lambda_{corr}=-k\cdot\left(\frac{W(\vec{r}, h)}{W(\Delta\vec{q}, h)}\right)^n
+\]</div>
+</div>
+<h3 id="smoothing-kernels">Smoothing Kernels</h3>
+<p>Smoothing kernels are essential for integrating local density of a particle in an SPH simulation. A good kernel needs to fulfill a few requirements:</p>
 <ul>
 <li>Radially symmetric (i.e. only depends on distance)</li>
 <li>Finite support (i.e. particles should only affect up to a certain distance)</li>
 <li>Differentiable and integrates to 1</li>
 </ul>
-<h3 id="poly6">Poly6</h3>
-<p>In 3D:</p>
-<div class="arithmatex">\[
-W_{poly6}(\vec{r}, h) = \frac{315}{64 \pi h^9}
-  \begin{cases}
-  (h^2-\|r\|^2)^3 &amp; \text{if } 0\leq \|r\|\leq h\\
-  0               &amp; \text{else}
-  \end{cases}
-\]</div>
-<h3 id="spiky">Spiky</h3>
-<p>In 3D:</p>
-<div class="arithmatex">\[
-W_{spiky}(\vec{r}, h) = \frac{15}{\pi h^6}
-  \begin{cases}
-  (h-\|r\|)^3 &amp; \text{if } 0\leq \|r\|\leq h\\
-  0           &amp; \text{else}
-  \end{cases}
-\]</div>
-<h2 id="tensile-instability">Tensile Instability</h2>
-<p>Quoting from the paper<sup id="fnref2:1"><a class="footnote-ref" href="#fn:1">1</a></sup>:</p>
-<blockquote>
-<p>A common problem in SPH simulations is particle clustering or
-clumping caused by negative pressures when a particle has only a
-few neighbors and is unable to satisfy the rest density.</p>
-</blockquote>
-<p>Lone particles that do not have sufficient neighbor particles to satisfy its density constraint will cause numerical instability in the constraint projection stage. Resulting in extreme correction vector value and can break the simulation. One method is to clamp the density constraint result to zero to prevent negative pressure.</p>
-<div class="arithmatex">\[
-C_i(\mathbf{x}_1, \cdots, \mathbf{x}_\mathbf{n_j}) = \max(0, \frac{\rho_i}{\rho_o}-1)
-\]</div>
-<p>Even though negative pressure is not a thing in real life, it models the cohesion nature of fluid particles. So by clamping the constraint, we are also limiting ourselves from having the cohesive behavior.</p>
-<p>Luckily, in the paper "SPH without a tensile instability"<sup id="fnref:2"><a class="footnote-ref" href="#fn:2">2</a></sup>, an artificial pressure correction factor is proposed. Where <span class="arithmatex">\(\Delta\vec{q}\)</span> is vector to a point at some fixed distance inside the smoothing kernel radius <span class="arithmatex">\(h\)</span> and <span class="arithmatex">\(\epsilon\)</span> is a small positive constant. The recommended values are <span class="arithmatex">\(\|\Delta\vec{q}\|=\{0.1h, \cdots, 0.3h\}\)</span>, <span class="arithmatex">\(\epsilon = 0.1\)</span> and <span class="arithmatex">\(n = 4\)</span> work well in most cases.</p>
-<div class="arithmatex">\[
-\lambda_{corr}=-\epsilon\cdot\left(\frac{W(\vec{r}, h)}{W(\Delta\vec{q}, h)}\right)^n
-\]</div>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Kernel Type</th>
+<th style="text-align: center;">Definition</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">Poly6 (2D)</td>
+<td style="text-align: center;"><span class="arithmatex">\(W_{poly6}(\vec{r}, h) = \frac{4}{\pi h^8} \begin{cases} (h^2-\|r\|^2)^3 &amp; \text{if } 0\leq \|r\|\leq h\\ 0 &amp; \text{else} \end{cases}\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;">Poly6 (3D)</td>
+<td style="text-align: center;"><span class="arithmatex">\(W_{poly6}(\vec{r}, h) = \frac{315}{64 \pi h^9} \begin{cases} (h^2-\|r\|^2)^3 &amp; \text{if } 0\leq \|r\|\leq h\\ 0 &amp; \text{else} \end{cases}\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;">Spiky (2D)</td>
+<td style="text-align: center;"><span class="arithmatex">\(W_{spiky}(\vec{r}, h) = \frac{10}{\pi h^5} \begin{cases} (h-\|r\|)^3 &amp; \text{if } 0\leq \|r\|\leq h\\ 0 &amp; \text{else} \end{cases}\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;">Spiky (3D)</td>
+<td style="text-align: center;"><span class="arithmatex">\(W_{spiky}(\vec{r}, h) = \frac{15}{\pi h^6} \begin{cases} (h-\|r\|)^3 &amp; \text{if } 0\leq \|r\|\leq h\\ 0 &amp; \text{else} \end{cases}\)</span></td>
+</tr>
+</tbody>
+</table>
+<div id="smoothing-kernels" style="width: 100%; height: 240px;"></div>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    let colorScheme = document.querySelector('meta[name="color-scheme"]');
+    var elt = document.getElementById('smoothing-kernels');
+    var calculator = Desmos.GraphingCalculator(elt, {
+      keypad: false,
+      invertedColors: colorScheme.content == "dark",
+      expressions: false,
+      settingsMenu: false,
+      polarMode: true,
+      lockViewport: true,
+    });
+    let aspect = elt.clientWidth / elt.clientHeight;
+    calculator.setMathBounds({ left: -1.5*aspect, right: 1.5*aspect, bottom: -1.5, top: 1.5 });
+    calculator.setExpression({ id: "positive", latex: "r=\\sin(k\\theta)", color: Desmos.Colors.BLUE });
+    calculator.setExpression({ id: "negative", latex: "r=-\\sin(k\\theta)", color: Desmos.Colors.ORANGE });
+    calculator.setExpression({ id: "k", latex: "k=1", sliderBounds: { min: 1, max: 10, step: 1 }, color: Desmos.Colors.RED, });
+    calculator.setExpression({ id: "slider", type: 'table', columns: [ { latex: 'x', values: ['-2', '2'] }, { latex: 'y', values: ['-1.2', '-1.2'], color: Desmos.Colors.RED, columnMode: Desmos.ColumnModes.LINES, lineOpacity: 0.2 } ] });
+    calculator.setExpression({ id: "knob", latex: "(2(2(k-1)/9-1), -1.2)", dragMode: "X", label: "`k=${k}`", showLabel: true, color: Desmos.Colors.RED });
+  }, false);
+</script>
+
 <h2 id="bloopers">Bloopers</h2>
 <table>
 <thead>
@@ -992,9 +994,9 @@ C_i(\mathbf{x}_1, \cdots, \mathbf{x}_\mathbf{n_j}) = \max(0, \frac{\rho_i}{\rho_
 </thead>
 <tbody>
 <tr>
-<td style="text-align: center;"><img alt="" src="/img/blooper1.webp" /></td>
-<td style="text-align: center;"><img alt="" src="/img/blooper2.webp" /></td>
-<td style="text-align: center;"><img alt="" src="/img/blooper3.webp" /></td>
+<td style="text-align: center;"><img alt="" src="../../../img/blooper1.webp" /></td>
+<td style="text-align: center;"><img alt="" src="../../../img/blooper2.webp" /></td>
+<td style="text-align: center;"><img alt="" src="../../../img/blooper3.webp" /></td>
 </tr>
 </tbody>
 </table>
@@ -1002,7 +1004,7 @@ C_i(\mathbf{x}_1, \cdots, \mathbf{x}_\mathbf{n_j}) = \max(0, \frac{\rho_i}{\rho_
 <hr />
 <ol>
 <li id="fn:1">
-<p>Macklin, M., &amp; Müller, M. (2013). Position based fluids. ACM Transactions on Graphics (TOG), 32(4), 1-12.&#160;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">&#8617;</a><a class="footnote-backref" href="#fnref2:1" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+<p>Macklin, M., &amp; Müller, M. (2013). Position based fluids. ACM Transactions on Graphics (TOG), 32(4), 1-12.&#160;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">&#8617;</a></p>
 </li>
 <li id="fn:2">
 <p>Monaghan, J. J. (2000). SPH without a tensile instability. Journal of computational physics, 159(2), 290-311.&#160;<a class="footnote-backref" href="#fnref:2" title="Jump back to footnote 2 in the text">&#8617;</a></p>

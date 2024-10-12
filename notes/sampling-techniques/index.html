@@ -46,7 +46,7 @@
       
     
     
-      <link rel="stylesheet" href="../../css/app.css">
+      <link rel="stylesheet" href="../../stylesheets/app.css">
     
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
@@ -934,7 +934,7 @@
 <h2 id="low-discrepancy-sequences">Low-Discrepancy Sequences</h2>
 <p>If randomness are difficult to control, how about herding the points to position in a deterministic pattern such that they are <em>almost</em> equal distance to each other? In other words, how do we get an equidistribution of samples?</p>
 <h3 id="defining-discrepancy">Defining Discrepancy</h3>
-<p>Imagine a <span class="arithmatex">\(s\)</span>-dimentional unit cube <span class="arithmatex">\(\mathbb{I}^s = [0, 1)^s\)</span>, with a point set <span class="arithmatex">\(P = {x_1, x_2, \dots, x_N} \in \mathbb{I}^s\)</span>. We define the point set discrepancy <span class="arithmatex">\(\mathcal{D}(J, P)\)</span> as follows:</p>
+<p>Imagine a <span class="arithmatex">\(s\)</span>-dimentional unit cube <span class="arithmatex">\(\mathbb{I}^s = [0, 1)^s\)</span>, with a point set <span class="arithmatex">\(P = {x_1, x_2, \dots, x_N} \in \mathbb{I}^s\)</span>. We define the point set discrepancy<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup> <span class="arithmatex">\(\mathcal{D}(J, P)\)</span> as follows:</p>
 <div class="arithmatex">\[
 \mathcal{D}(J, P) = \left|\frac{A(J)}{N} - V(J)\right|
 \]</div>
@@ -966,26 +966,23 @@
 &amp;=\frac12,\frac14,\frac34,\frac18,\frac58,\frac38,\dots \\
 \end{align}
 \]</div>
-<p>This is also known as the <em>van der Corput sequence</em>, a specialized one-dimensional radical inverse sequence. The generalized form is called the <em>Halton sequence</em>, that is scalable to higher dimensions. To generate points in <span class="arithmatex">\(N\)</span>-dimension, simply pick a different base from the prim number series <span class="arithmatex">\({2, 3, 5, 7, 11, \dots}\)</span>. Scratchapixel has a more <a href="https://www.scratchapixel.com/lessons/mathematics-physics-for-computer-graphics/monte-carlo-methods-in-practice/introduction-quasi-monte-carlo.html">in-depth explanation</a>, feel free to give it a read! </p>
+<p>This is also known as the <em>van der Corput sequence</em><sup id="fnref:2"><a class="footnote-ref" href="#fn:2">2</a></sup>, a specialized one-dimensional radical inverse sequence. The generalized form is called the <em>Halton sequence</em>, that is scalable to higher dimensions. To generate points in <span class="arithmatex">\(N\)</span>-dimension, simply pick a different base from the prim number series <span class="arithmatex">\({2, 3, 5, 7, 11, \dots}\)</span>. Scratchapixel has a more <a href="https://www.scratchapixel.com/lessons/mathematics-physics-for-computer-graphics/monte-carlo-methods-in-practice/introduction-quasi-monte-carlo.html">in-depth explanation</a>, feel free to give it a read! </p>
 <div id="halton"></div>
 <p><button type="button" class="btn d-inline" id="halton-start">Start</button>
 <button type="button" class="btn d-inline" id="halton-reset">Reset</button></p>
 <h2 id="sobol-sequence">Sobol Sequence</h2>
-<h2 id="progressive-multi-jittered-sample-sequence">Progressive Multi-Jittered Sample Sequence</h2>
+<h2 id="progressive-multi-jittered-sample-sequence">Progressive Multi-Jittered Sample Sequence<sup id="fnref:3"><a class="footnote-ref" href="#fn:3">3</a></sup></h2>
 <div class="footnote">
 <hr />
 <ol>
 <li id="fn:1">
-<p>Veach, E. (1997). Robust Monte Carlo Methods for Light Transport Simulation. (Doctoral dissertation, Stanford University).&#160;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+<p>Dalal, I., Stefan, D., &amp; Harwayne-Gidansky, J. (2008). Low discrepancy sequences for Monte Carlo simulations on reconfigurable platforms. In 2008 International Conference on Application-Specific Systems, Architectures and Processors (pp. 108–113).&#160;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">&#8617;</a></p>
 </li>
 <li id="fn:2">
-<p>Dalal, I., Stefan, D., &amp; Harwayne-Gidansky, J. (2008). Low discrepancy sequences for Monte Carlo simulations on reconfigurable platforms. In 2008 International Conference on Application-Specific Systems, Architectures and Processors (pp. 108–113).&#160;<a class="footnote-backref" href="#fnref:2" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+<p>van der Corput, J.G. (1935), "Verteilungsfunktionen (Erste Mitteilung)" (PDF), Proceedings of the Koninklijke Akademie van Wetenschappen te Amsterdam (in German), 38: 813–821, Zbl 0012.34705&#160;<a class="footnote-backref" href="#fnref:2" title="Jump back to footnote 2 in the text">&#8617;</a></p>
 </li>
 <li id="fn:3">
-<p>van der Corput, J.G. (1935), "Verteilungsfunktionen (Erste Mitteilung)" (PDF), Proceedings of the Koninklijke Akademie van Wetenschappen te Amsterdam (in German), 38: 813–821, Zbl 0012.34705&#160;<a class="footnote-backref" href="#fnref:3" title="Jump back to footnote 3 in the text">&#8617;</a></p>
-</li>
-<li id="fn:4">
-<p>Christensen, P., Kensler, A., &amp; Kilpatrick, C. (2018). Progressive Multi-Jittered Sample Sequences. Computer Graphics Forum.&#160;<a class="footnote-backref" href="#fnref:4" title="Jump back to footnote 4 in the text">&#8617;</a></p>
+<p>Christensen, P., Kensler, A., &amp; Kilpatrick, C. (2018). Progressive Multi-Jittered Sample Sequences. Computer Graphics Forum.&#160;<a class="footnote-backref" href="#fnref:3" title="Jump back to footnote 3 in the text">&#8617;</a></p>
 </li>
 </ol>
 </div>
