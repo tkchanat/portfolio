@@ -1,7 +1,5 @@
-# Position Based Simulation
+# Position Based Dynamics
 As oppose to any other rigidbody simulations, [force-based](force-based.md) and [impulse-based](impulse-based.md) that deals with velocity and acceleration calculations, position-based simulation[^1] attempts to minimize the constrains on the position domain down to particle level. 
-
-This is probably my favorite simulation technique!! It's extendable, reuseable, and can simulate all the things. Soft body, fluid, semi-rigidbody, you name it!
 
 ## Problem
 Given a set of $M$ constrains (basically means there are $M$ equality or inequality equations to satisfy), we need to solve for $N\times\mathbb{R}^3$ unknowns to resolve our final positions. Most of the time, the number of constraints won't match the number of unknowns we are solving (i.e. $M \neq N$). This means if the problem was a linear system $\mathbf{A}\mathbf{x}=\mathbf{b}$, the solution can't be obtained easily by inverting the matrix and solve for $\mathbf{x}$. Not to mention the system we are solving won't necessarily be linear. For example, a simple distance constraint $C_i(\mathbf{x}_1, \mathbf{x}_2)=\left|\mathbf{x}_1-\mathbf{x}_2\right|^2-d^2$ alone is a non-linear equation.
@@ -11,39 +9,51 @@ Thus, it all boils down to a problem of finding a set of positions $\mathbf{x}$ 
 $$
 C(\mathbf{x}) =
 \begin{cases}
-C_1(\mathbf{x}_1, \mathbf{x}_2, \cdots, \mathbf{x}_N) \succ 0\\
+C_1(\mathbf{x}_1, \mathbf{x}_2, \cdots, \mathbf{x}_{\mathbf{n}_j}) \succ 0\\
 \cdots\\
-C_M(\mathbf{x}_1, \mathbf{x}_2, \cdots, \mathbf{x}_N) \succ 0\\
+C_M(\mathbf{x}_1, \mathbf{x}_2, \cdots, \mathbf{x}_{\mathbf{n}_j}) \succ 0\\
 \end{cases}
 $$
 
 Where $\mathbf{x}$ is the concatenation of $N\times\mathbb{R}^3$ positions we are trying to solve, and the symbol $\succ$ denotes either $=$ or $\geq$. $C(\mathbf{x})=0$ means the constraint has a bilateral condition enforced, usually representing strong forces which should always hold true. On the other hand, $C(\mathbf{x}) \geq 0$ or $C(\mathbf{x}) \leq 0$ means the constraint is loosely enforced. They are usually seen in collision constraints where particles are free to move on one side, but preventing them to enter the other side. 
 
-## Non-Linear Gauss-Seidel Solver
+## Gauss-Seidel Iterative Method
 As said in the previous section, there won't be a closed-form solution because the system is neither symmetric nor linear. Our best bet is to apply an iterative solver to minimize the system after a fixed amount of iterations and hope for the best that the approximated result will satisfy all our constraints. This is where the non-linear Gauss-Seidel algorithm comes in.
 
-Since all constraints in the system can't be solved at once, then each constraint equations need to be solved separately. At the end of each iteration, each particles should have a correction vector $\Delta\mathbf{x}$ such that most constraints should reach their condition $C_i(\mathbf{x}+\Delta\mathbf{x})\succ0$. Thus we arrived to this constraint equation:
+This is a kind of local optimization algorithm where  each constraints are solved separately. At the end of each iteration, each particles should have a correction vector $\Delta\mathbf{x}$ in order to reach their constrained condition. Thus, after each step, the constraint value $C(\mathbf{x}+\Delta\mathbf{x})$ should be closer and closer to zero.
 
 $$
-C(\mathbf{x}+\Delta\mathbf{x})\approx C(\mathbf{x})+\nabla C(\mathbf{x})\cdot\Delta \mathbf{x} \succ 0 \tag{1}
+C(\mathbf{x}+\Delta\mathbf{x})\approx C(\mathbf{x})+\nabla C(\mathbf{x})\cdot\Delta \mathbf{x} \rightarrow 0 \tag{1}\label{1}
 $$
 
-Here $\nabla C(\mathbf{x})$ is the gradient of given constraints, and the equation above literally means stepping from the current constraint value $C(\mathbf{x})$ with a step size $\Delta\mathbf{x}$ should be ended up equal or greater or equal than 0. {==The paper mentioned that by restricting the step direction to be $\nabla C(\mathbf{x})$, satisfies the requirement for linear and angular momentum conservation. It also means only Lagrange multiplier scalar $\lambda$ has to be found to solve the correction equation $(1)$.==}{>>I can't comprehend this part<<}
-
-The position correction vector $\Delta\mathbf{x}$ will then be evaluated as:
+The above equation can be thought as a Newton iteration, where the constraint function is linearized and we are stepping the gradient $\nabla C(\mathbf{x})$ with a step size $\Delta\mathbf{x}$. Hence, the position correction vector $\Delta\mathbf{x}$ will then be expressed as the gradient scaled by the Lagrange multiplier as follows:
 
 $$
-\Delta\mathbf{x}=\lambda \mathbf{M}^{-1}\nabla C(\mathbf{x})
+\Delta\mathbf{x}=\lambda \nabla C(\mathbf{x})
 $$
 
-where $\mathbf{M}=diag(m_1, m_2, \cdots, m_N)$ represents the mass of each particles. So the correction vector of particle $i$ will be:
+The scalar $\lambda$ is found by substituting $\Delta\mathbf{x}$ back into the equation $\eqref{1}$.
+
+$$
+\begin{align*}
+C(\mathbf{x})+\nabla C(\mathbf{x})\cdot\Delta\mathbf{x} &= 0\\
+\nabla C(\mathbf{x})\cdot\Delta\mathbf{x} &= -C(\mathbf{x})\\
+\Delta\mathbf{x} &= -\frac{C(\mathbf{x})}{\|\nabla C(\mathbf{x})\|^2} \nabla C(\mathbf{x}) \tag{2}\label{2}
+\end{align*}
+$$
+
+You can clearly see, our Langrage multiplier $\lambda$ is the simply the coefficient part $-\frac{C(\mathbf{x})}{\|\nabla C(\mathbf{x})\|^2}$. As each constraint is formed by a set of vertices $\mathbf{x}_1, \cdots, \mathbf{x}_\mathbf{j}$, we will have to compute $C(\mathbf{x})$ and $\nabla C(\mathbf{x})$ with respect to each particle weighted by their masses. Noted how weighted sum is used so basically weights can be unbounded.
 
 $$
 \begin{cases}
-\Delta\mathbf{x}_i &= -\lambda_i w_i \nabla_{\mathbf{x}_i} C_i(\mathbf{x})\\
-\lambda_i &= \frac{C_i(\mathbf{x})}{\sum_j{w_j\left|\nabla_{\mathbf{x}_j}C_i(\mathbf{x})\right|^2}}
+\lambda &= -\frac{C(\mathbf{x})}{\sum{w_j\|\nabla_{\mathbf{x}_j}C(\mathbf{x})\|^2}}\\
+\Delta\mathbf{x}_j &= \lambda \nabla_{\mathbf{x}_j} C(\mathbf{x}) w_j
 \end{cases}
 $$
+
+## Conservation of Linear Momentum
+!!! thonk
+    {==The paper mentioned that by restricting the step direction to be $\nabla C(\mathbf{x})$, satisfies the requirement for linear and angular momentum conservation. It also means only Lagrange multiplier scalar $\lambda$ has to be found to solve the correction equation $\eqref{1}$.==}{>>I can't comprehend this part<<}
 
 ## Algorithm
 The main position based dynamics (PBD) algorithm can be split into three different stages: prediction, solving constraints, and post-solve updates.

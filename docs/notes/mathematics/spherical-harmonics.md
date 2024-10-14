@@ -11,7 +11,6 @@ y=\frac{4}{\pi} \sum_{k=1}^n {\frac{\sin((2k-1)x)}{2k-1}}
 $$
 
 <div id="fourier-1d" style="width: 100%; height: 240px;"></div>
-<script src="/js/desmos.min.js"></script>
 <script>
   document.addEventListener('DOMContentLoaded', () => {
       let colorScheme = document.querySelector('meta[name="color-scheme"]');
@@ -252,7 +251,6 @@ $Y(\theta, \phi)$ denotes the whole sets of infinitely many solutions to the ang
       polarMode: true,
       lockViewport: true,
     });
-    console.log(calculator);
     let aspect = elt.clientWidth / elt.clientHeight;
     calculator.setMathBounds({ left: -1.5*aspect, right: 1.5*aspect, bottom: -1.5, top: 1.5 });
     calculator.setExpression({ id: "index", latex: "i=l(l+1)+m+1", hidden: true });
