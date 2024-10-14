@@ -9,10 +9,10 @@
       
       
       
-        <link rel="prev" href="../numerical-methods/">
+        <link rel="prev" href="../position-based-dynamics/">
       
       
-        <link rel="next" href="../position-based/">
+        <link rel="next" href="../../software-dev/ui-library/">
       
       
       <link rel="icon" href="../../../img/dump.webp">
@@ -596,6 +596,27 @@
                 
   
   
+  
+  
+    <li class="md-nav__item">
+      <a href="../position-based-dynamics/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Position Based Dynamics
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
     
   
   
@@ -681,27 +702,6 @@
   
 </nav>
       
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../position-based/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Position Based Simulation
-  </span>
-  
-
-      </a>
     </li>
   
 
@@ -895,7 +895,7 @@
 
 
 <h1 id="position-based-fluids">Position Based Fluids</h1>
-<p>As discussed in <a href="../position-based/">Position Based Simulation</a>, position-based dynamics provided the foundations of simulating lagrangian fluids. Remember PBD is all about how to put constraints on particles and how to resolve them. Similarly, we can model how fluid particles interact by posing some constraints on them.</p>
+<p>As discussed in <a href="../position-based-dynamics/">Position Based Simulation</a>, position-based dynamics provided the foundations of simulating lagrangian fluids. Remember PBD is all about how to put constraints on particles and how to resolve them. Similarly, we can model how fluid particles interact by posing some constraints on them.</p>
 <h2 id="density-constraint">Density Constraint</h2>
 <p>The density constraint<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup> aims to model the <a href="https://en.wikipedia.org/wiki/Compressibility">compressibility on fluids</a> by constraining the density (measuring the amount of mass per unit volume) of a single fluid particle.</p>
 <div class="arithmatex">\[
@@ -938,7 +938,7 @@ C_i(\mathbf{x}_1, \cdots, \mathbf{x}_\mathbf{n_j}) = \max(0, \frac{\rho_i}{\rho_
 <thead>
 <tr>
 <th style="text-align: center;">Kernel Type</th>
-<th style="text-align: center;">Definition</th>
+<th style="text-align: center;">Function <span class="arithmatex">\(W(\vec{r}, h)\)</span></th>
 </tr>
 </thead>
 <tbody>
@@ -960,29 +960,63 @@ C_i(\mathbf{x}_1, \cdots, \mathbf{x}_\mathbf{n_j}) = \max(0, \frac{\rho_i}{\rho_
 </tr>
 </tbody>
 </table>
-<div id="smoothing-kernels" style="width: 100%; height: 240px;"></div>
+<div id="smoothing-kernel" style="width: 100%; height: 240px;"></div>
 <script>
   document.addEventListener('DOMContentLoaded', () => {
-    let colorScheme = document.querySelector('meta[name="color-scheme"]');
-    var elt = document.getElementById('smoothing-kernels');
+      let colorScheme = document.querySelector('meta[name="color-scheme"]');
+    var elt = document.getElementById('smoothing-kernel');
     var calculator = Desmos.GraphingCalculator(elt, {
       keypad: false,
       invertedColors: colorScheme.content == "dark",
       expressions: false,
       settingsMenu: false,
-      polarMode: true,
       lockViewport: true,
     });
     let aspect = elt.clientWidth / elt.clientHeight;
-    calculator.setMathBounds({ left: -1.5*aspect, right: 1.5*aspect, bottom: -1.5, top: 1.5 });
-    calculator.setExpression({ id: "positive", latex: "r=\\sin(k\\theta)", color: Desmos.Colors.BLUE });
-    calculator.setExpression({ id: "negative", latex: "r=-\\sin(k\\theta)", color: Desmos.Colors.ORANGE });
-    calculator.setExpression({ id: "k", latex: "k=1", sliderBounds: { min: 1, max: 10, step: 1 }, color: Desmos.Colors.RED, });
-    calculator.setExpression({ id: "slider", type: 'table', columns: [ { latex: 'x', values: ['-2', '2'] }, { latex: 'y', values: ['-1.2', '-1.2'], color: Desmos.Colors.RED, columnMode: Desmos.ColumnModes.LINES, lineOpacity: 0.2 } ] });
-    calculator.setExpression({ id: "knob", latex: "(2(2(k-1)/9-1), -1.2)", dragMode: "X", label: "`k=${k}`", showLabel: true, color: Desmos.Colors.RED });
+    calculator.setMathBounds({ left: -1.5*aspect, right: 1.5*aspect, bottom: -1, top: 4 });
+    calculator.setExpression({ id: "poly6", latex: "W_{poly6}\\left(r\\right)=\\frac{4}{\\pi h^{8}}\\left\\{\\left|r\\right|<h:\\left(h^{2}-\\left|r\\right|^{2}\\right)^{3}\\ ,\\ 0\\right\\}", color: Desmos.Colors.RED });
+    calculator.setExpression({ id: "spiky", latex: "W_{spiky}\\left(r\\right)=\\frac{10}{\\pi h^{5}}\\left\\{\\left|r\\right|<h:\\left(h-\\left|r\\right|\\right)^{3}\\ ,\\ 0\\right\\}", color: Desmos.Colors.BLUE });
+    calculator.setExpression({ id: "h", latex: "h=1", sliderBounds: { min: 1, max: 3 }, color: Desmos.Colors.RED, });
+    calculator.setExpression({ id: "hbound", latex: "x=[-h,h]", lineStyle: Desmos.Styles.DASHED, lineWidth: 1, color: Desmos.Colors.BLACK, });
+    calculator.setExpression({ id: "hslider", type: 'table', columns: [ { latex: 'x', values: ['-2', '-1'] }, { latex: 'y', values: ['-0.5', '-0.5'], color: Desmos.Colors.ORANGE, columnMode: Desmos.ColumnModes.LINES, lineOpacity: 0.2 } ] });
+    calculator.setExpression({ id: "hknob", latex: "((h-1)/2-2, -0.5)", dragMode: "X", label: "`h=${h}`", showLabel: true, color: Desmos.Colors.ORANGE });
+    calculator.setExpression({ id: "r", latex: "R=0", sliderBounds: { min: -4, max: 4 }, color: Desmos.Colors.ORANGE });
+    calculator.setExpression({ id: "rslider", type: 'table', columns: [ { latex: 'x', values: ['1', '2'] }, { latex: 'y', values: ['-0.5', '-0.5'], color: Desmos.Colors.ORANGE, columnMode: Desmos.ColumnModes.LINES, lineOpacity: 0.2 } ] });
+    calculator.setExpression({ id: "rknob", latex: "((R+4)/8+1, -0.5)", dragMode: "X", label: "`r=${R}`", showLabel: true, color: Desmos.Colors.ORANGE });
+    calculator.setExpression({ id: "poly6-eval", latex: "E_{poly6}=W_{poly6}(R)", hidden: true});
+    calculator.setExpression({ id: "spiky-eval", latex: "E_{spiky}=W_{spiky}(R)", hidden: true});
+    calculator.setExpression({ id: "poly6-label", label: "`W_{poly6}=`${E_{poly6}}", labelOrientation: Desmos.LabelOrientations.ABOVE_RIGHT, latex: "(R, W_{poly6}(R))", color: Desmos.Colors.RED, showLabel: true, pointStyle: Desmos.Styles.CROSS, dragMode: Desmos.DragModes.NONE });
+    calculator.setExpression({ id: "spiky-label", label: "`W_{spiky}=`${E_{spiky}}", labelOrientation: Desmos.LabelOrientations.ABOVE_RIGHT, latex: "(R, W_{spiky}(R))", color: Desmos.Colors.BLUE, showLabel: true, pointStyle: Desmos.Styles.CROSS, dragMode: Desmos.DragModes.NONE });
   }, false);
 </script>
 
+<p>In order to attract or repel neighboring particles, we need to compute the gradient of the smoothing kernel <span class="arithmatex">\(\nabla W(\vec{r}, h)\)</span>.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Kernel Type</th>
+<th style="text-align: center;">Gradient <span class="arithmatex">\(\nabla W(\vec{r}, h)\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">Poly6 (2D)</td>
+<td style="text-align: center;"><span class="arithmatex">\(\nabla W_{poly6}(\vec{r}, h) = -\vec{r}\frac{24}{\pi h^8} \begin{cases} (h^2-\|r\|^2)^2 &amp; \text{if } 0\leq \|r\|\leq h\\ 0 &amp; \text{else} \end{cases}\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;">Poly6 (3D)</td>
+<td style="text-align: center;"><span class="arithmatex">\(\nabla W_{poly6}(\vec{r}, h) = -\vec{r}\frac{945}{32 \pi h^9} \begin{cases} (h^2-\|r\|^2)^2 &amp; \text{if } 0\leq \|r\|\leq h\\ 0 &amp; \text{else} \end{cases}\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;">Spiky (2D)</td>
+<td style="text-align: center;"><span class="arithmatex">\(\nabla W_{spiky}(\vec{r}, h) = -\frac{\vec{r}}{\|\vec{r}\|}\frac{30}{\pi h^5} \begin{cases} (h-\|r\|)^2 &amp; \text{if } 0\leq \|r\|\leq h\\ 0 &amp; \text{else} \end{cases}\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;">Spiky (3D)</td>
+<td style="text-align: center;"><span class="arithmatex">\(\nabla W_{spiky}(\vec{r}, h) = -\frac{\vec{r}}{\|\vec{r}\|}\frac{45}{\pi h^5} \begin{cases} (h-\|r\|)^2 &amp; \text{if } 0\leq \|r\|\leq h\\ 0 &amp; \text{else} \end{cases}\)</span></td>
+</tr>
+</tbody>
+</table>
 <h2 id="bloopers">Bloopers</h2>
 <table>
 <thead>
@@ -1040,7 +1074,7 @@ C_i(\mathbf{x}_1, \cdots, \mathbf{x}_\mathbf{n_j}) = \max(0, \frac{\rho_i}{\rho_
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../numerical-methods/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Numerical Methods">
+          <a href="../position-based-dynamics/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Position Based Dynamics">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
@@ -1050,20 +1084,20 @@ C_i(\mathbf{x}_1, \cdots, \mathbf{x}_\mathbf{n_j}) = \max(0, \frac{\rho_i}{\rho_
                 Previous
               </span>
               <div class="md-ellipsis">
-                Numerical Methods
+                Position Based Dynamics
               </div>
             </div>
           </a>
         
         
           
-          <a href="../position-based/" class="md-footer__link md-footer__link--next" aria-label="Next: Position Based Simulation">
+          <a href="../../software-dev/ui-library/" class="md-footer__link md-footer__link--next" aria-label="Next: Prelude">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                Position Based Simulation
+                Prelude
               </div>
             </div>
             <div class="md-footer__button md-icon">
@@ -1165,6 +1199,8 @@ C_i(\mathbf{x}_1, \cdots, \mathbf{x}_\mathbf{n_j}) = \max(0, \frac{\rho_i}{\rho_
       <script src="../../../assets/javascripts/bundle.d7c377c4.min.js"></script>
       
         <script src="../../../js/mathjax.js"></script>
+      
+        <script src="../../../js/desmos.min.js"></script>
       
         <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       

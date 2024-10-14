@@ -657,11 +657,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../../simulation/position-based-fluids/" class="md-nav__link">
+      <a href="../../simulation/position-based-dynamics/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    Position Based Fluids
+    Position Based Dynamics
   </span>
   
 
@@ -678,11 +678,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../../simulation/position-based/" class="md-nav__link">
+      <a href="../../simulation/position-based-fluids/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    Position Based Simulation
+    Position Based Fluids
   </span>
   
 
@@ -888,7 +888,6 @@
 y=\frac{4}{\pi} \sum_{k=1}^n {\frac{\sin((2k-1)x)}{2k-1}}
 \]</div>
 <div id="fourier-1d" style="width: 100%; height: 240px;"></div>
-<script src="/js/desmos.min.js"></script>
 <script>
   document.addEventListener('DOMContentLoaded', () => {
       let colorScheme = document.querySelector('meta[name="color-scheme"]');
@@ -1096,7 +1095,6 @@ Y_\ell^m(\theta, \phi) = \underbrace{\sqrt{\frac{2\ell+1}{4\pi}\frac{(\ell-m)!}{
       polarMode: true,
       lockViewport: true,
     });
-    console.log(calculator);
     let aspect = elt.clientWidth / elt.clientHeight;
     calculator.setMathBounds({ left: -1.5*aspect, right: 1.5*aspect, bottom: -1.5, top: 1.5 });
     calculator.setExpression({ id: "index", latex: "i=l(l+1)+m+1", hidden: true });
@@ -1310,6 +1308,8 @@ Y_\ell^m(\theta, \phi) = \underbrace{\sqrt{\frac{2\ell+1}{4\pi}\frac{(\ell-m)!}{
       <script src="../../../assets/javascripts/bundle.d7c377c4.min.js"></script>
       
         <script src="../../../js/mathjax.js"></script>
+      
+        <script src="../../../js/desmos.min.js"></script>
       
         <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
