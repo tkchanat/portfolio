@@ -95,3 +95,9 @@
   -webkit-mask-image: var(--md-admonition-icon--thonk);
           mask-image: var(--md-admonition-icon--thonk);
 }
+
+img {
+  width: 80%;
+  margin: auto;
+  display: block;
+}
