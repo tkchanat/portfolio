@@ -793,9 +793,9 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#my-solution" class="md-nav__link">
+  <a href="#first-attempt" class="md-nav__link">
     <span class="md-ellipsis">
-      My Solution
+      First Attempt
     </span>
   </a>
   
@@ -803,6 +803,15 @@
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#back-to-square-one" class="md-nav__link">
+    <span class="md-ellipsis">
+      Back to Square One
+    </span>
+  </a>
   
 </li>
       
@@ -826,9 +835,9 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#delaunay-triangulation" class="md-nav__link">
+  <a href="#constrained-delaunay-triangulation" class="md-nav__link">
     <span class="md-ellipsis">
-      Delaunay Triangulation
+      Constrained Delaunay Triangulation
     </span>
   </a>
   
@@ -901,30 +910,38 @@
 <li>... I will add more to this when I can think of anything</li>
 </ol>
 <h2 id="contouring">Contouring</h2>
-<p>Contour here means the exterior <a href="https://en.wikipedia.org/wiki/Polygonal_chain">polygonal chain</a> that bounds the target shape, in this case, wherever the alpha channel of the image is non-zero. </p>
-<p>In the original ARAP paper, which has quite some history I know, uses marching squares to extract the contour. Of course it wouldn't be so easy if you remember one of the the above challenges. </p>
-<p>Yes, the target shape can have rough edges! That means after running the marching squares algorithm, the bounding polygon is very much jagged like a coastline. Normally this wouldn't be a problem, but I want to deform the mesh after this geometry processing. So less triangles/vertices = faster deformation. </p>
+<p>Contour refers to both the exterior and interior <a href="https://en.wikipedia.org/wiki/Polygonal_chain">polygonal chain</a> that sits on top of a similar isovalue and form a level set. </p>
+<p>In the original ARAP paper, they uses marching squares to extract the contour. Of course it makes sense to treat the image alpha mask as a scalar field. And run the marching square algorithm over the pixel grid to extract the desire contour.</p>
+<p>That's exactly what I did. Quantizing the image's alpha channel with a threshold, iterate through each 2x2 pixel grid cell and apply the corresponding cell configuration. Yet, the result isn't too appealing...</p>
+<p>&lt;insert image later&gt;</p>
+<p>The extracted contour is very jagged like a coastline. Normally this wouldn't be a problem, because it's still a valid contour. But ideally, I'd like to deform a mesh with less vertices/triangles as less complex mesh = faster deformation. </p>
 <p>Honestly, we can apply some line segment decimation algorithms like the <a href="https://en.wikipedia.org/wiki/Ramer–Douglas–Peucker_algorithm">Ramer-Douglas-Perucker</a> and <a href="https://en.wikipedia.org/wiki/Visvalingam–Whyatt_algorithm">Visvalingam-Whyatt</a> algorithm. Yeah, they will do the job, but that's extra work. Not only it takes time to compute, but also it can open a can of worms with exceptional cases and potentially self-intersecting contour. </p>
 <p><img alt="" src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Douglas–Peucker_and_Visvalingam–Whyatt_simplification_algorithms.svg/1920px-Douglas–Peucker_and_Visvalingam–Whyatt_simplification_algorithms.svg.png" /></p>
-<p>Besides, the input image can have multiple contours for disconnected shapes. Just imagine a donut, two circles. Well, it's not really a problem. But for my design, I don't need to extract the inner contour, only the silhouette is sufficient. </p>
-<h3 id="my-solution">My Solution</h3>
+<h3 id="first-attempt">First Attempt</h3>
 <p>So what I have in mind is some simpler, a naive approach. Just hear me out. </p>
 <p>What if... what if, like a shrinking plastic wrap, start with an N-gon, then find the closest intersection with the target shape. That has to work, right? </p>
 <p>The process goes like this: </p>
-<p>I get the center of the bounding box of all the opaque pixels as the center of the N-gon. Or, I can use the centroid of those pixels, not sure which is better. Then I construct a line segment running from the N-gon's vertex to the center as my "ray". After that, finding the closest intersection was just a matter of implementing the <a href="https://www.google.com/url?sa=t&amp;source=web&amp;rct=j&amp;opi=89978449&amp;url=https://en.wikipedia.org/wiki/Differential_diagnosis&amp;ved=2ahUKEwjI6qDp79uMAxUfHjQIHXW7HbMQFnoECB8QAQ&amp;usg=AOvVaw2pNwTcmNGopCeEvIwUB4MK">Differential Diagnosis (DDx)</a> algorithm and step towards the center. This gives me the distance to the closest opaque hit. </p>
-<p>But of course we don't want the final constructed mesh to "eat" away part of the image, so padding was necessary. Adding padding is simple, just subtract a certain amount from the closest hit distance.</p>
+<p>I get the center of the bounding box of all the opaque pixels as the center of the N-gon. Or, I can use the centroid of those pixels, not sure which is better. Then I construct a line segment running from the N-gon's vertex to the center as my "ray". After that, find the closest intersection with <a href="https://www.google.com/url?sa=t&amp;source=web&amp;rct=j&amp;opi=89978449&amp;url=https://en.wikipedia.org/wiki/Differential_diagnosis&amp;ved=2ahUKEwjI6qDp79uMAxUfHjQIHXW7HbMQFnoECB8QAQ&amp;usg=AOvVaw2pNwTcmNGopCeEvIwUB4MK">Differential Diagnosis (DDx)</a> algorithm and step towards the center until it returns the distance to the closest opaque hit. Finally apply vertex displacement along the ray direction with the given hit distance.</p>
+<p>But of course we don't want the final constructed mesh to "eat" away parts of the image, so padding was necessary. Adding padding is simple, just subtract a certain amount from the closest hit distance. And the end result looks like this.</p>
 <p><img alt="" src="../img/image-auto-mesh.md/first-attempt.png" style="width:20rem" /></p>
 <p>And when you really think about it, it will NEVER generate a self-intersecting contour. Think of a pizza, shrinking the N-gon vertices is just like biting away an uncut pizza's crust (by the way, that's not how you eat a pizza). My point is, it will always remain a non-intersecting polygon. </p>
-<p>The only criticism are, </p>
+<p>The only criticisms are, </p>
 <ol>
 <li>Line segments are non-uniform. Concave areas have steep edges because of the large differences in DDx hit distance. </li>
-<li>Elongated/spiky shapes can have extruded areas where the insufficiently subdivided N-gon can totally missed the intersection. (I couldn't figure out how to resolve this case yet)</li>
+<li>Elongated/spiky shapes can have extruded areas where the insufficiently subdivided N-gon can totally missed the intersection.</li>
 </ol>
-<p>For the non-uniform edges, I could either run an iterative line segment relaxation process until they are evenly distributed, or better approach is to subdivide and interpolate the curve if it exceeded the maximum edge length. </p>
+<p>For the non-uniform edges, I could either run an iterative segment relaxation process until they are evenly distributed, or better approach is to subdivide and interpolate the curve if it exceeded the maximum edge length. </p>
+<p>Except for the second point, yeah, I'd admit this approach isn't really suitable for these cases. </p>
+<p>&lt;insert image later&gt;</p>
+<h2 id="back-to-square-one">Back to Square One</h2>
+<p>The pizza method obviously doesn't work for all cases, but marching squares gives me too much high frequency details. How can we go about this? </p>
+<p>If the high frequency details is the only problem to have a clean contour, why not just filter them out? </p>
+<p>That's a really good observation. It's essentially downscaling the image and calculate the contour on a lower resolution image. It would be blocky for sure, but with proper interpolation, it can still be visually appealing. The bonus point is, using marching squares, we know that it won't produce self-intersecting contour and each edge length won't exceed the diagonal length of the grid. </p>
+<p>TODO</p>
 <h2 id="meshing">Meshing</h2>
-<p>Good contour, huh? How to turn it into a triangle mesh? We couldn't just do a <a href="https://en.wikipedia.org/wiki/Two_ears_theorem">ear clipping triangulation</a>, that's embarrassing. And bad triangulation leads to all kinds of texture stretching after deformation. </p>
+<p>Good contour, huh? But how to turn it into a triangle mesh? We couldn't just do a <a href="https://en.wikipedia.org/wiki/Two_ears_theorem">ear clipping triangulation</a>, that's embarrassing. And bad triangulation leads to all kinds of texture stretching after deformation. </p>
 <h3 id="poisson-disk-sampling">Poisson Disk Sampling</h3>
-<h3 id="delaunay-triangulation">Delaunay Triangulation</h3>
+<h3 id="constrained-delaunay-triangulation">Constrained Delaunay Triangulation</h3>
 
 
 
