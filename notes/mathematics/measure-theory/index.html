@@ -510,6 +510,15 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#lebesgue-integral" class="md-nav__link">
+    <span class="md-ellipsis">
+      Lebesgue Integral
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -854,15 +863,17 @@
 
 <h1 id="measure-theory">Measure Theory</h1>
 <h2 id="preface">Preface</h2>
-<p>I saw an argument on the internet the other day, claiming that high school students should really learn the basics of measure theory before touching any topics in statistics study. That sparks my interest in learning what the measure theory is actually about. Nothing is better than learning it through Terence Tao's book <a href="https://terrytao.files.wordpress.com/2012/12/gsm-126-tao5-measure-book.pdf">"An Introduction to Measure Theory"</a>. Hopefully this gives me better insights into the statistical world. </p>
+<p>I saw an interesting argument on the internet the other day, claiming that measure theory should be a part of the high school curriculum before touching any topics in statistics or calculus. That sparks my curiosity in learning what the measure theory is actually about. I thought it would be a good start to read through Terence Tao's book <a href="https://terrytao.files.wordpress.com/2012/12/gsm-126-tao5-measure-book.pdf">"An Introduction to Measure Theory"</a>. Hopefully this gives me better insights into what measurement is about in the mathematic world. </p>
 <h2 id="problem-of-measure">Problem of Measure</h2>
-<p>What is a measure? The first thing comes to my mind was to use a ruler, scale, etc., something with a discrete interval to physically measure a body <span class="arithmatex">\(E\)</span>. But in the real world, everything is made of immeasurable atomic components. Think of the <a href="https://en.wikipedia.org/wiki/Coastline_paradox">Coastline Paradox</a>. So to formalize this intuition would be defining a solid body as consisting an infinite and uncountable number of points, each of which has a measure of zero. Even though this sounds reasonable at first, it causes two problems:</p>
+<p>What is a measure? The first thing comes to my mind was to use a ruler, scale, etc., something with a discrete interval to physically measure a body <span class="arithmatex">\(E\)</span>. It's either length of a rope, or weight of a rock. Doesn't matter. It's just about how to obtain a quantitative measurement of something, a magnitude.</p>
+<p>But in the real world, everything is made of immeasurable atomic components. Think of the <a href="https://en.wikipedia.org/wiki/Coastline_paradox">Coastline Paradox</a>. So to formalize this intuition would be defining a solid body as consisting an infinite and uncountable number of points, each of which has a measure of zero. Even though this sounds reasonable at first, it causes two problems:</p>
 <ol>
 <li><span class="arithmatex">\(0\cdot\infty\)</span> is undefined, we simply couldn't measure it mathematically.</li>
 <li>Two bodies that have exactly the same number of points, need not have the same measure. Imagine a rope of length 1, you disassemble it into an uncountable number of points and reassemble it twice further apart, now you got the same rope but with length of 2.</li>
 </ol>
-<p>Ones might blame the infinite partitions that causes all sorts of weirdness. But the <a href="https://youtu.be/s86-Z-CbaHA?si=HM-8MQncXfS7Iv6g&amp;t=679">Banach-Tarski paradox</a> demonstrates that it's theoretically possible to disassemble a unit sphere <span class="arithmatex">\(B := \{(x,y,z) \in \mathbf{R}^3: x^2+y^2+z^2\leq1\}\)</span> into 5 pieces, which can then be reassembled by rigid motion (translation/rotation) to form two disjoint copies of the original sphere.</p>
-<p>But the idea of this decomposition is highly <a href="https://en.wikipedia.org/wiki/Pathological_(mathematics)#:~:text=Here%2C%20an%20input%20(or%20set,complexity%2C%20or%20even%20its%20correctness.">pathological</a> and considered as not having much practical applications in mathematics. Therefore, the modern problem of measure has shifted the focus to a certain subset of the non-pathological cases in <span class="arithmatex">\(\mathbf{R}^d\)</span>, which mathematicians refer as the <em>measurable sets</em>. Then the following subproblems arose:</p>
+<p>If a measurement is infinitesimally small, what is its length? No one governs its length, right?</p>
+<p>Ones might blame the infinite partitions that causes all sorts of weirdness. But the <a href="https://youtu.be/s86-Z-CbaHA?si=HM-8MQncXfS7Iv6g&amp;t=679">Banach-Tarski paradox</a> uses a combination of set theory to demonstrate that it's theoretically possible to disassemble a unit sphere <span class="arithmatex">\(B := \{(x,y,z) \in \mathbf{R}^3: x^2+y^2+z^2\leq1\}\)</span> into 5 pieces, which can then be reassembled by rigid motion (translation/rotation) to form two disjoint copies of the original sphere. </p>
+<p>My head is about to explode when I read until here. I'm sure everyone is. This is why mathematicians try not to think about them. These ideas are considered highly <a href="https://en.wikipedia.org/wiki/Pathological_(mathematics)#:~:text=Here%2C%20an%20input%20(or%20set,complexity%2C%20or%20even%20its%20correctness.">pathological</a> and considered as not having much practical applications in mathematics. Therefore, the modern problem of measure has shifted the focus to a certain subset of the non-pathological cases in <span class="arithmatex">\(\mathbf{R}^d\)</span>, which mathematicians refer as the <em>measurable sets</em>. Then the following subproblem arose:</p>
 <ol>
 <li>What does it mean for a subset <span class="arithmatex">\(E\)</span> of <span class="arithmatex">\(\mathbf{R}^d\)</span> to be measurable?</li>
 <li>If a set <span class="arithmatex">\(E\)</span> is measurable, how does one define its measure?</li>
@@ -870,6 +881,50 @@
 <li>Are ordinary sets (e.g. cubes, sphere, platonic solids, etc.) measurable?</li>
 <li>Does the measure of an ordinary set equal the naive geometric measure?</li>
 </ol>
+<h2 id="lebesgue-integral">Lebesgue Integral</h2>
+<p>Most continuous functions can be integrated using a Riemann integral, i.e. using infinitesimal rectangles to approximate the area under a curve. For example, a simple function like:</p>
+<div class="arithmatex">\[
+f(x) = 
+\begin{cases}
+0 \quad x \in [0, 1]
+\end{cases}
+\]</div>
+<p>Of course its integral is zero, since every rectangles have a height of zero. But what if the function is one exclusively at both ends?</p>
+<div class="arithmatex">\[
+f(x) = 
+\begin{cases}
+1 \quad x = 0\\
+0 \quad x \in (0, 1)\\
+1 \quad x = 1
+\end{cases}
+\]</div>
+<p>Despite it's a discontinuous function, this still can be evaluated by a Riemann integral. Since the rectangle width at both ends tends to zero, their areas are still zero. And hence the whole integral evaluates to zero.</p>
+<p>Following the same logic, no matter how many points in the interval [0, 1] that I disconnect from the function and set its value to 1, the integral will always evaluates to be zero. Or, is it? </p>
+<p>Consider the following:</p>
+<div class="arithmatex">\[
+\mathbf{1}_\mathbb{Q}(x) = 
+\begin{cases}
+1 \quad x \in \mathbb{Q}\\
+0 \quad x \notin \mathbb{Q}
+\end{cases}
+\]</div>
+<p>This is called a <a href="https://en.wikipedia.org/wiki/Dirichlet_function">Dirichlet function</a>. It is an example of a pathological function where it's 1 if <span class="arithmatex">\(x\)</span> is a rational number and 0 if <span class="arithmatex">\(x\)</span> is irrational. </p>
+<p>This cannot be solved by the Riemann integral due to rational and irrational number are closely packed on the real number line. No matter how small the interval around a rational number (width of a infinitesimal rectangle), you will always capture an infinite number of irrational numbers around the rational number.</p>
+<p>This is where the Lebesgue integral comes to rescue. It's base on the axiom that the measure of a single point on the real number line is zero. This is denoted by:</p>
+<div class="arithmatex">\[
+\mu(\text{point})=0
+\]</div>
+<p>If we just look at all the rational numbers, since they are just individual points with 0 measurement, their sum is going to be zero (regardless of its defined value in the function). For the irrationals, their sum is zero too. So the entire integral is zero.</p>
+<p>However, when we swap the rationals and irrationals in the Dirichlet function. That is,</p>
+<div class="arithmatex">\[
+\mathbf{1}_\mathbb{Q}(x) = 
+\begin{cases}
+1 \quad x \notin \mathbb{Q}\\
+0 \quad x \in \mathbb{Q}
+\end{cases}
+\]</div>
+<p>Noted that the rationals still evaluates to zero due to the zero measurement of a point as discussed above. What different is the irrationals. We all know the integral length of [0, 1] is one, and the fact that real numbers is a union of rational and irrational numbers (i.e. <span class="arithmatex">\(\mathbb{R}=\text{rational}\ \cap\ \text{irrational}\)</span>). Thus, the integral must be 1 because the irrational set must be the complement that make up the rest of the interval.</p>
+<p>Bizarre, I know.</p>
 
 
 
