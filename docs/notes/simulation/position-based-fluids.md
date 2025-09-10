@@ -52,9 +52,9 @@ Smoothing kernels are essential for integrating local density of a particle in a
 
 |Kernel Type|Function $W(\vec{r}, h)$|
 |:--:|:--:|
-|Poly6 (2D)|$W_{poly6}(\vec{r}, h) = \frac{4}{\pi h^8} \begin{cases} (h^2-\|r\|^2)^3 & \text{if } 0\leq \|r\|\leq h\\ 0 & \text{else} \end{cases}$|
-|Poly6 (3D)|$W_{poly6}(\vec{r}, h) = \frac{315}{64 \pi h^9} \begin{cases} (h^2-\|r\|^2)^3 & \text{if } 0\leq \|r\|\leq h\\ 0 & \text{else} \end{cases}$|
-|Spiky (2D)|$W_{spiky}(\vec{r}, h) = \frac{10}{\pi h^5} \begin{cases} (h-\|r\|)^3 & \text{if } 0\leq \|r\|\leq h\\ 0 & \text{else} \end{cases}$|
+|Smooth (2D)|$W_{smooth}(\vec{r}, h) = \frac{35}{32\pi h^7} \begin{cases} (h^2-\|r\|^2)^3 & \text{if } 0\leq \|r\|\leq h\\ 0 & \text{else} \end{cases}$|
+|Smooth (3D)|$W_{smooth}(\vec{r}, h) = \frac{315}{64 \pi h^9} \begin{cases} (h^2-\|r\|^2)^3 & \text{if } 0\leq \|r\|\leq h\\ 0 & \text{else} \end{cases}$|
+|Spiky (2D)|$W_{spiky}(\vec{r}, h) = \frac{2}{\pi h^4} \begin{cases} (h-\|r\|)^3 & \text{if } 0\leq \|r\|\leq h\\ 0 & \text{else} \end{cases}$|
 |Spiky (3D)|$W_{spiky}(\vec{r}, h) = \frac{15}{\pi h^6} \begin{cases} (h-\|r\|)^3 & \text{if } 0\leq \|r\|\leq h\\ 0 & \text{else} \end{cases}$|
 
 <div id="smoothing-kernel" style="width: 100%; height: 240px;"></div>
@@ -70,19 +70,19 @@ Smoothing kernels are essential for integrating local density of a particle in a
       lockViewport: true,
     });
     let aspect = elt.clientWidth / elt.clientHeight;
-    calculator.setMathBounds({ left: -1.5*aspect, right: 1.5*aspect, bottom: -1, top: 4 });
-    calculator.setExpression({ id: "poly6", latex: "W_{poly6}\\left(r\\right)=\\frac{4}{\\pi h^{8}}\\left\\{\\left|r\\right|<h:\\left(h^{2}-\\left|r\\right|^{2}\\right)^{3}\\ ,\\ 0\\right\\}", color: Desmos.Colors.RED });
-    calculator.setExpression({ id: "spiky", latex: "W_{spiky}\\left(r\\right)=\\frac{10}{\\pi h^{5}}\\left\\{\\left|r\\right|<h:\\left(h-\\left|r\\right|\\right)^{3}\\ ,\\ 0\\right\\}", color: Desmos.Colors.BLUE });
+    calculator.setMathBounds({ left: -1.5*aspect, right: 1.5*aspect, bottom: -0.2, top: 1 });
+    calculator.setExpression({ id: "smooth", latex: "W_{smooth}\\left(r\\right)=\\frac{35}{32\\pi h^{7}}\\left\\{\\left|r\\right|<h:\\left(h^{2}-\\left|r\\right|^{2}\\right)^{3}\\ ,\\ 0\\right\\}", color: Desmos.Colors.RED });
+    calculator.setExpression({ id: "spiky", latex: "W_{spiky}\\left(r\\right)=\\frac{2}{\\pi h^{4}}\\left\\{\\left|r\\right|<h:\\left(h-\\left|r\\right|\\right)^{3}\\ ,\\ 0\\right\\}", color: Desmos.Colors.BLUE });
     calculator.setExpression({ id: "h", latex: "h=1", sliderBounds: { min: 1, max: 3 }, color: Desmos.Colors.RED, });
     calculator.setExpression({ id: "hbound", latex: "x=[-h,h]", lineStyle: Desmos.Styles.DASHED, lineWidth: 1, color: Desmos.Colors.BLACK, });
-    calculator.setExpression({ id: "hslider", type: 'table', columns: [ { latex: 'x', values: ['-2', '-1'] }, { latex: 'y', values: ['-0.5', '-0.5'], color: Desmos.Colors.ORANGE, columnMode: Desmos.ColumnModes.LINES, lineOpacity: 0.2 } ] });
-    calculator.setExpression({ id: "hknob", latex: "((h-1)/2-2, -0.5)", dragMode: "X", label: "`h=${h}`", showLabel: true, color: Desmos.Colors.ORANGE });
+    calculator.setExpression({ id: "hslider", type: 'table', columns: [ { latex: 'x', values: ['-2', '-1'] }, { latex: 'y', values: ['-0.05', '-0.05'], color: Desmos.Colors.ORANGE, columnMode: Desmos.ColumnModes.LINES, lineOpacity: 0.2 } ] });
+    calculator.setExpression({ id: "hknob", latex: "((h-1)/2-2, -0.05)", dragMode: "X", label: "`h=${h}`", showLabel: true, color: Desmos.Colors.ORANGE });
     calculator.setExpression({ id: "r", latex: "R=0", sliderBounds: { min: -4, max: 4 }, color: Desmos.Colors.ORANGE });
-    calculator.setExpression({ id: "rslider", type: 'table', columns: [ { latex: 'x', values: ['1', '2'] }, { latex: 'y', values: ['-0.5', '-0.5'], color: Desmos.Colors.ORANGE, columnMode: Desmos.ColumnModes.LINES, lineOpacity: 0.2 } ] });
-    calculator.setExpression({ id: "rknob", latex: "((R+4)/8+1, -0.5)", dragMode: "X", label: "`r=${R}`", showLabel: true, color: Desmos.Colors.ORANGE });
-    calculator.setExpression({ id: "poly6-eval", latex: "E_{poly6}=W_{poly6}(R)", hidden: true});
+    calculator.setExpression({ id: "rslider", type: 'table', columns: [ { latex: 'x', values: ['1', '2'] }, { latex: 'y', values: ['-0.05', '-0.05'], color: Desmos.Colors.ORANGE, columnMode: Desmos.ColumnModes.LINES, lineOpacity: 0.2 } ] });
+    calculator.setExpression({ id: "rknob", latex: "((R+4)/8+1, -0.05)", dragMode: "X", label: "`r=${R}`", showLabel: true, color: Desmos.Colors.ORANGE });
+    calculator.setExpression({ id: "smooth-eval", latex: "E_{smooth}=W_{smooth}(R)", hidden: true});
     calculator.setExpression({ id: "spiky-eval", latex: "E_{spiky}=W_{spiky}(R)", hidden: true});
-    calculator.setExpression({ id: "poly6-label", label: "`W_{poly6}=`${E_{poly6}}", labelOrientation: Desmos.LabelOrientations.ABOVE_RIGHT, latex: "(R, W_{poly6}(R))", color: Desmos.Colors.RED, showLabel: true, pointStyle: Desmos.Styles.CROSS, dragMode: Desmos.DragModes.NONE });
+    calculator.setExpression({ id: "smooth-label", label: "`W_{smooth}=`${E_{smooth}}", labelOrientation: Desmos.LabelOrientations.ABOVE_RIGHT, latex: "(R, W_{smooth}(R))", color: Desmos.Colors.RED, showLabel: true, pointStyle: Desmos.Styles.CROSS, dragMode: Desmos.DragModes.NONE });
     calculator.setExpression({ id: "spiky-label", label: "`W_{spiky}=`${E_{spiky}}", labelOrientation: Desmos.LabelOrientations.ABOVE_RIGHT, latex: "(R, W_{spiky}(R))", color: Desmos.Colors.BLUE, showLabel: true, pointStyle: Desmos.Styles.CROSS, dragMode: Desmos.DragModes.NONE });
   }, false);
 </script>
@@ -91,9 +91,9 @@ In order to attract or repel neighboring particles, we need to compute the gradi
 
 |Kernel Type|Gradient $\nabla W(\vec{r}, h)$|
 |:--:|:--:|
-|Poly6 (2D)|$\nabla W_{poly6}(\vec{r}, h) = -\vec{r}\frac{24}{\pi h^8} \begin{cases} (h^2-\|r\|^2)^2 & \text{if } 0\leq \|r\|\leq h\\ 0 & \text{else} \end{cases}$|
-|Poly6 (3D)|$\nabla W_{poly6}(\vec{r}, h) = -\vec{r}\frac{945}{32 \pi h^9} \begin{cases} (h^2-\|r\|^2)^2 & \text{if } 0\leq \|r\|\leq h\\ 0 & \text{else} \end{cases}$|
-|Spiky (2D)|$\nabla W_{spiky}(\vec{r}, h) = -\frac{\vec{r}}{\|\vec{r}\|}\frac{30}{\pi h^5} \begin{cases} (h-\|r\|)^2 & \text{if } 0\leq \|r\|\leq h\\ 0 & \text{else} \end{cases}$|
+|Smooth (2D)|$\nabla W_{smooth}(\vec{r}, h) = -\vec{r}\frac{105}{16\pi h^7} \begin{cases} (h^2-\|r\|^2)^2 & \text{if } 0\leq \|r\|\leq h\\ 0 & \text{else} \end{cases}$|
+|Smooth (3D)|$\nabla W_{smooth}(\vec{r}, h) = -\vec{r}\frac{945}{32 \pi h^9} \begin{cases} (h^2-\|r\|^2)^2 & \text{if } 0\leq \|r\|\leq h\\ 0 & \text{else} \end{cases}$|
+|Spiky (2D)|$\nabla W_{spiky}(\vec{r}, h) = -\frac{\vec{r}}{\|\vec{r}\|}\frac{6}{\pi h^4} \begin{cases} (h-\|r\|)^2 & \text{if } 0\leq \|r\|\leq h\\ 0 & \text{else} \end{cases}$|
 |Spiky (3D)|$\nabla W_{spiky}(\vec{r}, h) = -\frac{\vec{r}}{\|\vec{r}\|}\frac{45}{\pi h^5} \begin{cases} (h-\|r\|)^2 & \text{if } 0\leq \|r\|\leq h\\ 0 & \text{else} \end{cases}$|
 
 ## Bloopers

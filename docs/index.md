@@ -63,7 +63,7 @@ _Exchange Study, Master's Program_
 <h3>Tools & Application</h3>
 |![](img/vscode.webp){:style="width:50px"}|![](img/vs.webp){:style="width:50px"}|![](img/git.webp){:style="width:50px"}|![](img/usd.webp){:style="width:50px"}|![](img/unity.webp){:style="width:50px"}|![](img/ue4.webp){:style="width:50px"}|![](img/blender.webp){:style="width:50px"}|
 |:--:|:--:|:--:|:--:|:--:|:--:|:--:|
-|VSCode|VisualStudio|Git|USD|Unity|UE4|Blender|
+|VSCode|VisualStudio|Git|OpenUSD|Unity|UE4|Blender|
 
 <h3>Programming Languages</h3>
 |![](img/cpp.webp){:style="width:50px"}|![](img/rust.webp){:style="width:50px"}|![](img/python.webp){:style="width:50px"}|![](img/cs.webp){:style="width:50px"}|![](img/js.webp){:style="width:50px"}|
