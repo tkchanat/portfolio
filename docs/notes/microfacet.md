@@ -1,5 +1,5 @@
 # Microfacet Theory
-There is a well-written paper by Eric Heitz[^1] explaining every details about the microfacet theory. I highly recommend everyone to read it to get a thorough understanding from beginning to end. The stuff I write is just an abstract plus my own understanding (prone to misinformation). I am happy to correct this page anytime. 
+There is a well-written paper by Eric Heitz[^1] explaining every details about the microfacet theory. I highly recommend everyone to read it to get a thorough understanding from beginning to end. The stuff I write here was just my rough understanding of the work, happy to correct this page anytime. 
 
 ## Radiance on Surface
 Here is the definition of radiance from wikipedia.
@@ -35,7 +35,7 @@ L(\omega_o, \mathcal{G}) &= \frac{\int_\mathcal{G}{A^\bot_{\omega_o}(\mathbf{x})
 \end{align*}
 $$
 
-## Normal Distribution
+## Normal Distribution Function
 Spatial integral isn't ideal to work with because the whole microfacet theory is based on a statistical model, it's not necessarily tied to an actual spatial representation. That being said, we need a way to convert that integral into the solid angle domain. Luckily, the distribution of normals is able to provide just that.
 
 $$
@@ -56,40 +56,71 @@ $$
 \int_\mathcal{M}f(\omega_m(\mathbf{x}))\ d\mathbf{x} = \int_\Omega f(\omega_m)\ D(\omega_m)\ d\omega_m
 $$
 
+TODO...
 
 ## Geometric Attenuation
-$G_1(\omega_o, \omega_m)$ is the statistical masking function of micronormal $\omega_m$. 
+$G_1(\omega_o, \omega_m)$ is the statistical masking function of micro-normal $\omega_m$. 
 
-$G_1(\omega_i, \omega_m)$ is the statistical shadowing function of micronormal $\omega_m$
+$G_1(\omega_i, \omega_m)$ is the statistical shadowing function of micro-normal $\omega_m$
 
 $G(\omega_i, \omega_o)$ is the shadowing-masking term
 
 ## Various Models
+!!! info "Notation"
 
-### GGX
-GGX[^2] is a well-known geometry-based microfacet BSDF model for rough surfaces. 
+    $\chi^+(a)$ is a special step function, called Heaviside function. It is defined as $1$ if $a>0$ and $0$ if $a\leq 0$.
 
-$$D(\mathbf{h})=\frac{\alpha^2\chi^+(\left<\mathbf{h}\cdot\mathbf{n}\right>)}{\pi cos^4\theta_\mathbf{h}(\alpha^2+tan^2\theta_\mathbf{h})^2}$$
+    $\omega_m$ is my preferred notation for micro-normal, it's also known as $\mathbf{h}$ or $\mathbf{m}$.
 
-$$G(\mathbf{l},\mathbf{v},\mathbf{h})=\chi^+\left(\frac{\left<\mathbf{v}\cdot\mathbf{h}\right>}{\left<\mathbf{v}\cdot\mathbf{n}\right>}\right)\quad\frac{2}{1+\sqrt{1+\alpha^2tan^2\theta_\mathbf{v}}}$$
+    $\omega_g$ is my preferred notation for geometric normal, it is also known as $\mathbf{n}$ or $Z=(0,0,1)$ if in local tangent-space.
 
-### Schlick's Approximation
-Christophe Schlick proposed an inexpensive and efficient model[^3] in attempt to capture the microfacet properties. This is probably the most popular go-to model aside from the Cook-Torrance model, usually used in real-time graphics since it has less mathematical operations. Both $F$ and $G$ terms are inspired from the Cook-Torrance model, while the $D$ term is derived from the Beckmann distribution.
+### Trowbridge–Reitz (GGX)
+There are way too many forms online, I picked the known ones to show you that they are all equivalent. 
 
-$$F(\mathbf{v},\mathbf{h})=f_0+(1-f_0)(1-\left<\mathbf{v}\cdot\mathbf{h}\right>)^5$$
+$$
+\begin{align}
+D(\omega_m, \alpha) &=
+\frac{\alpha^2\chi^+(\omega_m\cdot\mathbf{\omega_g})}
+     {\pi cos^4\theta_m(\alpha^2+tan^2\theta_m)^2}
+& \text{Walter et al. 2007}
+\\
+&=
+\frac{\alpha^2\chi^+(\omega_m\cdot\mathbf{\omega_g})}
+     {\pi cos^4\theta_m (\frac{sin^2\theta_m}{cos^2\theta_m}+\alpha^2\frac{\cancel{cos^2\theta_m}}{\cancel{cos^2\theta_m}})^2}
+\\
+&=
+\frac{\alpha^2\chi^+(\omega_m\cdot\mathbf{\omega_g})}
+     {\pi (sin^2\theta_m+\alpha^2cos^2\theta_m)^2}
+\\
+&=
+\frac{\chi^+(\omega_m\cdot\mathbf{\omega_g})}
+     {\pi \alpha^2 (\frac{1}{\alpha^2}(sin^2\theta_m+\alpha^2cos^2\theta_m))^2}
+\\
+&=
+\frac{\chi^+(\omega_m\cdot\mathbf{\omega_g})}
+     {\pi \alpha^2 (\frac{sin^2\theta_m}{\alpha^2}+cos^2\theta_m)^2}
+\\
+&=
+\frac{\chi^+(\omega_m\cdot\mathbf{\omega_g})}
+     {\pi \alpha^2 (\frac{x_m^2 + y_m^2}{\alpha^2}+z_m^2)^2}
+\\
+D(\omega_m, \alpha_x, \alpha_y) &=
+\frac{\chi^+(\omega_m\cdot\mathbf{\omega_g})}
+     {\pi \alpha_x \alpha_y (\frac{x_m^2}{\alpha_x^2}+\frac{y_m^2}{\alpha_y^2}+z_m^2)^2}
+& \text{Heitz 2018}
+\end{align}
+$$
 
-$$D(\mathbf{h})=\frac{\alpha^3x}{\left<\mathbf{n}\cdot\mathbf{h}\right>(\alpha x^2-x^2+\alpha^2)^2},\quad x=\left<\mathbf{n}\cdot\mathbf{h}\right>+\alpha-1$$
-
-$$G(\mathbf{l},\mathbf{v},\mathbf{h})=G_1(\mathbf{l})\ G_1(\mathbf{v}),\quad G_1(\mathbf{v})=\frac{\left<\mathbf{n}\cdot\mathbf{h}\right>}{\left<\mathbf{n}\cdot\mathbf{h}\right>(1-k)+k},\quad k=\sqrt{\frac{\pi}{2\alpha^2}}$$
+$$G(\mathbf{l},\mathbf{v},\omega_m)=\chi^+\left(\frac{\left<\mathbf{v}\cdot\omega_m\right>}{\left<\mathbf{v}\cdot\mathbf{n}\right>}\right)\quad\frac{2}{1+\sqrt{1+\alpha^2tan^2\theta_\mathbf{v}}}$$
 
 ### Unreal 4 Approximation
 Epic Games[^4] mostly adopts the formulations of $F$ and $G$ from the Schlick's model with slight modifications, but picked the $D$ in the Disney's GGX model. These are obviously an approximation on top of an approximation. Every decisions made here are sacrificing minor visual error for faster computations.
 
-$$F(\mathbf{v},\mathbf{h})=f_0+(1-f_0)\cdot2^{(-5.55473\left<\mathbf{v}\cdot\mathbf{h}\right>-6.98316)\left<\mathbf{v}\cdot\mathbf{h}\right>}$$
+$$F(\mathbf{v},\omega_m)=f_0+(1-f_0)\cdot2^{(-5.55473\left<\mathbf{v}\cdot\omega_m\right>-6.98316)\left<\mathbf{v}\cdot\omega_m\right>}$$
 
-$$D(\mathbf{h})=\frac{\alpha^2}{\pi(\left<\mathbf{n}\cdot\mathbf{h}\right>^2(\alpha^2-1)+1)^2}$$
+$$D(\omega_m)=\frac{\alpha^2}{\pi(\left<\mathbf{n}\cdot\omega_m\right>^2(\alpha^2-1)+1)^2}$$
 
-$$G(\mathbf{l},\mathbf{v},\mathbf{h})=G_1(\mathbf{l})\ G_1(\mathbf{v}),\quad G_1(\mathbf{v})=\frac{\left<\mathbf{n}\cdot\mathbf{h}\right>}{\left<\mathbf{n}\cdot\mathbf{h}\right>(1-k)+k},\quad k=\frac{(\alpha+1)^2}{8}$$
+$$G(\mathbf{l},\mathbf{v},\omega_m)=G_1(\mathbf{l})\ G_1(\mathbf{v}),\quad G_1(\mathbf{v})=\frac{\left<\mathbf{n}\cdot\omega_m\right>}{\left<\mathbf{n}\cdot\omega_m\right>(1-k)+k},\quad k=\frac{(\alpha+1)^2}{8}$$
 
 
 

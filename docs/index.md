@@ -7,16 +7,16 @@ hide:
 
 :fontawesome-brands-github: [tkchanat](https://github.com/tkchanat) | :fontawesome-brands-twitter: [@tkchanat](https://twitter.com/tkchanat1) | :fontawesome-brands-linkedin: [Andy Chan](https://www.linkedin.com/in/andy-chan-9b8294155/) | :fontawesome-solid-location-dot: Vancouver, BC
 
-![](img/portrait.jpg){:style="width:200px; height:200px; object-fit: cover; border-radius: 15%; box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.5);"}
+![](img/portrait.jpg){:style="width:200px; height:200px; display: inline; object-fit: cover; border-radius: 15%; box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.5);"}
 
-I am a rendering software engineer at [Animal Logic](https://animallogic.com/) Vancouver, developing in-house production renderer [_Glimpse_](https://animallogic.com/technology/products/glimpse/). I love both offline and realtime graphics. My main interests are light transport and Monte Carlo path tracer, but any compute graphics related topics fascinate me too.
+I am a rendering software engineer at [Netflix Animation Studios](https://animallogic.com/) Vancouver, developing in-house production renderer [_Glimpse_](https://animallogic.com/technology/products/glimpse/). I love both offline and realtime graphics. My main interests are light transport and Monte Carlo path tracer, but any compute graphics related topics fascinate me too.
 
 This site is my dedicated graphics dump yard where you can (occasionally) find some useful knowledge. Happy diving!
 
 ---
 
 ## Experience
-![](img/al.webp){:style="width:150px;vertical-align:middle"} ![](img/varadise.webp){:style="width:200px;vertical-align:middle"}
+![](img/nas.png) ![](img/al.webp) ![](img/varadise.webp)
 
 <sub>* Trademarks of the above are owned by their respective companies and publishers.</sub>
 
@@ -71,6 +71,6 @@ _Exchange Study, Master's Program_
 |C++|Rust|Python|C#|Javascript|
 
 <h3>Graphics API</h3>
-|![](img/vulkan.webp){:style="width:50px"}|![](img/opengl.webp){:style="width:50px"}|![](img/dx11.webp){:style="width:50px"}|![](img/webgl.webp){:style="width:50px"}|
-|:--:|:--:|:--:|:--:|
-|Vulkan|OpenGL|DirectX 11|WebGL|
+|![](img/vulkan.webp){:style="width:50px"}|![](img/opengl.webp){:style="width:50px"}|![](img/dx11.webp){:style="width:50px"}|![](img/webgl.webp){:style="width:50px"}|![](img/wgpu.svg){:style="width:50px"}|
+|:--:|:--:|:--:|:--:|:--:|
+|Vulkan|OpenGL|DirectX 11|WebGL|wgpu|
