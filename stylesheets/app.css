@@ -96,6 +96,19 @@
           mask-image: var(--md-admonition-icon--thonk);
 }
 
+#experience + p img {
+  width: auto;
+  max-height: 150px;
+  vertical-align: middle;
+  margin: 0 1rem;
+  display: inline;
+}
+
+#publication + p img {
+  display: inline;
+  margin: 0;
+}
+
 img {
   width: 80%;
   margin: auto;
