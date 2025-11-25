@@ -9,10 +9,10 @@
       
       
       
-        <link rel="prev" href="../../projects/path-tracer/">
+        <link rel="prev" href="../../notes/simulation/position-based-fluids/">
       
       
-        <link rel="next" href="../ue5-landscape/">
+        <link rel="next" href="../../random/image-auto-mesh/">
       
       
       <link rel="icon" href="../../img/dump.webp">
@@ -20,7 +20,7 @@
     
     
       
-        <title>Image Auto-Mesh - graphics memdump</title>
+        <title>Building an Idiomatic Path Tracer - graphics memdump</title>
       
     
     
@@ -74,7 +74,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#image-auto-mesh" class="md-skip">
+        <a href="#building-an-idiomatic-path-tracer" class="md-skip">
           Skip to content
         </a>
       
@@ -109,7 +109,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Image Auto-Mesh
+              Building an Idiomatic Path Tracer
             
           </span>
         </div>
@@ -669,73 +669,6 @@
       
   
   
-  
-  
-    
-    
-    
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-        
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
-        
-          
-          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
-            
-  
-  <span class="md-ellipsis">
-    Projects
-  </span>
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_3">
-            <span class="md-nav__icon md-icon"></span>
-            Projects
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../projects/path-tracer/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Building an Idiomatic Path Tracer
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-    
-      
-      
-  
-  
     
   
   
@@ -750,24 +683,24 @@
         
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
         
           
-          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
             
   
   <span class="md-ellipsis">
-    Random
+    Projects
   </span>
   
 
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
-          <label class="md-nav__title" for="__nav_4">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
             <span class="md-nav__icon md-icon"></span>
-            Random
+            Projects
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
@@ -791,7 +724,7 @@
           
   
   <span class="md-ellipsis">
-    Image Auto-Mesh
+    Building an Idiomatic Path Tracer
   </span>
   
 
@@ -802,7 +735,7 @@
         
   
   <span class="md-ellipsis">
-    Image Auto-Mesh
+    Building an Idiomatic Path Tracer
   </span>
   
 
@@ -824,68 +757,38 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#contouring" class="md-nav__link">
+  <a href="#ray" class="md-nav__link">
     <span class="md-ellipsis">
-      Contouring
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Contouring">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#first-attempt" class="md-nav__link">
-    <span class="md-ellipsis">
-      First Attempt
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#back-to-square-one" class="md-nav__link">
-    <span class="md-ellipsis">
-      Back to Square One
+      Ray
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#meshing" class="md-nav__link">
+  <a href="#bounding-volume-hierarchy" class="md-nav__link">
     <span class="md-ellipsis">
-      Meshing
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Meshing">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#poisson-disk-sampling" class="md-nav__link">
-    <span class="md-ellipsis">
-      Poisson Disk Sampling
+      Bounding Volume Hierarchy
     </span>
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#constrained-delaunay-triangulation" class="md-nav__link">
+      
+        <li class="md-nav__item">
+  <a href="#gathering-radiance" class="md-nav__link">
     <span class="md-ellipsis">
-      Constrained Delaunay Triangulation
+      Gathering Radiance
     </span>
   </a>
   
 </li>
-        
-      </ul>
-    </nav>
+      
+        <li class="md-nav__item">
+  <a href="#direct-lighting" class="md-nav__link">
+    <span class="md-ellipsis">
+      Direct Lighting
+    </span>
+  </a>
   
 </li>
       
@@ -898,6 +801,52 @@
 
               
             
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Random
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Random
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
               
                 
   
@@ -905,7 +854,28 @@
   
   
     <li class="md-nav__item">
-      <a href="../ue5-landscape/" class="md-nav__link">
+      <a href="../../random/image-auto-mesh/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Image Auto-Mesh
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../random/ue5-landscape/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -941,48 +911,71 @@
                   
 
 
-<h1 id="image-auto-mesh">Image Auto-Mesh</h1>
-<p><img alt="" src="../img/image-auto-mesh.md/arap.png" /></p>
-<p>This is a part of the bigger project that I'm working on (Spoiler: <a href="https://www-ui.is.s.u-tokyo.ac.jp/~takeo/papers/rigid.pdf">ARAP</a>). My goal is to automatically generate a triangulated mesh around an RGBA image. But I can already tell there are few obvious obstacles/problems along the way need to be tackled.</p>
-<ol>
-<li>Generating contours around the image is hard, especially if the edges aren't smooth, of which can occur naturally for irregular brush strokes.</li>
-<li>Contours cannot be self-intersecting, no one wants that.</li>
-<li>Triangle sizes and shape are really important. They must be mostly equiangular and evenly distributed to minimize texture stretching when deformed.</li>
-<li>... I will add more to this when I can think of anything</li>
-</ol>
-<h2 id="contouring">Contouring</h2>
-<p>Contour refers to both the exterior and interior <a href="https://en.wikipedia.org/wiki/Polygonal_chain">polygonal chain</a> that sits on top of a similar isovalue and form a level set. </p>
-<p>In the original ARAP paper, they uses marching squares to extract the contour. Of course it makes sense to treat the image alpha mask as a scalar field. And run the marching square algorithm over the pixel grid to extract the desire contour.</p>
-<p>That's exactly what I did. Quantizing the image's alpha channel with a threshold, iterate through each 2x2 pixel grid cell and apply the corresponding cell configuration. Yet, the result isn't too appealing...</p>
-<p>&lt;insert image later&gt;</p>
-<p>The extracted contour is very jagged like a coastline. Normally this wouldn't be a problem, because it's still a valid contour. But ideally, I'd like to deform a mesh with less vertices/triangles as less complex mesh = faster deformation. </p>
-<p>Honestly, we can apply some line segment decimation algorithms like the <a href="https://en.wikipedia.org/wiki/Ramer–Douglas–Peucker_algorithm">Ramer-Douglas-Perucker</a> and <a href="https://en.wikipedia.org/wiki/Visvalingam–Whyatt_algorithm">Visvalingam-Whyatt</a> algorithm. Yeah, they will do the job, but that's extra work. Not only it takes time to compute, but also it can open a can of worms with exceptional cases and potentially self-intersecting contour. </p>
-<p><img alt="" src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Douglas–Peucker_and_Visvalingam–Whyatt_simplification_algorithms.svg/1920px-Douglas–Peucker_and_Visvalingam–Whyatt_simplification_algorithms.svg.png" /></p>
-<h3 id="first-attempt">First Attempt</h3>
-<p>So what I have in mind is some simpler, a naive approach. Just hear me out. </p>
-<p>What if... what if, like a shrinking plastic wrap, start with an N-gon, then find the closest intersection with the target shape. That has to work, right? </p>
-<p>The process goes like this: </p>
-<p>I get the center of the bounding box of all the opaque pixels as the center of the N-gon. Or, I can use the centroid of those pixels, not sure which is better. Then I construct a line segment running from the N-gon's vertex to the center as my "ray". After that, find the closest intersection with <a href="https://www.google.com/url?sa=t&amp;source=web&amp;rct=j&amp;opi=89978449&amp;url=https://en.wikipedia.org/wiki/Differential_diagnosis&amp;ved=2ahUKEwjI6qDp79uMAxUfHjQIHXW7HbMQFnoECB8QAQ&amp;usg=AOvVaw2pNwTcmNGopCeEvIwUB4MK">Differential Diagnosis (DDx)</a> algorithm and step towards the center until it returns the distance to the closest opaque hit. Finally apply vertex displacement along the ray direction with the given hit distance.</p>
-<p>But of course we don't want the final constructed mesh to "eat" away parts of the image, so padding was necessary. Adding padding is simple, just subtract a certain amount from the closest hit distance. And the end result looks like this.</p>
-<p><img alt="" src="../img/image-auto-mesh.md/first-attempt.png" style="width:20rem" /></p>
-<p>And when you really think about it, it will NEVER generate a self-intersecting contour. Think of a pizza, shrinking the N-gon vertices is just like biting away an uncut pizza's crust (by the way, that's not how you eat a pizza). My point is, it will always remain a non-intersecting polygon. </p>
-<p>The only criticisms are, </p>
-<ol>
-<li>Line segments are non-uniform. Concave areas have steep edges because of the large differences in DDx hit distance. </li>
-<li>Elongated/spiky shapes can have extruded areas where the insufficiently subdivided N-gon can totally missed the intersection.</li>
-</ol>
-<p>For the non-uniform edges, I could either run an iterative segment relaxation process until they are evenly distributed, or better approach is to subdivide and interpolate the curve if it exceeded the maximum edge length. </p>
-<p>Except for the second point, yeah, I'd admit this approach isn't really suitable for these cases. </p>
-<p>&lt;insert image later&gt;</p>
-<h2 id="back-to-square-one">Back to Square One</h2>
-<p>The pizza method obviously doesn't work for all cases, but marching squares gives me too much high frequency details. How can we go about this? </p>
-<p>If the high frequency details is the only problem to have a clean contour, why not just filter them out? </p>
-<p>That's a really good observation. It's essentially downscaling the image and calculate the contour on a lower resolution image. It would be blocky for sure, but with proper interpolation, it can still be visually appealing. The bonus point is, using marching squares, we know that it won't produce self-intersecting contour and each edge length won't exceed the diagonal length of the grid. </p>
-<p>TODO</p>
-<h2 id="meshing">Meshing</h2>
-<p>Good contour, huh? But how to turn it into a triangle mesh? We couldn't just do a <a href="https://en.wikipedia.org/wiki/Two_ears_theorem">ear clipping triangulation</a>, that's embarrassing. And bad triangulation leads to all kinds of texture stretching after deformation. </p>
-<h3 id="poisson-disk-sampling">Poisson Disk Sampling</h3>
-<h3 id="constrained-delaunay-triangulation">Constrained Delaunay Triangulation</h3>
+<h1 id="building-an-idiomatic-path-tracer">Building an Idiomatic Path Tracer</h1>
+<p>This is my ambitious project of building an ergonomic path tracer in Rust. I am not aiming to document everything here, but I would post interesting architectural designs here to show my thought process in each components.</p>
+<p>My goal is to make the computations as close as possible to the mathematical notations. Because it's essentially what mathematicians/physicists used to communicate concisely about an idea. Every function should take the least information as needed. I aim to boil down to its simplest and cleanest form. Treat this page as my white paper of how I would write a path tracer.</p>
+<h2 id="ray">Ray</h2>
+<p>I'm seeing every path tracers out there has <code>t_near</code> and <code>t_far</code> built into the ray class, which annoys me because a ray shouldn't have an associated range. It only needs a origin and a direction.</p>
+<div class="language-rust highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">struct</span><span class="w"> </span><span class="nc">Ray</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="n">org</span><span class="p">:</span><span class="w"> </span><span class="nc">Vec3</span><span class="p">,</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="n">dir</span><span class="p">:</span><span class="w"> </span><span class="nc">Vec3</span><span class="p">,</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="p">}</span>
+</span></code></pre></div>
+<p>Cases where you need a near and far tests, just include them as function arguments.</p>
+<h2 id="bounding-volume-hierarchy">Bounding Volume Hierarchy</h2>
+<p>Here defines anything that is bounded and ray intersectable should be a buildable primitive for a BVH. This includes geometry primitives (i.e. triangle, sphere, curve, etc.) and BVHs, as long as the type implements BvhPrimitive, you are allowed to build nested hierarchies.</p>
+<div class="language-rust highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">trait</span><span class="w"> </span><span class="n">Bounded</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span><span class="k">type</span><span class="w"> </span><span class="nc">Bound</span><span class="p">;</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="k">fn</span><span class="w"> </span><span class="nf">bound</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nc">Self</span><span class="p">::</span><span class="n">Bound</span><span class="p">;</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="p">}</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="k">trait</span><span class="w"> </span><span class="n">RayIntersectable</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">    </span><span class="k">type</span><span class="w"> </span><span class="nb">Result</span><span class="p">;</span>
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">    </span><span class="k">fn</span><span class="w"> </span><span class="nf">intersects</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="n">ray</span><span class="p">:</span><span class="w"> </span><span class="kp">&amp;</span><span class="nc">Ray</span><span class="p">,</span><span class="w"> </span><span class="n">t_far</span><span class="p">:</span><span class="w"> </span><span class="kt">f32</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nc">Self</span><span class="p">::</span><span class="nb">Result</span><span class="p">;</span>
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="p">}</span>
+</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>
+</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="k">trait</span><span class="w"> </span><span class="n">BvhPrimitive</span><span class="p">:</span><span class="w"> </span><span class="nc">RayIntersectable</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">Bounded</span><span class="o">&lt;</span><span class="n">Bound</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Aabb3</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{}</span>
+</span></code></pre></div>
+<h2 id="gathering-radiance">Gathering Radiance</h2>
+<p>This is what people refers to a radiance integrator, because it uses a Monte-Carlo estimator to compute the integral of the <a href="https://en.wikipedia.org/wiki/Rendering_equation">rendering equation</a>. Strictly following the mathematical notation, <span class="arithmatex">\(L_o(\mathbf{x}, \omega_o, \lambda, t)\)</span>.</p>
+<div class="language-rust highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">trait</span><span class="w"> </span><span class="n">Integrator</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="c1">// Total spectral radiance directed outward along direction wo at time t, from a particular position x.</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="k">fn</span><span class="w"> </span><span class="nf">lo</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">:</span><span class="w"> </span><span class="nc">Hit</span><span class="p">,</span><span class="w"> </span><span class="n">wo</span><span class="p">:</span><span class="w"> </span><span class="nc">Vec3</span><span class="p">,</span><span class="w"> </span><span class="n">t</span><span class="p">:</span><span class="w"> </span><span class="kt">f32</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nc">Spectrum</span><span class="p">;</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="p">}</span>
+</span></code></pre></div>
+<h2 id="direct-lighting">Direct Lighting</h2>
+<p>Sampling a light and evaluating its contribution along such direction with the given point should be as simple as possible. </p>
+<div class="language-rust highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">struct</span><span class="w"> </span><span class="nc">LightSample</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">    </span><span class="n">p</span><span class="p">:</span><span class="w"> </span><span class="nc">Vec3</span><span class="p">,</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span><span class="n">wi</span><span class="p">:</span><span class="w"> </span><span class="nc">Sample</span><span class="o">&lt;</span><span class="n">Vec3</span><span class="o">&gt;</span><span class="p">,</span><span class="w"> </span><span class="c1">// pdf is in solid-angle measure</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">    </span><span class="n">radiance</span><span class="p">:</span><span class="w"> </span><span class="nc">Vec3</span><span class="p">,</span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="p">}</span>
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="k">fn</span><span class="w"> </span><span class="nf">direct_lighting</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">:</span><span class="w"> </span><span class="nc">Hit</span><span class="p">,</span><span class="w"> </span><span class="n">light</span><span class="p">:</span><span class="w"> </span><span class="nc">Light3D</span><span class="p">,</span><span class="w"> </span><span class="n">sampler</span><span class="p">:</span><span class="w"> </span><span class="kp">&amp;</span><span class="nc">mut</span><span class="w"> </span><span class="k">dyn</span><span class="w"> </span><span class="n">Sampler</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nc">LightSample</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="w">    </span><span class="c1">// Generate sample from the given light</span>
+</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">sample</span><span class="p">:</span><span class="w"> </span><span class="nc">LightSample</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">match</span><span class="w"> </span><span class="n">light</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="w">        </span><span class="n">Light</span><span class="p">::</span><span class="n">Area</span><span class="p">(</span><span class="n">area_light</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">area_light</span><span class="p">.</span><span class="n">sample_area</span><span class="p">(</span><span class="n">x</span><span class="p">.</span><span class="n">point</span><span class="p">(),</span><span class="w"> </span><span class="n">sampler</span><span class="p">),</span>
+</span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="w">        </span><span class="n">Light</span><span class="p">::</span><span class="n">Distant</span><span class="p">(</span><span class="n">distant_light</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">distant_light</span><span class="p">.</span><span class="n">sample_direction</span><span class="p">(),</span>
+</span><span id="__span-3-12"><a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="w">        </span><span class="n">Light</span><span class="p">::</span><span class="n">Dome</span><span class="p">(</span><span class="n">dome_light</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">dome_light</span><span class="p">.</span><span class="n">sample_direction</span><span class="p">(</span><span class="n">sampler</span><span class="p">),</span>
+</span><span id="__span-3-13"><a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="w">        </span><span class="o">..</span><span class="p">.</span>
+</span><span id="__span-3-14"><a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="w">    </span><span class="p">};</span>
+</span><span id="__span-3-15"><a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a>
+</span><span id="__span-3-16"><a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a><span class="w">    </span><span class="c1">// Visibility test</span>
+</span><span id="__span-3-17"><a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">ray</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">match</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-3-18"><a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a><span class="w">        </span><span class="n">Hit</span><span class="p">::</span><span class="n">Geometry</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">prim</span><span class="p">:</span><span class="w"> </span><span class="nc">PrimitiveHit</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">dg</span><span class="p">,</span><span class="w"> </span><span class="o">..</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="o">..</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">Ray</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-3-19"><a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a><span class="w">            </span><span class="n">org</span><span class="p">:</span><span class="w"> </span><span class="nc">dg</span><span class="p">.</span><span class="n">p</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">dg</span><span class="p">.</span><span class="n">ng</span><span class="p">.</span><span class="n">normalized</span><span class="p">()</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">EPSILON</span><span class="p">,</span>
+</span><span id="__span-3-20"><a id="__codelineno-3-20" name="__codelineno-3-20" href="#__codelineno-3-20"></a><span class="w">            </span><span class="n">dir</span><span class="p">:</span><span class="w"> </span><span class="o">*</span><span class="n">sample</span><span class="p">.</span><span class="n">wi</span><span class="p">,</span>
+</span><span id="__span-3-21"><a id="__codelineno-3-21" name="__codelineno-3-21" href="#__codelineno-3-21"></a><span class="w">        </span><span class="p">},</span>
+</span><span id="__span-3-22"><a id="__codelineno-3-22" name="__codelineno-3-22" href="#__codelineno-3-22"></a><span class="w">        </span><span class="n">Hit</span><span class="p">::</span><span class="n">Volume</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="fm">unimplemented!</span><span class="p">(),</span>
+</span><span id="__span-3-23"><a id="__codelineno-3-23" name="__codelineno-3-23" href="#__codelineno-3-23"></a><span class="w">    </span><span class="p">};</span>
+</span><span id="__span-3-24"><a id="__codelineno-3-24" name="__codelineno-3-24" href="#__codelineno-3-24"></a><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">t_far</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">sample</span><span class="p">.</span><span class="n">p</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">x</span><span class="p">.</span><span class="n">point</span><span class="p">()).</span><span class="n">mag</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">EPSILON</span><span class="p">;</span>
+</span><span id="__span-3-25"><a id="__codelineno-3-25" name="__codelineno-3-25" href="#__codelineno-3-25"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="kd">let</span><span class="w"> </span><span class="nb">Some</span><span class="p">(</span><span class="n">_hit</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">scene</span><span class="p">.</span><span class="n">accel</span><span class="p">.</span><span class="n">intersects</span><span class="p">(</span><span class="o">&amp;</span><span class="n">ray</span><span class="p">,</span><span class="w"> </span><span class="n">t_far</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-3-26"><a id="__codelineno-3-26" name="__codelineno-3-26" href="#__codelineno-3-26"></a><span class="w">      </span><span class="c1">// Cut contributions</span>
+</span><span id="__span-3-27"><a id="__codelineno-3-27" name="__codelineno-3-27" href="#__codelineno-3-27"></a><span class="w">      </span><span class="n">sample</span><span class="p">.</span><span class="n">set_zero</span><span class="p">();</span>
+</span><span id="__span-3-28"><a id="__codelineno-3-28" name="__codelineno-3-28" href="#__codelineno-3-28"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-3-29"><a id="__codelineno-3-29" name="__codelineno-3-29" href="#__codelineno-3-29"></a><span class="w">    </span><span class="n">sample</span>
+</span><span id="__span-3-30"><a id="__codelineno-3-30" name="__codelineno-3-30" href="#__codelineno-3-30"></a><span class="p">}</span>
+</span></code></pre></div>
 
 
 
@@ -1012,7 +1005,7 @@
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../../projects/path-tracer/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Building an Idiomatic Path Tracer">
+          <a href="../../notes/simulation/position-based-fluids/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Position Based Fluids">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
@@ -1022,20 +1015,20 @@
                 Previous
               </span>
               <div class="md-ellipsis">
-                Building an Idiomatic Path Tracer
+                Position Based Fluids
               </div>
             </div>
           </a>
         
         
           
-          <a href="../ue5-landscape/" class="md-footer__link md-footer__link--next" aria-label="Next: Unreal Engine 5 Landscape">
+          <a href="../../random/image-auto-mesh/" class="md-footer__link md-footer__link--next" aria-label="Next: Image Auto-Mesh">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                Unreal Engine 5 Landscape
+                Image Auto-Mesh
               </div>
             </div>
             <div class="md-footer__button md-icon">
