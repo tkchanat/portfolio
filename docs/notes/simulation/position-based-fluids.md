@@ -96,6 +96,9 @@ In order to attract or repel neighboring particles, we need to compute the gradi
 |Spiky (2D)|$\nabla W_{spiky}(\vec{r}, h) = -\frac{\vec{r}}{\|\vec{r}\|}\frac{6}{\pi h^4} \begin{cases} (h-\|r\|)^2 & \text{if } 0\leq \|r\|\leq h\\ 0 & \text{else} \end{cases}$|
 |Spiky (3D)|$\nabla W_{spiky}(\vec{r}, h) = -\frac{\vec{r}}{\|\vec{r}\|}\frac{45}{\pi h^5} \begin{cases} (h-\|r\|)^2 & \text{if } 0\leq \|r\|\leq h\\ 0 & \text{else} \end{cases}$|
 
+## Results
+![](../../img/square_sm.webp)
+
 ## Bloopers
 |1|2|3|
 |:--:|:--:|:--:|

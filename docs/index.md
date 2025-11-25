@@ -11,7 +11,7 @@ hide:
 
 I am a rendering software engineer at [Netflix Animation Studios](https://animallogic.com/) Vancouver, developing in-house production renderer [_Glimpse_](https://animallogic.com/technology/products/glimpse/). I love both offline and realtime graphics. My main interests are light transport and Monte Carlo path tracer, but any compute graphics related topics fascinate me too.
 
-This site is my dedicated graphics dump yard where you can (occasionally) find some useful knowledge. Happy diving!
+This site is my dedicated graphics dump yard where you can (occasionally) find some useful stuff. Happy diving!
 
 ---
 
